@@ -55,7 +55,14 @@ export default defineBlogConfig({
   },
 
   // features
-  comments: { provider: 'utterances', repo: 'laplacetw/vitepress-theme-trigger', dark: 'gruvbox-dark' },
+  comments: {
+    provider: 'giscus',
+    repo: 'laplacetw/vuemo-comments',
+    repoId: 'R_kgDOVS5AXA',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDOVS5AXM4DJmFA',
+    dark: 'gruvbox_dark'
+  },
   // points at nothing on purpose: clicking the button shows the fetch error
   aiSummary: { api: 'http://127.0.0.1:9/summary' }
 })
