@@ -1,0 +1,8 @@
+.vscode
+.DS_Store
+node_modules
+dist
+.vuemo-check
+example/.vitepress/dist
+example/.vitepress/cache
+*.log

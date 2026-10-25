@@ -1,0 +1,62 @@
+{
+  "name": "vuemo-theme-trigger",
+  "version": "2.0.0-alpha.0",
+  "description": "Trigger: a Vuemo blog theme (Tailwind CSS), the successor of vitepress-theme-trigger",
+  "type": "module",
+  "license": "MIT",
+  "author": "laplacetw",
+  "exports": {
+    ".": "./src/index.ts",
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "keywords": [
+    "vuemo-theme",
+    "vuemo",
+    "vitepress",
+    "theme",
+    "blog",
+    "tailwindcss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laplacetw/vuemo-theme-trigger.git"
+  },
+  "homepage": "https://github.com/laplacetw/vuemo-theme-trigger#readme",
+  "scripts": {
+    "build": "tailwindcss -i src/style.css -o dist/style.css --minify",
+    "dev": "vitepress dev example",
+    "build:example": "vitepress build example",
+    "preview": "vitepress preview example",
+    "check": "vuemo check-theme ./src/index.ts",
+    "test": "vitest run",
+    "typecheck": "vue-tsc --noEmit",
+    "prepack": "pnpm build"
+  },
+  "peerDependencies": {
+    "@vuemo/core": "^0.1.0-alpha.0",
+    "vitepress": "^1.6.0",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "@types/node": "^26.6.5",
+    "@vuemo/core": "link:../vuomo/packages/core",
+    "@vuemo/plugin-ai-summary": "link:../vuomo/plugins/ai-summary",
+    "@vuemo/plugin-comments": "link:../vuomo/plugins/comments",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "tailwindcss": "^4.1.0",
+    "typescript": "~5.9.3",
+    "vitepress": "^1.6.4",
+    "vitest": "^3.0.0",
+    "vue": "^3.5.0",
+    "vue-tsc": "^3.3.13"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
