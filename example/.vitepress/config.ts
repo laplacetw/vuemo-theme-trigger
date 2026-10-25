@@ -36,7 +36,7 @@ export default defineBlogConfig({
   socialLinks: [{ icon: 'github', link: 'https://github.com/laplacetw' }],
   footer: {
     message:
-      "Powered by <a target='_blank' href='https://vitepress.dev'>VitePress</a> Theme by <a target='_blank' href='https://github.com/laplacetw/vuemo-theme-trigger'>Trigger</a>",
+      "Powered by <a target='_blank' href='https://github.com/laplacetw/vuemo'>Vuemo</a> Theme by <a target='_blank' href='https://github.com/laplacetw/vuemo-theme-trigger'>Trigger</a>",
     copyright:
       "<a target='_blank' href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a> | © Trigger " +
       new Date().getFullYear()
