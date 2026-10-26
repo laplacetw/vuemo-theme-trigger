@@ -61,6 +61,34 @@ a {
   @apply bg-cyan-200 text-cyan-700 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-cyan-700 dark:text-cyan-200;
 }
 
+/* AI summary (@vuemo/plugin-ai-summary): styles its class hooks to look like Trigger 1.x. Unlayered, so it wins over the plugin's base style. */
+.vuemo-ai-summary {
+  @apply flex flex-col items-center justify-center min-h-[120px] p-4 my-0 border-2 border-dashed border-gray-400 text-gray-700 dark:border-gray-600 dark:text-gray-300;
+}
+
+.vuemo-ai-summary-button {
+  @apply bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg;
+}
+
+.vuemo-ai-summary-dots {
+  @apply ml-1 h-4 items-end;
+  gap: 0.5rem;
+}
+
+.vuemo-ai-summary-dot {
+  @apply w-2 h-2 bg-current rounded-full;
+  animation: trigger-bounce 1s infinite;
+}
+
+@keyframes trigger-bounce {
+  0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+  50% { transform: none; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vuemo-ai-summary-dot { animation: none; }
+}
+
 .VPHome,
 .VPDoc {
   padding-bottom: 1.25rem !important;

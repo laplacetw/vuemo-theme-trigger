@@ -29,7 +29,7 @@ const selected = useQueryParam('category')
       <h2 id="catName" class="pb-2">📁 {{ selected }}</h2>
       <ul>
         <li v-for="post in categories[selected]" :key="post.url">
-          <a class="decoration-2 hover:underline flex justify-between my-3 text-base leading-6 font-medium text-gray-500 dark:text-gray-300" :href="withBase(post.url)">
+          <a class="decoration-2 decoration-cyan-600 dark:decoration-cyan-300 hover:underline flex justify-between my-3 text-base leading-6 font-medium text-gray-500 dark:text-gray-300" :href="withBase(post.url)">
             <span class="truncate w-64 sm:w-fit">{{ post.title }}</span>
             <span>{{ post.date.string.slice(0, 7) }}</span>
           </a>

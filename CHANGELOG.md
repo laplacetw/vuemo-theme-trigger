@@ -4,6 +4,10 @@
 
 Trigger is now a theme for [Vuemo](https://github.com/laplacetw/vuemo) (a blog framework on VitePress) instead of a "clone and edit" project. See the README for the migration table.
 
+### Fixes
+- the Archive, Category and Tag post links underline in cyan on hover (not the gray/white text color), as in 1.x
+- the AI summary is styled through the plugin's class hooks (dashed box, yellow button, bouncing dots) and matches the 1.x look
+
 ### Breaking changes
 - the repo is a theme package (`vuemo-theme-trigger`), not a blog: the old `.vitepress/`, `posts/`, `public/`, `tailwind.config.js`, `postcss.config.js` and `npm run new` are gone (`vuemo new <name>` replaces the script)
 - settings moved from `.vitepress/theme/config.ts` to `defineBlogConfig` in `.vitepress/config.ts`
