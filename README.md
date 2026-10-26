@@ -113,15 +113,9 @@ pnpm test
 pnpm build:example
 ```
 
-`@vuemo/core` and the two plugins are not on npm yet. `devDependencies` links them from a checkout of the Vuemo monorepo with relative paths (`link:../vuomo/packages/core`, `link:../vuomo/plugins/comments`, `link:../vuomo/plugins/ai-summary`), so the monorepo must sit next to this repository:
+`@vuemo/core` and the two plugins come from npm (`devDependencies`). To develop against a local checkout of the Vuemo monorepo instead, temporarily point them at it with `link:../vuemo/packages/core`, `link:../vuemo/plugins/comments` and `link:../vuemo/plugins/ai-summary` (the monorepo must be built) and do not commit that change.
 
-```
-proj/
-  vuomo/                  # the Vuemo monorepo (built: pnpm build)
-  vuomo-theme-trigger/    # this repository
-```
-
-Once the `@vuemo/*` alpha releases are on npm, replace the three `link:` entries with `^0.1.0-alpha.0` and run `pnpm install` again to refresh the lockfile. The GitHub Pages workflow (`.github/workflows/pages.yml`) stays disabled until then.
+The GitHub Pages workflow (`.github/workflows/pages.yml`) builds the example blog on every push to `main`.
 
 `pnpm typecheck` runs `vue-tsc`.
 

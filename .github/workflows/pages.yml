@@ -1,11 +1,9 @@
 # Builds the example site and deploys it to GitHub Pages.
-#
-# DISABLED for now: `@vuemo/core` and the plugins are `link:` dependencies on a local checkout of the Vuemo
-# monorepo (../vuomo), which CI does not have. Once the @vuemo/* alpha is on npm, switch those devDependencies
-# to `^0.1.0-alpha.0`, then remove the `if: false` line below.
 name: Deploy example to GitHub Pages
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -19,7 +17,6 @@ concurrency:
 
 jobs:
   build:
-    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -44,9 +44,9 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.0",
     "@types/node": "^26.6.5",
-    "@vuemo/core": "link:../vuomo/packages/core",
-    "@vuemo/plugin-ai-summary": "link:../vuomo/plugins/ai-summary",
-    "@vuemo/plugin-comments": "link:../vuomo/plugins/comments",
+    "@vuemo/core": "^0.1.0-alpha.1",
+    "@vuemo/plugin-ai-summary": "^0.1.0-alpha.1",
+    "@vuemo/plugin-comments": "^0.1.0-alpha.1",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-mathjax3": "^4.3.2",
     "tailwindcss": "^4.1.0",
@@ -58,5 +58,9 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "packageManager": "pnpm@10.34.7",
+  "bugs": {
+    "url": "https://github.com/laplacetw/vuemo-theme-trigger/issues"
   }
 }
