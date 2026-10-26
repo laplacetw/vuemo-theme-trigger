@@ -53,6 +53,19 @@ Create the pages the nav points to, each with a layout in its frontmatter:
 | `category.md` | `layout: category` | |
 | `about.md` | `layout: page` | `<About />` |
 
+`npm create vuemo@alpha my-blog -- --theme vuemo-theme-trigger` already creates these files, but its `about.md` only holds placeholder text. To get Trigger's About card (avatar and quote), put `<About />` in the body and set `themeConfig.about` in `.vitepress/config.ts`:
+
+```md
+---
+title: About
+layout: page
+---
+
+<About />
+
+Any other Markdown you write here is rendered under the card.
+```
+
 See [`example/`](./example) for a complete blog. Posts go in `posts/`; an excerpt is the part before a `---` line.
 
 ## What it supports
