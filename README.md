@@ -5,29 +5,27 @@
 
 Trigger is a blog theme for [Vuemo](https://github.com/laplacetw/vuemo), the blog framework built on [VitePress](https://vitepress.dev). It is named after the anime "World Trigger" and styled with Tailwind CSS (compiled for you, nothing to install). It builds on VitePress's default theme for the nav bar, search and footer.
 
-> **Status: 2.0 alpha.** Vuemo is under development; the theme works with `@vuemo/core` `^0.1.0-alpha.0`.
+> **Status: 2.0 alpha.** Vuemo is under development. Resolving `theme: 'trigger'` (below) needs `@vuemo/core` `^0.1.0-alpha.2` or newer.
 
 ![](./example/public/preview.png)
 
-## Use it
+## Install
+
+### With npm
 
 ```sh
-npm create vuemo@alpha my-blog -- --theme vuemo-theme-trigger@alpha
+npm install vuemo-theme-trigger
 ```
 
-or in an existing Vuemo blog:
-
-```sh
-pnpm add vuemo-theme-trigger
-```
+Run it in the root of your Vuemo blog, then set the theme in `vuemo.config.ts` (the config file in the project root of a blog made with `npm create vuemo`; older projects keep their settings in `.vitepress/config.ts`):
 
 ```ts
-// .vitepress/config.ts
+// vuemo.config.ts
 import { defineBlogConfig } from '@vuemo/core'
 
 export default defineBlogConfig({
   title: 'Trigger !',
-  theme: 'vuemo-theme-trigger',
+  theme: 'trigger',
   appearance: 'dark',
   postsPerPage: 5,
   nav: [
@@ -43,6 +41,22 @@ export default defineBlogConfig({
 })
 ```
 
+To update, run `npm install vuemo-theme-trigger@latest`.
+
+### From a zip
+
+Download `vuemo-theme-trigger-<version>.zip` from [GitHub Releases](https://github.com/laplacetw/vuemo-theme-trigger/releases) and unzip it into the `themes/` folder of your blog (create the folder if it is not there). The result is `themes/trigger/`. Then set `theme: 'trigger'` in `vuemo.config.ts`, as above. To update, replace the folder with the newer zip. The zip carries the compiled CSS, so there is nothing to build.
+
+If both exist, `themes/trigger/` wins over the installed package.
+
+### A new blog
+
+```sh
+npm create vuemo@alpha my-blog -- --theme trigger
+```
+
+creates a blog with the theme already set up.
+
 Create the pages the nav points to, each with a layout in its frontmatter:
 
 | File | Frontmatter | Body |
@@ -53,7 +67,7 @@ Create the pages the nav points to, each with a layout in its frontmatter:
 | `category.md` | `layout: category` | |
 | `about.md` | `layout: page` | `<About />` |
 
-`npm create vuemo@alpha my-blog -- --theme vuemo-theme-trigger` already creates these files, but its `about.md` only holds placeholder text. To get Trigger's About card (avatar and quote), put `<About />` in the body and set `themeConfig.about` in `.vitepress/config.ts`:
+`npm create vuemo@alpha my-blog -- --theme trigger` already creates these files, but its `about.md` only holds placeholder text. To get Trigger's About card (avatar and quote), put `<About />` in the body and set `themeConfig.about` in `vuemo.config.ts`:
 
 ```md
 ---
@@ -94,7 +108,7 @@ Trigger 1.x was a repository you cloned and edited. 2.0 is a package; your posts
 | 1.x | 2.0 |
 | --- | --- |
 | clone this repo | `pnpm add vuemo-theme-trigger` in a Vuemo blog (`npm create vuemo`) |
-| `.vitepress/theme/config.ts` | `defineBlogConfig` in `.vitepress/config.ts` |
+| `.vitepress/theme/config.ts` | `defineBlogConfig` in `vuemo.config.ts` |
 | `title`, `description`, `lang`, `base`, `appearance`, `cleanUrls`, `cacheDir`, `hostname` | the same names in `defineBlogConfig` (`hostname` also drives sitemap, RSS and JSON-LD) |
 | `favicon` | `head: [['link', { rel: 'icon', href: '/favicon.png' }]]` |
 | `logo`, `nav`, `socialLinks`, `footer`, `postsPerPage` | the same names in `defineBlogConfig` |
@@ -124,9 +138,14 @@ pnpm dev            # the example blog
 pnpm check          # vuemo check-theme: the theme contract
 pnpm test
 pnpm build:example
+pnpm package        # dist-zip/vuemo-theme-trigger-<version>.zip, the download for the `themes/` folder
 ```
 
-`@vuemo/core` and the two plugins come from npm (`devDependencies`). To develop against a local checkout of the Vuemo monorepo instead, temporarily point them at it with `link:../vuemo/packages/core`, `link:../vuemo/plugins/comments` and `link:../vuemo/plugins/ai-summary` (the monorepo must be built) and do not commit that change.
+`@vuemo/core` and the two plugins come from npm (`devDependencies`, still on `^0.1.0-alpha.1`, which the example needs to build; the peer dependency is `@vuemo/core` `^0.1.0-alpha.2`, the first release that resolves `theme: 'trigger'`). To develop against a local checkout of the Vuemo monorepo instead, temporarily point them at it with `link:../vuemo/packages/core`, `link:../vuemo/plugins/comments` and `link:../vuemo/plugins/ai-summary` (the monorepo must be built) and do not commit that change.
+
+The example keeps its settings in `example/vuemo.config.ts`, like a scaffolded blog (`example/.vitepress/config.ts` only re-exports it).
+
+Pushing a tag `v*` runs `.github/workflows/release.yml`, which builds the zip and attaches it to a GitHub prerelease.
 
 The GitHub Pages workflow (`.github/workflows/pages.yml`) builds the example blog on every push to `main`.
 
