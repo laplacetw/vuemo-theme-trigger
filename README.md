@@ -98,6 +98,7 @@ See [`example/`](./example) for a complete blog. Posts go in `posts/`; an excerp
 | --- | --- | --- |
 | `about.avatar` | `string` | avatar of the About page: a file in `public/` or a URL (none by default) |
 | `about.quote` | `string` | the line under it (default `Trigger your blog !`) |
+| `palette` | `'default'` \| `'trigger'` | the colour palette (default `'default'`, the look of 1.x) |
 
 The type `TriggerThemeConfig` is exported; a wrong value prints a `console.warn('[vuemo-theme-trigger] ...')`.
 

@@ -5,7 +5,9 @@ import { defineBlogConfig } from '@vuemo/core'
 import footnote from 'markdown-it-footnote'
 import type { TriggerThemeConfig } from '../src'
 
+// `PALETTE=trigger pnpm dev` shows the other palette
 const themeConfig: TriggerThemeConfig = {
+  palette: process.env.PALETTE === 'trigger' ? 'trigger' : 'default',
   about: { avatar: '/avatar.png', quote: 'Trigger your blog !' }
 }
 

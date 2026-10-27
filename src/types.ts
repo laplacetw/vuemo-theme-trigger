@@ -7,6 +7,24 @@ export interface TriggerThemeConfig {
     /** The line under the avatar. Default: `Trigger your blog !` */
     quote?: string
   }
+  /**
+   * The colour palette. `'default'` (the default) is the look of Trigger 1.x;
+   * `'trigger'` is a dark-leaning sci-fi "operations console" look (navy surfaces, cyan signal accent).
+   */
+  palette?: Palette
+}
+
+export type Palette = 'default' | 'trigger'
+
+export const PALETTES: readonly Palette[] = ['default', 'trigger']
+
+/** The `palette` option: an unknown value warns and falls back to `'default'`. */
+export function readPalette(theme: Record<string, unknown>, warn: (message: string) => void = console.warn): Palette {
+  const raw = theme.palette
+  if (raw === undefined) return 'default'
+  if (typeof raw === 'string' && (PALETTES as readonly string[]).includes(raw)) return raw as Palette
+  warn(`[vuemo-theme-trigger] themeConfig.palette must be one of ${PALETTES.map((p) => `'${p}'`).join(', ')}; using 'default'`)
+  return 'default'
 }
 
 /** The `about` option as the theme understands it, with a warning for every wrong value. */

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Features
+- `themeConfig.palette: 'default' | 'trigger'` selects the colour palette; the theme root carries `data-palette`. An unknown value warns once and falls back to `'default'`. The example switches with the `PALETTE=trigger` environment variable
+
 ### Changes
 - the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
 

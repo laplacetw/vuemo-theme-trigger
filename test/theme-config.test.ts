@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { readAbout } from '../src/types'
+import { readAbout, readPalette } from '../src/types'
 
 describe('readAbout', () => {
   it('returns the valid options', () => {
@@ -18,5 +18,26 @@ describe('readAbout', () => {
     expect(readAbout({ about: 'x' }, (m) => warnings.push(m))).toEqual({})
     expect(warnings).toHaveLength(2)
     expect(warnings.every((m) => m.startsWith('[vuemo-theme-trigger]'))).toBe(true)
+  })
+})
+
+describe('readPalette', () => {
+  it('defaults to "default" without a warning', () => {
+    const warnings: string[] = []
+    expect(readPalette({}, (m) => warnings.push(m))).toBe('default')
+    expect(warnings).toEqual([])
+  })
+
+  it('accepts the known palettes', () => {
+    expect(readPalette({ palette: 'trigger' })).toBe('trigger')
+    expect(readPalette({ palette: 'default' })).toBe('default')
+  })
+
+  it('warns about an unknown value and falls back', () => {
+    const warnings: string[] = []
+    expect(readPalette({ palette: 'neon' }, (m) => warnings.push(m))).toBe('default')
+    expect(readPalette({ palette: 3 }, (m) => warnings.push(m))).toBe('default')
+    expect(warnings).toHaveLength(2)
+    expect(warnings[0]).toMatch(/^\[vuemo-theme-trigger\] themeConfig\.palette/)
   })
 })
