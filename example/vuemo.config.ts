@@ -18,7 +18,6 @@ export default defineBlogConfig({
   hostname: 'https://example.com',
   appearance: 'dark',
   cleanUrls: true,
-  head: [['link', { rel: 'icon', href: `${process.env.BASE ?? '/'}favicon.png` }]],
   lastUpdated: true,
   search: true,
 
