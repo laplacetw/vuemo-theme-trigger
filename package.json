@@ -34,6 +34,7 @@
     "check": "vuemo check-theme ./src/index.ts",
     "test": "vitest run",
     "typecheck": "vue-tsc --noEmit",
+    "package": "pnpm build && node scripts/package.mjs",
     "prepack": "pnpm build"
   },
   "peerDependencies": {

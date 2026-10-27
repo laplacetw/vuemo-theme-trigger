@@ -1,0 +1,27 @@
+# Builds the zip of the theme and attaches it to a GitHub Release when a version tag (v*) is pushed.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm package
+      - name: Create the release
+        run: gh release create "$GITHUB_REF_NAME" dist-zip/*.zip --generate-notes --prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

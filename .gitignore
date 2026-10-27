@@ -6,3 +6,4 @@ dist
 example/.vitepress/dist
 example/.vitepress/cache
 *.log
+dist-zip
