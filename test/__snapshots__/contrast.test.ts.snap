@@ -1,0 +1,85 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`baseline of the default look > colours (dark) 1`] = `
+{
+  "--tr-accent": "#53eafd",
+  "--tr-accent-active": "#cefafe",
+  "--tr-accent-ring": "#00b8db",
+  "--tr-accent-strong": "#cefafe",
+  "--tr-accent-ui": "#00b8db",
+  "--tr-badge-bg": "#007595",
+  "--tr-badge-fg": "#a2f4fd",
+  "--tr-border": "#364153",
+  "--tr-card-bg": "#314158",
+  "--tr-card-text": "#a2f4fd",
+  "--tr-dashed-border": "#4a5565",
+  "--tr-dashed-text": "#d1d5dc",
+  "--tr-divide": "#4a5565",
+  "--tr-hover-bg": "#364153",
+  "--tr-on-warn": "#000000",
+  "--tr-rule": "#6a7282",
+  "--tr-text-muted": "#d1d5dc",
+  "--tr-text-strong": "#ffffff",
+  "--tr-title-from": "#a2f4fd",
+  "--tr-title-to": "#155dfc",
+  "--tr-warn": "#f0b100",
+}
+`;
+
+exports[`baseline of the default look > colours (light) 1`] = `
+{
+  "--tr-accent": "#0092b8",
+  "--tr-accent-active": "#00b8db",
+  "--tr-accent-ring": "#00b8db",
+  "--tr-accent-strong": "#007595",
+  "--tr-accent-ui": "#007595",
+  "--tr-badge-bg": "#a2f4fd",
+  "--tr-badge-fg": "#007595",
+  "--tr-border": "#d1d5dc",
+  "--tr-card-bg": "#e2e8f0",
+  "--tr-card-text": "#6a7282",
+  "--tr-dashed-border": "#99a1af",
+  "--tr-dashed-text": "#364153",
+  "--tr-divide": "#4a5565",
+  "--tr-hover-bg": "#d1d5dc",
+  "--tr-on-warn": "#000000",
+  "--tr-rule": "#e5e7eb",
+  "--tr-text-muted": "#6a7282",
+  "--tr-text-strong": "#101828",
+  "--tr-title-from": "#007595",
+  "--tr-title-to": "#193cb8",
+  "--tr-warn": "#f0b100",
+}
+`;
+
+exports[`baseline of the default look > contrast ratios (dark) 1`] = `
+{
+  "AI summary button": 10.97,
+  "AI summary text on page": 11.66,
+  "about quote on card": 8.3,
+  "badge": 4.24,
+  "current page on hover bg": 9.2,
+  "link on page": 11.88,
+  "muted text on page": 11.66,
+  "pagination text on hover bg": 4.36,
+  "pagination text on page": 7.26,
+  "post title on page": 15.33,
+  "strong text on page": 17.17,
+}
+`;
+
+exports[`baseline of the default look > contrast ratios (light) 1`] = `
+{
+  "AI summary button": 10.97,
+  "AI summary text on page": 10.31,
+  "about quote on card": 3.93,
+  "badge": 4.24,
+  "current page on hover bg": 1.61,
+  "link on page": 3.6,
+  "muted text on page": 4.84,
+  "pagination text on hover bg": 3.59,
+  "pagination text on page": 5.28,
+  "post title on page": 5.28,
+  "strong text on page": 17.75,
+}
+`;
