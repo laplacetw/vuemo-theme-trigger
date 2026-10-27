@@ -4,6 +4,7 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' source(none);
 @source '.';
+@import './tokens.css';
 
 /* dark mode follows VitePress's `dark` class on <html> (isDark) */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -13,12 +14,12 @@
 }
 
 .theme-title {
-  /* light mode: cyan-700 to blue-800 on white is >= 5:1; dark mode keeps the light cyan to blue look */
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-700 to-blue-800 dark:from-cyan-200 dark:to-blue-600;
+  /* the gradient stops are tokens (the light mode pair has >= 5:1 on white) */
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-(--tr-title-from) to-(--tr-title-to);
 }
 
 .theme-excerpt {
-  @apply pb-8 text-gray-500 dark:text-gray-300;
+  @apply pb-8 text-(color:--tr-text-muted);
 }
 
 .theme-excerpt > p {
@@ -26,13 +27,12 @@
 }
 
 .theme-readmore {
-  @apply px-4 py-1 justify-self-center shadow-lg shadow-cyan-500/50 rounded-md ring-1 ring-cyan-500 motion-safe:animate-pulse;
+  @apply px-4 py-1 justify-self-center shadow-lg shadow-(color:--tr-accent-ring)/50 rounded-md ring-1 ring-(color:--tr-accent-ring) motion-safe:animate-pulse;
 }
 
 .theme-pagination {
   @apply flex items-center justify-center px-3 h-8 leading-tight cursor-pointer
-    text-cyan-700 border border-gray-300 sm:hover:bg-gray-300 sm:hover:text-cyan-500
-    dark:border-gray-700 dark:text-cyan-500 dark:sm:hover:bg-gray-700 dark:sm:hover:text-cyan-100;
+    text-(color:--tr-accent-ui) border border-(color:--tr-border) sm:hover:bg-(--tr-hover-bg) sm:hover:text-(color:--tr-accent-active);
 }
 
 .theme-pagination:disabled {
@@ -40,34 +40,34 @@
 }
 
 .theme-pagination-clicked {
-  @apply bg-gray-300 text-cyan-500 dark:bg-gray-700 dark:text-cyan-100;
+  @apply bg-(--tr-hover-bg) text-(color:--tr-accent-active);
 }
 
 .theme-prev,
 .theme-next {
-  @apply px-3 py-1 font-medium text-cyan-600 dark:text-cyan-300 cursor-pointer hover:underline;
+  @apply px-3 py-1 font-medium text-(color:--tr-accent) cursor-pointer hover:underline;
 }
 
 .theme-date {
-  @apply text-cyan-600 dark:text-cyan-300;
+  @apply text-(color:--tr-accent);
 }
 
 /* a separate rule: in a selector list the class would raise the specificity of `a` above the utilities */
 a {
-  @apply text-cyan-600 dark:text-cyan-300;
+  @apply text-(color:--tr-accent);
 }
 
 .theme-badge {
-  @apply bg-cyan-200 text-cyan-700 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-cyan-700 dark:text-cyan-200;
+  @apply bg-(--tr-badge-bg) text-(color:--tr-badge-fg) text-base font-medium mr-2 px-2.5 py-0.5 rounded;
 }
 
 /* AI summary (@vuemo/plugin-ai-summary): styles its class hooks to look like Trigger 1.x. Unlayered, so it wins over the plugin's base style. */
 .vuemo-ai-summary {
-  @apply flex flex-col items-center justify-center min-h-[120px] p-4 my-0 border-2 border-dashed border-gray-400 text-gray-700 dark:border-gray-600 dark:text-gray-300;
+  @apply flex flex-col items-center justify-center min-h-[120px] p-4 my-0 border-2 border-dashed border-(color:--tr-dashed-border) text-(color:--tr-dashed-text);
 }
 
 .vuemo-ai-summary-button {
-  @apply bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg;
+  @apply bg-(--tr-warn) text-(color:--tr-on-warn) font-bold py-2 px-4 rounded-lg;
 }
 
 .vuemo-ai-summary-dots {
@@ -99,39 +99,10 @@ a {
 }
 
 /**
- * Customize default theme styling by overriding CSS variables:
+ * VitePress variables. The accent colours (`--vp-c-brand-1/2/3/soft`, which VitePress's links, buttons, tip
+ * blocks, inline code and search use) are mapped to the tokens in tokens.css.
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
-
-/**
- * Colors
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-c-brand: #0891b2;
-  --vp-c-brand-light: #747bff;
-  --vp-c-brand-lighter: #9499ff;
-  --vp-c-brand-lightest: #bcc0ff;
-  --vp-c-brand-dark: #535bf2;
-  --vp-c-brand-darker: #454ce1;
-  --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
-}
-
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-button-brand-border: var(--vp-c-brand-light);
-  --vp-button-brand-text: var(--vp-c-white);
-  --vp-button-brand-bg: var(--vp-c-brand);
-  --vp-button-brand-hover-border: var(--vp-c-brand-light);
-  --vp-button-brand-hover-text: var(--vp-c-white);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-light);
-  --vp-button-brand-active-border: var(--vp-c-brand-light);
-  --vp-button-brand-active-text: var(--vp-c-white);
-  --vp-button-brand-active-bg: var(--vp-button-brand-bg);
-}
 
 /**
  * Component: Home
@@ -154,28 +125,4 @@ a {
   :root {
     --vp-home-hero-image-filter: blur(72px);
   }
-}
-
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-custom-block-tip-border: var(--vp-c-brand);
-  --vp-custom-block-tip-text: var(--vp-c-brand-darker);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
-}
-
-.dark {
-  --vp-custom-block-tip-border: var(--vp-c-brand);
-  --vp-custom-block-tip-text: var(--vp-c-brand-lightest);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
-}
-
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
-
-.DocSearch {
-  --docsearch-primary-color: var(--vp-c-brand) !important;
 }

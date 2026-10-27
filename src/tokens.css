@@ -1,0 +1,90 @@
+/**
+ * Design tokens of the Trigger theme.
+ *
+ * Primitives are Tailwind's colours (copied, so that nothing depends on which theme variables Tailwind emits);
+ * semantic tokens (`--tr-*`) say what a colour is for. Components use the semantic tokens only, a palette
+ * is a set of values for them. The default palette is the look of Trigger 1.x. Dark mode is VitePress's `.dark` class.
+ */
+
+/* default palette, light */
+:root {
+  --tr-cyan-100: oklch(95.6% 0.045 203.388);
+  --tr-cyan-200: oklch(91.7% 0.08 205.041);
+  --tr-cyan-300: oklch(86.5% 0.127 207.078);
+  --tr-cyan-500: oklch(71.5% 0.143 215.221);
+  --tr-cyan-600: oklch(60.9% 0.126 221.723);
+  --tr-cyan-700: oklch(52% 0.105 223.128);
+  --tr-blue-600: oklch(54.6% 0.245 262.881);
+  --tr-blue-800: oklch(42.4% 0.199 265.638);
+  --tr-gray-200: oklch(92.8% 0.006 264.531);
+  --tr-gray-300: oklch(87.2% 0.01 258.338);
+  --tr-gray-400: oklch(70.7% 0.022 261.325);
+  --tr-gray-500: oklch(55.1% 0.027 264.364);
+  --tr-gray-600: oklch(44.6% 0.03 256.802);
+  --tr-gray-700: oklch(37.3% 0.034 259.733);
+  --tr-gray-900: oklch(21% 0.034 264.665);
+  --tr-slate-200: oklch(92.9% 0.013 255.508);
+  --tr-slate-700: oklch(37.2% 0.044 257.287);
+  --tr-yellow-500: oklch(79.5% 0.184 86.047);
+
+  --tr-accent: var(--tr-cyan-600);
+  --tr-accent-strong: var(--tr-cyan-700);
+  --tr-accent-ui: var(--tr-cyan-700);
+  --tr-accent-active: var(--tr-cyan-500);
+  --tr-accent-ring: var(--tr-cyan-500);
+  --tr-accent-hover: var(--tr-cyan-700);
+  --tr-accent-solid: var(--tr-cyan-600);
+  --tr-accent-soft: oklch(71.5% 0.143 215.221 / 14%);
+  --tr-badge-bg: var(--tr-cyan-200);
+  --tr-badge-fg: var(--tr-cyan-700);
+  --tr-title-from: var(--tr-cyan-700);
+  --tr-title-to: var(--tr-blue-800);
+  --tr-text-muted: var(--tr-gray-500);
+  --tr-text-strong: var(--tr-gray-900);
+  --tr-border: var(--tr-gray-300);
+  --tr-rule: var(--tr-gray-200);
+  --tr-divide: var(--tr-gray-600);
+  --tr-hover-bg: var(--tr-gray-300);
+  --tr-card-bg: var(--tr-slate-200);
+  --tr-card-text: var(--tr-gray-500);
+  --tr-dashed-border: var(--tr-gray-400);
+  --tr-dashed-text: var(--tr-gray-700);
+  --tr-warn: var(--tr-yellow-500);
+  --tr-on-warn: #000000;
+}
+
+/* default palette, dark */
+:root.dark {
+  --tr-accent: var(--tr-cyan-300);
+  --tr-accent-strong: var(--tr-cyan-100);
+  --tr-accent-ui: var(--tr-cyan-500);
+  --tr-accent-active: var(--tr-cyan-100);
+  --tr-accent-hover: var(--tr-cyan-500);
+  --tr-badge-bg: var(--tr-cyan-700);
+  --tr-badge-fg: var(--tr-cyan-200);
+  --tr-title-from: var(--tr-cyan-200);
+  --tr-title-to: var(--tr-blue-600);
+  --tr-text-muted: var(--tr-gray-300);
+  --tr-text-strong: #ffffff;
+  --tr-border: var(--tr-gray-700);
+  --tr-rule: var(--tr-gray-500);
+  --tr-hover-bg: var(--tr-gray-700);
+  --tr-card-bg: var(--tr-slate-700);
+  --tr-card-text: var(--tr-cyan-200);
+  --tr-dashed-border: var(--tr-gray-600);
+  --tr-dashed-text: var(--tr-gray-300);
+}
+
+/*
+ * VitePress's variables follow the tokens. VitePress 1.6 colours its links, buttons, tip blocks, inline code
+ * and search with `--vp-c-brand-1/2/3/soft` (the old `--vp-c-brand`, `-light`, `-dark` ... are deprecated
+ * and no longer read), so these four are what makes VitePress's own parts follow the accent.
+ * Declared on `:root`, so every palette that changes `--tr-accent` there is picked up, including the
+ * search modal, which VitePress renders outside the theme's root element.
+ */
+:root {
+  --vp-c-brand-1: var(--tr-accent);
+  --vp-c-brand-2: var(--tr-accent-hover);
+  --vp-c-brand-3: var(--tr-accent-solid);
+  --vp-c-brand-soft: var(--tr-accent-soft);
+}

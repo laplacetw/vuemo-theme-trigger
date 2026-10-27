@@ -19,12 +19,12 @@ function summary(post: Post): { html?: string; text?: string } {
 
 <template>
   <div class="theme-container">
-    <ul class="divide-y divide-gray-600">
+    <ul class="divide-y divide-(color:--tr-divide)">
       <li v-for="post in page.items" :key="post.url" class="mb-6 p-6">
         <article class="space-y-2 xl:space-y-0 xl:items-baseline">
           <PostInfo :date="post.date.string" :category="post.category" />
           <h2 class="pb-2 text-2xl leading-8 font-bold tracking-tight">
-            <a class="text-gray-900 dark:text-white" :href="withBase(post.url)">{{ post.title }}</a>
+            <a class="text-(color:--tr-text-strong)" :href="withBase(post.url)">{{ post.title }}</a>
           </h2>
           <template v-for="s in [summary(post)]" :key="post.url">
             <div v-if="s.html" class="theme-excerpt" v-html="s.html"></div>

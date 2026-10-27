@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Changes
+- the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
+
+### Fixes
+- the accent of VitePress's own parts now follows Trigger's cyan. Trigger overrode the deprecated `--vp-c-brand`, `--vp-c-brand-light` ... variables, which VitePress 1.6 no longer reads, so VitePress buttons, tip blocks, links in the post body, inline code, the nav link highlight and the footer links stayed indigo. They are now driven by `--vp-c-brand-1/2/3/soft`, mapped to the accent tokens. Expect these to turn from indigo to cyan
+
 ## 2.0.0-alpha.1
 
 Install it the short way: `theme: 'trigger'`.

@@ -17,10 +17,10 @@ const avatar = computed(() => {
 <template>
   <div class="theme-container">
     <Title :text="frontmatter.title || 'About'" />
-    <figure class="bg-slate-200 rounded-xl p-8 dark:bg-slate-700">
+    <figure class="bg-(--tr-card-bg) rounded-xl p-8">
       <img v-if="avatar" class="w-24 h-24 rounded-full mx-auto" :src="avatar" alt="avatar" />
       <div class="pt-6 space-y-4 flex justify-center">
-        <p class="text-lg font-medium text-gray-500 dark:text-cyan-200">“{{ quote }}”</p>
+        <p class="text-lg font-medium text-(color:--tr-card-text)">“{{ quote }}”</p>
       </div>
     </figure>
   </div>

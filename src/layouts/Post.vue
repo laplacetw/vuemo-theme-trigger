@@ -13,7 +13,7 @@ const { tagLink } = useTaxonomyLinks()
 <template>
   <article class="theme-container pt-8 pb-16">
     <header class="grid">
-      <h1 class="mb-2 justify-self-center font-bold text-xl sm:text-2xl text-cyan-700 dark:text-cyan-100">
+      <h1 class="mb-2 justify-self-center font-bold text-xl sm:text-2xl text-(color:--tr-accent-strong)">
         {{ frontmatter.title }}
       </h1>
       <PostInfo v-if="post" class="justify-self-center" :date="post.date.string" :category="post.category" />
@@ -25,7 +25,7 @@ const { tagLink } = useTaxonomyLinks()
     <PluginSlot name="post-after-content" />
     <footer v-if="post">
       <div class="flex flex-wrap justify-center">
-        <a v-for="tag in post.tags" :key="tag" :href="tagLink(tag)" class="justify-self-center text-gray-500 dark:text-gray-300 my-1">
+        <a v-for="tag in post.tags" :key="tag" :href="tagLink(tag)" class="justify-self-center text-(color:--tr-text-muted) my-1">
           <span class="theme-badge">{{ tag }}</span>
         </a>
       </div>

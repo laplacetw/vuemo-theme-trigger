@@ -24,12 +24,12 @@ const selected = useQueryParam('tag')
         <sup>{{ list.length }}</sup>
       </a>
     </div>
-    <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-500" />
+    <hr class="h-px my-4 bg-(--tr-rule) border-0" />
     <template v-if="selected && Object.hasOwn(tags, selected)">
       <h2 id="tagName" class="pb-2">🔖 {{ selected }}</h2>
       <ul>
         <li v-for="post in tags[selected]" :key="post.url">
-          <a class="decoration-2 decoration-cyan-600 dark:decoration-cyan-300 hover:underline flex justify-between my-3 text-base leading-6 font-medium text-gray-500 dark:text-gray-300" :href="withBase(post.url)">
+          <a class="decoration-2 decoration-(color:--tr-accent) hover:underline flex justify-between my-3 text-base leading-6 font-medium text-(color:--tr-text-muted)" :href="withBase(post.url)">
             <span class="truncate w-64 sm:w-fit">{{ post.title }}</span>
             <span>{{ post.date.string.slice(0, 7) }}</span>
           </a>

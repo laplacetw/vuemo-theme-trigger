@@ -6,7 +6,7 @@ const { categoryLink } = useTaxonomyLinks()
 </script>
 
 <template>
-  <p class="pb-2 text-base leading-6 font-medium text-gray-500 dark:text-gray-300">
+  <p class="pb-2 text-base leading-6 font-medium text-(color:--tr-text-muted)">
     <span class="theme-date">📆{{ date }}</span>
     <template v-if="category">
       | 📂<a class="hover:underline" :href="categoryLink(category)">{{ category }}</a>
