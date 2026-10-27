@@ -15,14 +15,14 @@ importers:
         specifier: ^26.6.5
         version: 26.6.5
       '@vuemo/core':
-        specifier: ^0.1.0-alpha.1
-        version: 0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
+        specifier: ^0.1.0-alpha.2
+        version: 0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
       '@vuemo/plugin-ai-summary':
-        specifier: ^0.1.0-alpha.1
-        version: 0.1.0-alpha.1(@vuemo/core@0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
+        specifier: ^0.1.0-alpha.2
+        version: 0.1.0-alpha.2(@vuemo/core@0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
       '@vuemo/plugin-comments':
-        specifier: ^0.1.0-alpha.1
-        version: 0.1.0-alpha.1(@vuemo/core@0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
+        specifier: ^0.1.0-alpha.2
+        version: 0.1.0-alpha.2(@vuemo/core@0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
       markdown-it-footnote:
         specifier: ^4.0.0
         version: 4.0.0
@@ -952,27 +952,27 @@ packages:
   '@vue/shared@3.5.44':
     resolution: {integrity: sha512-H82XLH0DjmSOdbEwO15x3QTo1f5PWEtv237eLpYKc0mqLu+B8hnq16lFWmuBmNurkeiG3wr+oM1FhOll/YVFRg==}
 
-  '@vuemo/core@0.1.0-alpha.1':
-    resolution: {integrity: sha512-Z7O5eb/zeOF0vOVUbHvpNzy1vwyDFoHuudpDrlWFGWF/mIuBI5kg6gKzckye+5me2x2NeeUZpkyOX9jh+coiiA==}
+  '@vuemo/core@0.1.0-alpha.2':
+    resolution: {integrity: sha512-hxxG51XmJucoyWOez9yN54RTr6CnZ4J+EiEKEMCrXYZqSleTJL7RaV8PTDMRI4ajWHek8Dxfu9vDuxt0C9dYtA==}
     engines: {node: '>=18.3'}
     hasBin: true
     peerDependencies:
       vitepress: ^1.6.0
       vue: ^3.5.0
 
-  '@vuemo/plugin-ai-summary@0.1.0-alpha.1':
-    resolution: {integrity: sha512-gjua/4E5ZYhgnYOyfplD5kCVbGsfa1Luhsh4n+gpjlF1Ai6G+c1xxQRcrspphzBusJwqWbjUHGlm3Bn1wU4hIA==}
+  '@vuemo/plugin-ai-summary@0.1.0-alpha.2':
+    resolution: {integrity: sha512-buAj8u43WQgsxLXpDLTSYWgrSBLf1SqZmFcYzutSSpTEdTzkdchXvsNF6eSbl5PnCZmmu5DeOMKxjP5ROYqXVg==}
     engines: {node: '>=18.3'}
     peerDependencies:
-      '@vuemo/core': ^0.1.0-alpha.1
+      '@vuemo/core': ^0.1.0-alpha.2
       vitepress: ^1.6.0
       vue: ^3.5.0
 
-  '@vuemo/plugin-comments@0.1.0-alpha.1':
-    resolution: {integrity: sha512-ftiPzwZ5FHM15dKnspWNuZ4o+7q1sQC89DnFe/ap1fmNx5qgR1jvvlZJQ+9iybkR4Z3GFr+RIw2he+9rvw4xZg==}
+  '@vuemo/plugin-comments@0.1.0-alpha.2':
+    resolution: {integrity: sha512-FuP1dHqX9tA1283k9Br8lSOWuReS6Z0ZcmgrWV/1k9Q2nleS5lbgEictlb9iMBH5R3GfsA5QIg6uq9ZdNdCplA==}
     engines: {node: '>=18.3'}
     peerDependencies:
-      '@vuemo/core': ^0.1.0-alpha.1
+      '@vuemo/core': ^0.1.0-alpha.2
       vitepress: ^1.6.0
       vue: ^3.5.0
 
@@ -2521,20 +2521,20 @@ snapshots:
 
   '@vue/shared@3.5.44': {}
 
-  '@vuemo/core@0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))':
+  '@vuemo/core@0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))':
     dependencies:
       vitepress: 1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3)
       vue: 3.5.44(typescript@5.9.3)
 
-  '@vuemo/plugin-ai-summary@0.1.0-alpha.1(@vuemo/core@0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))':
+  '@vuemo/plugin-ai-summary@0.1.0-alpha.2(@vuemo/core@0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))':
     dependencies:
-      '@vuemo/core': 0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
+      '@vuemo/core': 0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
       vitepress: 1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3)
       vue: 3.5.44(typescript@5.9.3)
 
-  '@vuemo/plugin-comments@0.1.0-alpha.1(@vuemo/core@0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))':
+  '@vuemo/plugin-comments@0.1.0-alpha.2(@vuemo/core@0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3)))(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))':
     dependencies:
-      '@vuemo/core': 0.1.0-alpha.1(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
+      '@vuemo/core': 0.1.0-alpha.2(vitepress@1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3))(vue@3.5.44(typescript@5.9.3))
       vitepress: 1.6.4(@algolia/client-search@5.60.0)(@types/node@26.6.5)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.31)(search-insights@2.17.3)(typescript@5.9.3)
       vue: 3.5.44(typescript@5.9.3)
 
