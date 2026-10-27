@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.0.0-alpha.1
+
+Install it the short way: `theme: 'trigger'`.
+
+### Features
+- `pnpm package` writes `dist-zip/vuemo-theme-trigger-<version>.zip` (top-level folder `trigger/` with `src`, `dist/style.css`, `package.json`, `README.md`, `LICENSE`) for people who unzip it into their blog's `themes/` folder
+- `.github/workflows/release.yml` builds the zip and creates a GitHub prerelease when a tag `v*` is pushed
+
+### Changes
+- the peer dependency is now `@vuemo/core` `^0.1.0-alpha.2`: the zip flow and the short name `theme: 'trigger'` (from `themes/trigger/` or the installed `vuemo-theme-trigger`) need core >= alpha.2. With alpha.1 use the full package name, `theme: 'vuemo-theme-trigger'`
+- the README installs with `npm install vuemo-theme-trigger` or from the zip, and names `vuemo.config.ts` as the user's config file
+- `example/` keeps its settings in `example/vuemo.config.ts` with the boilerplate `.vitepress/config.ts` re-export, like a scaffolded blog
+- the `@vuemo/*` devDependencies stay on `^0.1.0-alpha.1` until alpha.2 is on npm
+
 ## 2.0.0-alpha.0
 
 Trigger is now a theme for [Vuemo](https://github.com/laplacetw/vuemo) (a blog framework on VitePress) instead of a "clone and edit" project. See the README for the migration table.
