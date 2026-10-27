@@ -20,7 +20,7 @@ function summary(post: Post): { html?: string; text?: string } {
 <template>
   <div class="theme-container">
     <ul class="divide-y divide-(color:--tr-divide)">
-      <li v-for="post in page.items" :key="post.url" class="mb-6 p-6">
+      <li v-for="post in page.items" :key="post.url" class="theme-card mb-6 p-6">
         <article class="space-y-2 xl:space-y-0 xl:items-baseline">
           <PostInfo :date="post.date.string" :category="post.category" />
           <h2 class="pb-2 text-2xl leading-8 font-bold tracking-tight">

@@ -1,0 +1,243 @@
+/*
+ * Palette "trigger": component styles. Everything is scoped to `.tr-root[data-palette="trigger"]` (or to
+ * `:root:has(...)` for what lives outside the theme root), so the default palette is untouched.
+ * The ornaments are original geometry drawn for this theme (src/assets/*.svg, see ASSETS.md): a hexagon tiling
+ * used as a very faint texture, one cut corner on chips and a small hexagon node on dividers.
+ * The SVGs are inlined as masks (data URIs, the same content as the files), so they take the palette's colours.
+ */
+
+:root:has(.tr-root[data-palette="trigger"]) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tr-scrollbar-thumb) var(--tr-scrollbar-track);
+}
+
+:root:has(.tr-root[data-palette="trigger"])::-webkit-scrollbar,
+:root:has(.tr-root[data-palette="trigger"]) ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+:root:has(.tr-root[data-palette="trigger"])::-webkit-scrollbar-track,
+:root:has(.tr-root[data-palette="trigger"]) ::-webkit-scrollbar-track {
+  background: var(--tr-scrollbar-track);
+}
+
+:root:has(.tr-root[data-palette="trigger"])::-webkit-scrollbar-thumb,
+:root:has(.tr-root[data-palette="trigger"]) ::-webkit-scrollbar-thumb {
+  background: var(--tr-scrollbar-thumb);
+  border-radius: var(--tr-radius);
+}
+
+:root:has(.tr-root[data-palette="trigger"]) ::selection {
+  background: var(--tr-selection-bg);
+  color: var(--tr-selection-fg);
+}
+
+/* the focus ring is an outline (it is not clipped by the chips' cut corners and shows in forced-colors mode) */
+:root:has(.tr-root[data-palette="trigger"]) :focus-visible {
+  outline: 2px solid var(--tr-focus);
+  outline-offset: 2px;
+}
+
+/* nav: a 1px accent line with a clipped corner at the end */
+.tr-root[data-palette="trigger"] .VPNavBar {
+  position: relative;
+}
+
+.tr-root[data-palette="trigger"] .VPNavBar::before,
+.tr-root[data-palette="trigger"] .VPNavBar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.tr-root[data-palette="trigger"] .VPNavBar::before {
+  left: 0;
+  right: var(--tr-chip-cut);
+  height: 1px;
+  background: var(--tr-accent);
+}
+
+.tr-root[data-palette="trigger"] .VPNavBar::after {
+  right: 0;
+  width: var(--tr-chip-cut);
+  height: var(--tr-chip-cut);
+  background: var(--tr-accent);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  opacity: 0.55;
+}
+
+/* chip: a rectangle with one cut corner and an LED dot; decoration only (aria-hidden), hidden by the default palette */
+.tr-chip {
+  display: none;
+}
+
+.tr-root[data-palette="trigger"] .tr-chip {
+  display: inline-flex;
+  align-items: center;
+  width: 2.25rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  padding-left: 0.4rem;
+  vertical-align: middle;
+  background: var(--tr-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
+  clip-path: polygon(0 0, calc(100% - 0.5rem) 0, 100% 0.5rem, 100% 100%, 0 100%);
+}
+
+.tr-chip-led {
+  display: block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--tr-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--tr-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tr-root[data-palette="trigger"] .tr-chip-led {
+    animation: tr-led 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes tr-led {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* tag and category badges, "Read more": a cut corner instead of rounded corners */
+.tr-root[data-palette="trigger"] .theme-badge {
+  border-radius: 0;
+  box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
+  clip-path: polygon(0 0, calc(100% - 0.4rem) 0, 100% 0.4rem, 100% 100%, 0 100%);
+}
+
+.tr-root[data-palette="trigger"] .theme-readmore {
+  padding-inline: 1.25rem;
+  border-radius: 0;
+  color: var(--tr-accent);
+  background: var(--tr-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
+  clip-path: polygon(0 0, calc(100% - var(--tr-chip-cut)) 0, 100% var(--tr-chip-cut), 100% 100%, 0 100%);
+  animation: none;
+  text-decoration: none;
+  transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
+}
+
+.tr-root[data-palette="trigger"] .theme-readmore:hover {
+  background: var(--tr-accent-solid);
+  color: var(--tr-on-accent);
+}
+
+.tr-root[data-palette="trigger"] .theme-pagination {
+  border-radius: var(--tr-radius);
+  transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
+}
+
+/* post cards: hairline frame, corner brackets (::before), a very faint hexagon texture (::after) */
+.tr-root[data-palette="trigger"] .theme-card {
+  position: relative;
+  isolation: isolate;
+  background: var(--tr-surface-1);
+  border: 1px solid var(--tr-hairline);
+  border-radius: var(--tr-radius);
+}
+
+.tr-root[data-palette="trigger"] .theme-card::before {
+  --bracket: var(--tr-accent);
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--bracket), var(--bracket)) top left / 14px 2px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) top left / 2px 14px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) top right / 14px 2px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) top right / 2px 14px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) bottom left / 14px 2px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) bottom left / 2px 14px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) bottom right / 14px 2px no-repeat,
+    linear-gradient(var(--bracket), var(--bracket)) bottom right / 2px 14px no-repeat;
+}
+
+.tr-root[data-palette="trigger"] .theme-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--tr-accent);
+  opacity: var(--tr-grid-opacity);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2248%22%20viewBox%3D%220%200%2028%2048%22%3E%3Cpath%20d%3D%22M14%20-8V8M14%208L0%2016M14%208L28%2016M0%2016V32M28%2016V32M0%2032L14%2040M28%2032L14%2040M14%2040V56M14%20-8L0%20-16M14%20-8L28%20-16%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E") 0 0 / 28px 48px;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2248%22%20viewBox%3D%220%200%2028%2048%22%3E%3Cpath%20d%3D%22M14%20-8V8M14%208L0%2016M14%208L28%2016M0%2016V32M28%2016V32M0%2032L14%2040M28%2032L14%2040M14%2040V56M14%20-8L0%20-16M14%20-8L28%20-16%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E") 0 0 / 28px 48px;
+}
+
+/* post body: h2 with an accent bar and a counter */
+.tr-root[data-palette="trigger"] .vuemo-content {
+  counter-reset: tr-h2;
+}
+
+.tr-root[data-palette="trigger"] .vuemo-content h2 {
+  counter-increment: tr-h2;
+  margin-top: 2.5rem;
+  padding: 0.125rem 0 0.125rem 0.75rem;
+  border-top: 0;
+  border-left: 3px solid var(--tr-accent);
+}
+
+.tr-root[data-palette="trigger"] .vuemo-content h2::before {
+  content: counter(tr-h2, decimal-leading-zero);
+  margin-right: 0.6rem;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--tr-accent);
+}
+
+/* dividers: a dashed hairline with a small hexagon node */
+.tr-root[data-palette="trigger"] hr {
+  position: relative;
+  height: 12px;
+  border: 0;
+  background: repeating-linear-gradient(to right, var(--tr-hairline) 0 6px, transparent 6px 10px) center / 100% 1px no-repeat;
+  overflow: visible;
+}
+
+.tr-root[data-palette="trigger"] hr::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: var(--tr-accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpolygon%20points%3D%226%2C0.8%2010.5%2C3.4%2010.5%2C8.6%206%2C11.2%201.5%2C8.6%201.5%2C3.4%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.5%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpolygon%20points%3D%226%2C0.8%2010.5%2C3.4%2010.5%2C8.6%206%2C11.2%201.5%2C8.6%201.5%2C3.4%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.5%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+}
+
+/* code blocks: an accent edge */
+.tr-root[data-palette="trigger"] .vp-doc div[class*="language-"] {
+  border: 1px solid var(--tr-code-border);
+  border-left: 3px solid var(--tr-accent);
+  border-radius: var(--tr-radius);
+}
+
+/* motion: quiet when the system asks for it */
+@media (prefers-reduced-motion: reduce) {
+  .tr-root[data-palette="trigger"],
+  .tr-root[data-palette="trigger"] *,
+  .tr-root[data-palette="trigger"] *::before,
+  .tr-root[data-palette="trigger"] *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* room between the nav line and the first card */
+.tr-root[data-palette="trigger"] .theme-card:first-child {
+  margin-top: 1.5rem;
+}
