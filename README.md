@@ -3,7 +3,7 @@
 ![](https://img.shields.io/github/license/laplacetw/vuemo-theme-trigger)
 ![Node.js >= 18.0.0](https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green)
 
-Trigger is a blog theme for [Vuemo](https://github.com/laplacetw/vuemo), the blog framework built on [VitePress](https://vitepress.dev). It is named after the anime "World Trigger" and styled with Tailwind CSS (compiled for you, nothing to install). It builds on VitePress's default theme for the nav bar, search and footer.
+Trigger is a blog theme for [Vuemo](https://github.com/laplacetw/vuemo), the blog framework built on [VitePress](https://vitepress.dev). It is styled with Tailwind CSS (compiled for you, nothing to install). It builds on VitePress's default theme for the nav bar, search and footer.
 
 > **Status: 2.0 alpha.** Vuemo is under development. Resolving `theme: 'trigger'` (below) needs `@vuemo/core` `^0.1.0-alpha.2` or newer.
 
@@ -100,7 +100,29 @@ See [`example/`](./example) for a complete blog. Posts go in `posts/`; an excerp
 | `about.quote` | `string` | the line under it (default `Trigger your blog !`) |
 | `palette` | `'default'` \| `'trigger'` | the colour palette (default `'default'`, the look of 1.x) |
 
-The type `TriggerThemeConfig` is exported; a wrong value prints a `console.warn('[vuemo-theme-trigger] ...')`.
+The type `TriggerThemeConfig` is exported; a wrong value prints a `console.warn('[vuemo-theme-trigger] ...')` once and the theme falls back to the default.
+
+### Palettes
+
+`themeConfig.palette` picks the colours:
+
+```ts
+export default defineBlogConfig({
+  theme: 'trigger',
+  themeConfig: { palette: 'trigger' }
+})
+```
+
+| Palette | Look |
+| --- | --- |
+| `'default'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
+| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, amber for the AI summary button, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner chips for tags and "Read more", a thin scrollbar and accent-edged code blocks |
+
+Both palettes follow VitePress's dark mode (`appearance`, the toggle in the nav). The `'trigger'` palette respects `prefers-reduced-motion` and keeps text at 4.5:1 and borders and the focus ring at 3:1 or more (checked by `pnpm test`).
+
+The colours are semantic tokens (`--tr-accent`, `--tr-surface-0`, `--tr-text-muted`, `--tr-border`, `--tr-focus`, ...) in [`src/tokens.css`](./src/tokens.css), mapped to VitePress's variables (`--vp-c-brand-1/2/3/soft`, and under the `'trigger'` palette `--vp-c-bg`, `--vp-c-divider`, `--vp-code-block-bg`, ...) so VitePress's own buttons, tip blocks, links and search follow the accent. A new palette is a new set of values for these tokens.
+
+In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'trigger'` palette.
 
 ## Migrating from 1.x
 
@@ -137,8 +159,8 @@ pnpm install
 pnpm build          # compile src/style.css to dist/style.css (Tailwind CSS v4)
 pnpm dev            # the example blog
 pnpm check          # vuemo check-theme: the theme contract
-pnpm test
-pnpm build:example
+pnpm test           # includes the colour tokens: snapshot of the default palette, WCAG contrast of both
+pnpm build:example  # PALETTE=trigger pnpm build:example for the other palette
 pnpm package        # dist-zip/vuemo-theme-trigger-<version>.zip, the download for the `themes/` folder
 ```
 
@@ -151,6 +173,12 @@ Pushing a tag `v*` runs `.github/workflows/release.yml`, which builds the zip an
 The GitHub Pages workflow (`.github/workflows/pages.yml`) builds the example blog on every push to `main`.
 
 `pnpm typecheck` runs `vue-tsc`.
+
+## Name and credits
+
+The name is a nod to the manga *World Trigger* by Daisuke Ashihara. This is an unofficial fan-made project, not affiliated with or endorsed by the author, Shueisha or Toei Animation.
+
+The theme contains no official artwork, logos, character likenesses or other material from that work. The palette is inspired only by general motifs (a sci-fi control-room feel, HUD lines, hexagon geometry, a cool colour scheme). Every graphic is original work drawn in this repository under the MIT licence, listed in [ASSETS.md](./ASSETS.md); fonts are system fonts or OFL only. Contributions must follow the same rule (see the pull request template): nothing copied or traced from official material, and no names, titles or terms from the work in code, class names or documentation.
 
 ## License
 

@@ -6,6 +6,8 @@
 - `themeConfig.palette: 'default' | 'trigger'` selects the colour palette (`'trigger'`: navy and graphite surfaces, signal-cyan accent, light and dark, contrast-tested); the theme root carries `data-palette`. An unknown value warns once and falls back to `'default'`. The example switches with the `PALETTE=trigger` environment variable
 - palette `'trigger'` styles: nav with an accent line and a clipped corner, `TriggerChip` (decorative, `aria-hidden`), tag/category badges and "Read more" as cut-corner chips, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, and reduced-motion support. The default palette does not change
 - `ASSETS.md` lists every graphic (original work, MIT)
+- the README documents the palettes and adds a name and credits section with the unofficial-fan-project disclaimer; `.github/PULL_REQUEST_TEMPLATE.md` has a checkbox that no official material was copied or traced
+- the README no longer describes the origin of the name in its introduction (it is in "Name and credits")
 
 ### Changes
 - the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
