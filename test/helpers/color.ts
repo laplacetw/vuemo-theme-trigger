@@ -6,6 +6,11 @@ export interface Rgba {
   a: number
 }
 
+/*
+ * Limitation: oklch colours outside the sRGB gamut are clamped per channel here, while a browser maps them
+ * into gamut differently (CSS Color 4 gamut mapping). For the in-gamut Tailwind colours used as primitives the
+ * two agree to within a rounding step; a very saturated oklch value could differ, so prefer #hex for new colours.
+ */
 const clamp = (n: number) => Math.min(1, Math.max(0, n))
 const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)
 const toGamma = (c: number) => (c <= 0.0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - 0.055)
@@ -58,9 +63,10 @@ export function luminance(c: Rgba): number {
   return 0.2126 * toLinear(c.r) + 0.7152 * toLinear(c.g) + 0.0722 * toLinear(c.b)
 }
 
-/** WCAG contrast ratio; a translucent `fg` is composited over `bg` first. */
+/** WCAG contrast ratio; a translucent `fg` is composited over `bg` first. `bg` must be opaque (flatten it with `composite` first). */
 export function contrast(fg: string | Rgba, bg: string | Rgba): number {
   const b = typeof bg === 'string' ? parseColor(bg) : bg
+  if (b.a < 1) throw new Error('contrast(): the background must be opaque, composite it over the page first')
   let f = typeof fg === 'string' ? parseColor(fg) : fg
   if (f.a < 1) f = composite(f, b)
   const [hi, lo] = [luminance(f), luminance(b)].sort((x, y) => y - x)

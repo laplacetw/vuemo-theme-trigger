@@ -20,6 +20,8 @@ export default defineBlogConfig({
   hostname: 'https://example.com',
   appearance: 'dark',
   cleanUrls: true,
+  // the build test writes elsewhere, so it does not touch a dist you are looking at
+  ...(process.env.OUT_DIR ? { outDir: process.env.OUT_DIR } : {}),
   lastUpdated: true,
   search: true,
 

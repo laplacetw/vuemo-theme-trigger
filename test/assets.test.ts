@@ -20,9 +20,9 @@ describe('palette assets', () => {
 })
 
 describe('palette styles', () => {
-  it('scopes every rule to the trigger palette (or the chip hook)', () => {
+  it('scopes every rule to the trigger palette (or the tag hook)', () => {
     const selectors = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/(^|\})\s*([^{}@]+)\{/g)].map((m) => m[2].trim())
-    const stray = selectors.filter((s) => !/data-palette="trigger"/.test(s) && !/^(\.tr-chip|\.tr-chip-led|0%, 100%|50%)$/.test(s))
+    const stray = selectors.filter((s) => !/data-palette="trigger"/.test(s) && !/^(\.tr-tag|\.tr-tag-led|0%, 100%|50%)$/.test(s))
     expect(stray).toEqual([])
   })
 

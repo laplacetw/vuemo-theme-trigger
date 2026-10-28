@@ -4,16 +4,22 @@
 
 ### Features
 - `themeConfig.palette: 'default' | 'trigger'` selects the colour palette (`'trigger'`: navy and graphite surfaces, signal-cyan accent, light and dark, contrast-tested); the theme root carries `data-palette`. An unknown value warns once and falls back to `'default'`. The example switches with the `PALETTE=trigger` environment variable
-- palette `'trigger'` styles: nav with an accent line and a clipped corner, `TriggerChip` (decorative, `aria-hidden`), tag/category badges and "Read more" as cut-corner chips, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, and reduced-motion support. The default palette does not change
+- palette `'trigger'` styles: nav with an accent line and a clipped corner, `SignalTag` (decorative, `aria-hidden`), tag/category badges and "Read more" with a cut corner, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, and reduced-motion support. The default palette does not change
 - `ASSETS.md` lists every graphic (original work, MIT)
 - the README documents the palettes and adds a name and credits section with the unofficial-fan-project disclaimer; `.github/PULL_REQUEST_TEMPLATE.md` has a checkbox that no official material was copied or traced
 - the README no longer describes the origin of the name in its introduction (it is in "Name and credits")
 
 ### Changes
+- renamed the decorative component `TriggerChip` to `SignalTag` (class `.tr-tag`, token `--tr-cut` instead of `--tr-chip-cut`); it is internal and only visible in the `'trigger'` palette
+- `layout: page` content from `@vuemo/plugin-gallery` gets a centred container (max 72rem, 1rem padding) in both palettes; the About page is unchanged
 - the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
 
 ### Fixes
-- the accent of VitePress's own parts now follows Trigger's cyan. Trigger overrode the deprecated `--vp-c-brand`, `--vp-c-brand-light` ... variables, which VitePress 1.6 no longer reads, so VitePress buttons, tip blocks, links in the post body, inline code, the nav link highlight and the footer links stayed indigo. They are now driven by `--vp-c-brand-1/2/3/soft`, mapped to the accent tokens. Expect these to turn from indigo to cyan
+- keyboard focus on "Read more" is visible in the `'trigger'` palette: the cut corner is a `clip-path` on the link itself, which also clipped its focus outline. It now drops on `:focus-visible` and the link gets a 2px ring; a test fails if a focusable element carries a `clip-path` without such an override
+- the `'trigger'` palette rules in `tokens.css` are no longer one selector list with `:root:has(...)`: a browser without `:has()` dropped the whole list and lost the palette. The two rules are separate (and the `:has()` one is narrowed to `:root:has(> body > #app > .tr-root[...])`)
+- the numbering of `h2` in posts (`'trigger'` palette) is decoration and no longer read by screen readers (`content: ... / ""`)
+- `--vp-c-brand-1` and `--vp-c-brand-3` in the default palette gave about 3.6:1 for VitePress links, inline code and the white text on buttons. They use cyan-700 now (about 5.3:1 on white), and dark mode defines its own button colour. **VitePress-owned colours changed**: links, inline code, buttons and tip blocks in the default palette are a darker cyan in light mode (`--tr-brand-text`, `--tr-accent-solid`). Trigger's own parts (title, post links, badges, "Read more") keep their 1.x colours. Contrast tests now cover `--vp-c-brand-1` (on the page, soft surfaces, inline code and code blocks) and the white button text for both palettes and both modes
+- the accent of VitePress's own parts now follows Trigger's cyan. Trigger overrode the deprecated `--vp-c-brand`, `--vp-c-brand-light` ... variables, which VitePress 1.6 no longer reads, so VitePress buttons, tip blocks, links in the post body, inline code, the nav link highlight and the footer links stayed indigo. They are now driven by `--vp-c-brand-1/2/3/soft`, mapped to the accent tokens. Expect these to turn from indigo to cyan. The border of a tip block changed from cyan to transparent in the default palette: VitePress 1.6 sets `--vp-custom-block-tip-border: transparent`, and Trigger no longer overrides it, so a tip block has the tinted background and no coloured border
 
 ## 2.0.0-alpha.1
 

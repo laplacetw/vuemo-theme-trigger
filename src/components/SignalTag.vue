@@ -4,5 +4,5 @@
 </script>
 
 <template>
-  <span class="tr-chip" aria-hidden="true"><i class="tr-chip-led"></i></span>
+  <span class="tr-tag" aria-hidden="true"><i class="tr-tag-led"></i></span>
 </template>

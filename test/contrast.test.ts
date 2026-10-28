@@ -32,6 +32,10 @@ describe('colour helpers', () => {
     expect(toHex(parseColor('oklch(100% 0 0)'))).toBe('#ffffff')
   })
 
+  it('refuses a translucent background', () => {
+    expect(() => contrast('#000', 'rgba(0, 0, 0, 0.5)')).toThrow(/opaque/)
+  })
+
   it('composites a translucent foreground over the background', () => {
     expect(contrast('rgba(0, 0, 0, 0.5)', '#ffffff')).toBeCloseTo(contrast('#808080', '#ffffff'), 1)
   })

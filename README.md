@@ -116,13 +116,22 @@ export default defineBlogConfig({
 | Palette | Look |
 | --- | --- |
 | `'default'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
-| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, amber for the AI summary button, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner chips for tags and "Read more", a thin scrollbar and accent-edged code blocks |
+| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, amber for the AI summary button, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut corners on tag badges and "Read more", a thin scrollbar and accent-edged code blocks |
 
-Both palettes follow VitePress's dark mode (`appearance`, the toggle in the nav). The `'trigger'` palette respects `prefers-reduced-motion` and keeps text at 4.5:1 and borders and the focus ring at 3:1 or more (checked by `pnpm test`).
+Both palettes follow VitePress's dark mode (`appearance`, the toggle in the nav). The `'trigger'` palette respects `prefers-reduced-motion` and keeps text at 4.5:1 and borders and the focus ring at 3:1 or more (checked by `pnpm test`, including VitePress's links, inline code and buttons in both palettes).
 
 The colours are semantic tokens (`--tr-accent`, `--tr-surface-0`, `--tr-text-muted`, `--tr-border`, `--tr-focus`, ...) in [`src/tokens.css`](./src/tokens.css), mapped to VitePress's variables (`--vp-c-brand-1/2/3/soft`, and under the `'trigger'` palette `--vp-c-bg`, `--vp-c-divider`, `--vp-code-block-bg`, ...) so VitePress's own buttons, tip blocks, links and search follow the accent. A new palette is a new set of values for these tokens.
 
 In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'trigger'` palette.
+
+### Photo gallery
+
+[`@vuemo/plugin-gallery`](https://github.com/laplacetw/vuemo) works with Trigger without extra code:
+
+1. install it and enable it in `vuemo.config.ts` (`gallery: { baseUrl: '...' }`)
+2. add `gallery.md` with `layout: page` and `<VuemoGallery />` as the body
+
+Trigger centres the gallery in a container (max 72rem) and, under the `'trigger'` palette, maps the plugin's CSS variables to its tokens: `--vuemo-gallery-radius` to `--tr-radius`, `--vuemo-gallery-bg` to `--tr-surface-1` and `--vuemo-gallery-focus` to `--tr-focus`. Without them the plugin uses VitePress's variables, which follow the accent in both palettes. Override any `--vuemo-gallery-*` variable in your own CSS to change it.
 
 ## Migrating from 1.x
 

@@ -2,39 +2,39 @@
  * Palette "trigger": component styles. Everything is scoped to `.tr-root[data-palette="trigger"]` (or to
  * `:root:has(...)` for what lives outside the theme root), so the default palette is untouched.
  * The ornaments are original geometry drawn for this theme (src/assets/*.svg, see ASSETS.md): a hexagon tiling
- * used as a very faint texture, one cut corner on chips and a small hexagon node on dividers.
+ * used as a very faint texture, one cut corner on tags and a small hexagon node on dividers.
  * The SVGs are inlined as masks (data URIs, the same content as the files), so they take the palette's colours.
  */
 
-:root:has(.tr-root[data-palette="trigger"]) {
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) {
   scrollbar-width: thin;
   scrollbar-color: var(--tr-scrollbar-thumb) var(--tr-scrollbar-track);
 }
 
-:root:has(.tr-root[data-palette="trigger"])::-webkit-scrollbar,
-:root:has(.tr-root[data-palette="trigger"]) ::-webkit-scrollbar {
+:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar,
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-:root:has(.tr-root[data-palette="trigger"])::-webkit-scrollbar-track,
-:root:has(.tr-root[data-palette="trigger"]) ::-webkit-scrollbar-track {
+:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar-track,
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar-track {
   background: var(--tr-scrollbar-track);
 }
 
-:root:has(.tr-root[data-palette="trigger"])::-webkit-scrollbar-thumb,
-:root:has(.tr-root[data-palette="trigger"]) ::-webkit-scrollbar-thumb {
+:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar-thumb,
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar-thumb {
   background: var(--tr-scrollbar-thumb);
   border-radius: var(--tr-radius);
 }
 
-:root:has(.tr-root[data-palette="trigger"]) ::selection {
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::selection {
   background: var(--tr-selection-bg);
   color: var(--tr-selection-fg);
 }
 
-/* the focus ring is an outline (it is not clipped by the chips' cut corners and shows in forced-colors mode) */
-:root:has(.tr-root[data-palette="trigger"]) :focus-visible {
+/* the focus ring is an outline (it is not clipped by the cut corners and shows in forced-colors mode) */
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) :focus-visible {
   outline: 2px solid var(--tr-focus);
   outline-offset: 2px;
 }
@@ -54,26 +54,26 @@
 
 .tr-root[data-palette="trigger"] .VPNavBar::before {
   left: 0;
-  right: var(--tr-chip-cut);
+  right: var(--tr-cut);
   height: 1px;
   background: var(--tr-accent);
 }
 
 .tr-root[data-palette="trigger"] .VPNavBar::after {
   right: 0;
-  width: var(--tr-chip-cut);
-  height: var(--tr-chip-cut);
+  width: var(--tr-cut);
+  height: var(--tr-cut);
   background: var(--tr-accent);
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
   opacity: 0.55;
 }
 
-/* chip: a rectangle with one cut corner and an LED dot; decoration only (aria-hidden), hidden by the default palette */
-.tr-chip {
+/* signal tag: a rectangle with one cut corner and an LED dot; decoration only (aria-hidden), hidden by the default palette */
+.tr-tag {
   display: none;
 }
 
-.tr-root[data-palette="trigger"] .tr-chip {
+.tr-root[data-palette="trigger"] .tr-tag {
   display: inline-flex;
   align-items: center;
   width: 2.25rem;
@@ -86,7 +86,7 @@
   clip-path: polygon(0 0, calc(100% - 0.5rem) 0, 100% 0.5rem, 100% 100%, 0 100%);
 }
 
-.tr-chip-led {
+.tr-tag-led {
   display: block;
   width: 0.4rem;
   height: 0.4rem;
@@ -96,7 +96,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .tr-root[data-palette="trigger"] .tr-chip-led {
+  .tr-root[data-palette="trigger"] .tr-tag-led {
     animation: tr-led 2.4s ease-in-out infinite;
   }
 }
@@ -106,7 +106,7 @@
   50% { opacity: 0.45; }
 }
 
-/* tag and category badges, "Read more": a cut corner instead of rounded corners */
+/* tag and category badges, "Read more": a cut corner instead of rounded corners (the cut is a clip-path, which also clips an element's own focus outline: focusable ones drop it on :focus-visible) */
 .tr-root[data-palette="trigger"] .theme-badge {
   border-radius: 0;
   box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
@@ -119,7 +119,7 @@
   color: var(--tr-accent);
   background: var(--tr-accent-soft);
   box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
-  clip-path: polygon(0 0, calc(100% - var(--tr-chip-cut)) 0, 100% var(--tr-chip-cut), 100% 100%, 0 100%);
+  clip-path: polygon(0 0, calc(100% - var(--tr-cut)) 0, 100% var(--tr-cut), 100% 100%, 0 100%);
   animation: none;
   text-decoration: none;
   transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
@@ -128,6 +128,13 @@
 .tr-root[data-palette="trigger"] .theme-readmore:hover {
   background: var(--tr-accent-solid);
   color: var(--tr-on-accent);
+}
+
+/* the cut corner clips the focus outline of the link itself, so it goes while the link has focus and the ring shows in full */
+.tr-root[data-palette="trigger"] .theme-readmore:focus-visible {
+  clip-path: none;
+  outline: 2px solid var(--tr-focus);
+  outline-offset: 3px;
 }
 
 .tr-root[data-palette="trigger"] .theme-pagination {
@@ -187,7 +194,9 @@
 }
 
 .tr-root[data-palette="trigger"] .vuemo-content h2::before {
+  /* decoration: the second declaration (alt text "") keeps screen readers from reading the number; a browser without that syntax ignores it and uses the first */
   content: counter(tr-h2, decimal-leading-zero);
+  content: counter(tr-h2, decimal-leading-zero) / "";
   margin-right: 0.6rem;
   font-family: var(--vp-font-family-mono);
   font-size: 0.7em;

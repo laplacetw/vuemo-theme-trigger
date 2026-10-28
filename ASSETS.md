@@ -6,7 +6,11 @@ Every graphic or font that ships with the theme, with its author and licence.
 | --- | --- | --- | --- | --- |
 | `src/assets/hex-grid.svg` | a plain hexagon tiling (28 x 48 px tile), used as a very faint card texture through a CSS mask | laplacetw | MIT | original work, drawn for this repository from the geometry of a regular hexagon grid |
 | `src/assets/divider-node.svg` | a small hexagon outline with a dot, the node on a divider line | laplacetw | MIT | original work, drawn for this repository |
-| `src/components/TriggerChip.vue` | a rectangle with one cut corner and an LED dot (CSS shapes, no image) | laplacetw | MIT | original work |
+| `src/components/SignalTag.vue` | a rectangle with one cut corner and an LED dot (CSS shapes, no image) | laplacetw | MIT | original work |
+| nav corner (`.VPNavBar::before/::after` in `src/palette-trigger.css`) | a 1px line ending in a clipped triangle | laplacetw | MIT | original work, CSS only (no image) |
+| card brackets (`.theme-card::before` in `src/palette-trigger.css`) | four L-shaped corner marks drawn with gradients | laplacetw | MIT | original work, CSS only (no image) |
+
+The SVGs were drawn for this repository with AI assistance (Claude). The geometry is original: a regular hexagon tiling and a hexagon outline with a centre dot; nothing was traced from, or modelled on, any third-party artwork.
 
 The same SVG content is inlined in `src/palette-trigger.css` (as mask data URIs, so the palette's colours apply); `test/assets.test.ts` checks that the files and the CSS stay identical.
 

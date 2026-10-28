@@ -90,6 +90,14 @@ a {
   .vuemo-ai-summary-dot { animation: none; }
 }
 
+/* `layout: page` renders its content with no container (the About page brings its own): keep a photo gallery
+   (@vuemo/plugin-gallery) off the viewport edges */
+.VPPage .vuemo-gallery {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 0 1rem 1rem;
+}
+
 .VPHome,
 .VPDoc {
   padding-bottom: 1.25rem !important;
