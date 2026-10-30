@@ -1,31 +1,41 @@
 /*
- * Palette "trigger": component styles. Everything is scoped to `.tr-root[data-palette="trigger"]` (or to
- * `:root:has(...)` for what lives outside the theme root), so the default palette is untouched.
- * The ornaments are original geometry drawn for this theme (src/assets/*.svg, see ASSETS.md): a hexagon tiling
- * used as a very faint texture, one cut corner on tags and a small hexagon node on dividers.
- * The SVGs are inlined as masks (data URIs, the same content as the files), so they take the palette's colours.
+ * Palette "trigger": component styles (DESIGN.md of the theme). Everything is scoped to
+ * `.tr-root[data-palette="trigger"]` (or to `:root:has(...)` for what lives outside the theme root, such as
+ * the search modal), so the default palette is untouched.
+ * Reading first: no motion, no shadows, no gradients, square corners, one accent (`--tr-trion`) used only for
+ * links, the current position, the quote line, the reading progress and focus. The one shape is a small square
+ * corner mark (`.tr-mark`), drawn with borders. Spacing uses 4 / 8 / 16 / 24 / 40 / 64 px.
  */
 
+/* guards: no transitions, animations, smooth scrolling, shadows, blur or rounded corners anywhere on the page */
 :root:has(> body > #app > .tr-root[data-palette="trigger"]) {
+  scroll-behavior: auto !important;
   scrollbar-width: thin;
   scrollbar-color: var(--tr-scrollbar-thumb) var(--tr-scrollbar-track);
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar,
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) *,
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) *::before,
+:root:has(> body > #app > .tr-root[data-palette="trigger"]) *::after {
+  transition: none !important;
+  animation: none !important;
+  scroll-behavior: auto !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar-track,
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar-track {
-  background: var(--tr-scrollbar-track);
-}
-
-:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar-thumb,
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar-thumb {
-  background: var(--tr-scrollbar-thumb);
-  border-radius: var(--tr-radius);
+/* the same inside the theme root, for a browser without :has() */
+.tr-root[data-palette="trigger"] *,
+.tr-root[data-palette="trigger"] *::before,
+.tr-root[data-palette="trigger"] *::after {
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
 }
 
 :root:has(> body > #app > .tr-root[data-palette="trigger"]) ::selection {
@@ -33,220 +43,626 @@
   color: var(--tr-selection-fg);
 }
 
-/* the focus ring is an outline (it is not clipped by the cut corners and shows in forced-colors mode) */
+/* focus: an accent outline (shows in forced-colors mode too) */
 :root:has(> body > #app > .tr-root[data-palette="trigger"]) :focus-visible {
   outline: 2px solid var(--tr-focus);
   outline-offset: 2px;
 }
 
-/* nav: a 1px accent line with a clipped corner at the end */
-.tr-root[data-palette="trigger"] .VPNavBar {
+/* labels, numbers and metadata: small monospace */
+.tr-root[data-palette="trigger"] :is(.tr-label, .tr-meta, .tr-code, .tr-count, .tr-mono, .tr-mode, .tr-bailout) {
+  font-family: var(--tr-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--tr-muted);
+}
+
+.tr-root[data-palette="trigger"] .tr-label {
+  text-transform: uppercase;
+}
+
+.tr-root[data-palette="trigger"] .tr-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  margin: 0;
+  line-height: 24px;
+}
+
+.tr-root[data-palette="trigger"] .tr-meta > span + span::before {
+  /* a separator, not read out */
+  content: "·";
+  content: "·" / "";
+  margin-right: 8px;
+}
+
+/* the corner mark: a small square corner at the top left of a block, like the number field of a form */
+.tr-root[data-palette="trigger"] .tr-mark {
   position: relative;
 }
 
-.tr-root[data-palette="trigger"] .VPNavBar::before,
-.tr-root[data-palette="trigger"] .VPNavBar::after {
+.tr-root[data-palette="trigger"] .tr-mark::before {
   content: "";
   position: absolute;
-  bottom: 0;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--tr-ink);
+  border-left: 2px solid var(--tr-ink);
   pointer-events: none;
 }
 
-.tr-root[data-palette="trigger"] .VPNavBar::before {
-  left: 0;
-  right: var(--tr-cut);
-  height: 1px;
-  background: var(--tr-accent);
+/* links: the accent in text; lists of titles stay ink and only underline on hover */
+.tr-root[data-palette="trigger"] a:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
 }
 
-.tr-root[data-palette="trigger"] .VPNavBar::after {
-  right: 0;
-  width: var(--tr-cut);
-  height: var(--tr-cut);
-  background: var(--tr-accent);
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  opacity: 0.55;
+.tr-root[data-palette="trigger"] :is(.tr-list h2, .tr-rows, .tr-table td, .tr-squads, .tr-prevnext, .tr-slots) a {
+  color: var(--tr-ink);
 }
 
-/* signal tag: a rectangle with one cut corner and an LED dot; decoration only (aria-hidden), hidden by the default palette */
-.tr-tag {
+.tr-root[data-palette="trigger"] :is(.tr-list h2, .tr-rows, .tr-table td, .tr-squads, .tr-prevnext, .tr-slots) a:hover {
+  color: var(--tr-accent);
+}
+
+/* nav: VitePress's own appearance switches give way to the DAY / NIGHT button */
+.tr-root[data-palette="trigger"] :is(.VPNavBarAppearance, .VPNavScreenAppearance) {
   display: none;
 }
 
-.tr-root[data-palette="trigger"] .tr-tag {
-  display: inline-flex;
-  align-items: center;
-  width: 2.25rem;
-  height: 1rem;
-  margin-right: 0.5rem;
-  padding-left: 0.4rem;
-  vertical-align: middle;
-  background: var(--tr-accent-soft);
-  box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
-  clip-path: polygon(0 0, calc(100% - 0.5rem) 0, 100% 0.5rem, 100% 100%, 0 100%);
+.tr-root[data-palette="trigger"] .tr-mode {
+  margin-left: 8px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-.tr-tag-led {
-  display: block;
-  width: 0.4rem;
-  height: 0.4rem;
-  background: var(--tr-accent);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--tr-accent);
+.tr-root[data-palette="trigger"] .tr-mode:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .tr-root[data-palette="trigger"] .tr-tag-led {
-    animation: tr-led 2.4s ease-in-out infinite;
+html:not(.dark) .tr-root[data-palette="trigger"] .tr-mode-day,
+html.dark .tr-root[data-palette="trigger"] .tr-mode-night {
+  color: var(--tr-ink);
+}
+
+/* pages (archive, tag, category, about): room under the nav, one column */
+.tr-root[data-palette="trigger"] .tr-page {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.tr-root[data-palette="trigger"] :is(.tr-page-head, .tr-home-head) {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] :is(.tr-page-head, .tr-home-head, .tr-post-head) h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--tr-ink);
+}
+
+.tr-root[data-palette="trigger"] .tr-home-head p {
+  margin: 8px 0 0;
+  color: var(--tr-muted);
+}
+
+/* home: the post list, and a side column from 1024px */
+.tr-root[data-palette="trigger"] .tr-home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: 40px;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.tr-root[data-palette="trigger"] .tr-home-side {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .tr-root[data-palette="trigger"] .tr-home {
+    grid-template-columns: minmax(0, 1fr) 16rem;
+  }
+
+  .tr-root[data-palette="trigger"] .tr-home-head {
+    grid-column: 1 / -1;
+  }
+
+  .tr-root[data-palette="trigger"] .tr-home-side {
+    display: block;
   }
 }
 
-@keyframes tr-led {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
+.tr-root[data-palette="trigger"] .tr-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* tag and category badges, "Read more": a cut corner instead of rounded corners (the cut is a clip-path, which also clips an element's own focus outline: focusable ones drop it on :focus-visible) */
-.tr-root[data-palette="trigger"] .theme-badge {
-  border-radius: 0;
-  box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
-  clip-path: polygon(0 0, calc(100% - 0.4rem) 0, 100% 0.4rem, 100% 100%, 0 100%);
+.tr-root[data-palette="trigger"] .tr-list > li {
+  padding: 16px 0 24px;
+  border-bottom: 1px solid var(--tr-line);
 }
 
-.tr-root[data-palette="trigger"] .theme-readmore {
-  padding-inline: 1.25rem;
-  border-radius: 0;
-  color: var(--tr-accent);
-  background: var(--tr-accent-soft);
-  box-shadow: inset 0 0 0 1px var(--tr-accent-ring);
-  clip-path: polygon(0 0, calc(100% - var(--tr-cut)) 0, 100% var(--tr-cut), 100% 100%, 0 100%);
-  animation: none;
-  text-decoration: none;
-  transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
+.tr-root[data-palette="trigger"] .tr-list > li:first-child {
+  padding-top: 0;
 }
 
-.tr-root[data-palette="trigger"] .theme-readmore:hover {
-  background: var(--tr-accent-solid);
-  color: var(--tr-on-accent);
+.tr-root[data-palette="trigger"] .tr-list h2 {
+  margin: 4px 0 8px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 600;
 }
 
-/* the cut corner clips the focus outline of the link itself, so it goes while the link has focus and the ring shows in full */
-.tr-root[data-palette="trigger"] .theme-readmore:focus-visible {
-  clip-path: none;
-  outline: 2px solid var(--tr-focus);
-  outline-offset: 3px;
+.tr-root[data-palette="trigger"] .tr-summary {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--tr-muted);
 }
 
 .tr-root[data-palette="trigger"] .theme-pagination {
-  border-radius: var(--tr-radius);
-  transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
+  font-family: var(--tr-font-mono);
+  font-size: 13px;
 }
 
-/* post cards: hairline frame, corner brackets (::before), a very faint hexagon texture (::after) */
-.tr-root[data-palette="trigger"] .theme-card {
-  position: relative;
-  isolation: isolate;
-  background: var(--tr-surface-1);
-  border: 1px solid var(--tr-hairline);
-  border-radius: var(--tr-radius);
+/* author card */
+.tr-root[data-palette="trigger"] .tr-card {
+  padding: 16px;
+  border: 1px solid var(--tr-line);
 }
 
-.tr-root[data-palette="trigger"] .theme-card::before {
-  --bracket: var(--tr-accent);
-  content: "";
-  position: absolute;
-  inset: -1px;
-  pointer-events: none;
-  background:
-    linear-gradient(var(--bracket), var(--bracket)) top left / 14px 2px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) top left / 2px 14px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) top right / 14px 2px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) top right / 2px 14px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) bottom left / 14px 2px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) bottom left / 2px 14px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) bottom right / 14px 2px no-repeat,
-    linear-gradient(var(--bracket), var(--bracket)) bottom right / 2px 14px no-repeat;
+.tr-root[data-palette="trigger"] .tr-card-avatar {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
 }
 
-.tr-root[data-palette="trigger"] .theme-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: var(--tr-accent);
-  opacity: var(--tr-grid-opacity);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2248%22%20viewBox%3D%220%200%2028%2048%22%3E%3Cpath%20d%3D%22M14%20-8V8M14%208L0%2016M14%208L28%2016M0%2016V32M28%2016V32M0%2032L14%2040M28%2032L14%2040M14%2040V56M14%20-8L0%20-16M14%20-8L28%20-16%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E") 0 0 / 28px 48px;
-  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2248%22%20viewBox%3D%220%200%2028%2048%22%3E%3Cpath%20d%3D%22M14%20-8V8M14%208L0%2016M14%208L28%2016M0%2016V32M28%2016V32M0%2032L14%2040M28%2032L14%2040M14%2040V56M14%20-8L0%20-16M14%20-8L28%20-16%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E") 0 0 / 28px 48px;
+.tr-root[data-palette="trigger"] .tr-card-quote {
+  margin: 8px 0 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--tr-muted);
 }
 
-/* post body: h2 with an accent bar and a counter */
+.tr-root[data-palette="trigger"] .tr-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-stats dt {
+  font-family: var(--tr-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tr-muted);
+}
+
+.tr-root[data-palette="trigger"] .tr-stats dd {
+  margin: 4px 0 0;
+  font-family: var(--tr-font-mono);
+  font-size: 16px;
+  color: var(--tr-ink);
+}
+
+.tr-root[data-palette="trigger"] .tr-page .tr-card {
+  max-width: 32rem;
+}
+
+.tr-root[data-palette="trigger"] .tr-about-body {
+  margin-top: 24px;
+}
+
+/* lists of rows: categories, and the posts of a category or tag */
+.tr-root[data-palette="trigger"] .tr-squads {
+  margin-top: 24px;
+}
+
+.tr-root[data-palette="trigger"] :is(.tr-squads ul, .tr-rows) {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tr-root[data-palette="trigger"] :is(.tr-squads, .tr-rows) li a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-squad-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tr-root[data-palette="trigger"] .tr-rows a[aria-current] {
+  padding-left: 8px;
+  border-left: 2px solid var(--tr-trion);
+}
+
+.tr-root[data-palette="trigger"] .tr-selection {
+  margin-top: 40px;
+}
+
+.tr-root[data-palette="trigger"] .tr-selection h2 {
+  margin: 0;
+  line-height: 24px;
+}
+
+/* tags: fixed-width slots, four on a post */
+.tr-root[data-palette="trigger"] .tr-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .tr-root[data-palette="trigger"] .tr-slots {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.tr-root[data-palette="trigger"] .tr-slots-all {
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+}
+
+/* again after the four-slot rule above, which would win from 640px */
+@media (min-width: 640px) {
+  .tr-root[data-palette="trigger"] .tr-slots-all {
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  }
+}
+
+.tr-root[data-palette="trigger"] .tr-slot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px;
+  overflow: hidden;
+  font-family: var(--tr-font-mono);
+  font-size: 13px;
+  line-height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-slot-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tr-root[data-palette="trigger"] .tr-slot-empty {
+  border-style: dashed;
+}
+
+.tr-root[data-palette="trigger"] .tr-slot[aria-current] {
+  border-color: var(--tr-trion);
+}
+
+/* archive: one table */
+.tr-root[data-palette="trigger"] .tr-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-table :is(th, td) {
+  padding: 8px 16px;
+  text-align: left;
+  vertical-align: baseline;
+  border-bottom: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-table th {
+  font-family: var(--tr-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tr-muted);
+}
+
+.tr-root[data-palette="trigger"] .tr-table .tr-mono {
+  white-space: nowrap;
+}
+
+.tr-root[data-palette="trigger"] .tr-col-wide {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .tr-root[data-palette="trigger"] .tr-col-wide {
+    display: table-cell;
+  }
+}
+
+/* post: one centred column of at most 68 characters, the contents beside it from 1280px */
+.tr-root[data-palette="trigger"] .tr-post {
+  display: grid;
+  grid-template-columns: minmax(0, 68ch);
+  justify-content: center;
+  padding: 40px 24px 64px;
+}
+
+.tr-root[data-palette="trigger"] .tr-post-aside,
+.tr-root[data-palette="trigger"] .tr-toc-inline {
+  display: none;
+}
+
+@media (max-width: 1279px) {
+  .tr-root[data-palette="trigger"] .tr-toc-inline {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .tr-root[data-palette="trigger"] .tr-post {
+    grid-template-columns: 1fr minmax(0, 68ch) 1fr;
+    column-gap: 40px;
+  }
+
+  .tr-root[data-palette="trigger"] .tr-post-main {
+    grid-column: 2;
+  }
+
+  .tr-root[data-palette="trigger"] .tr-post-aside {
+    display: block;
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+.tr-root[data-palette="trigger"] .tr-post-head {
+  margin-bottom: 24px;
+}
+
+.tr-root[data-palette="trigger"] .tr-post-head h1 {
+  margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .tr-root[data-palette="trigger"] .tr-post-head h1 {
+    font-size: 32px;
+  }
+}
+
+.tr-root[data-palette="trigger"] .tr-toc {
+  position: sticky;
+  top: calc(var(--vp-nav-height) + 24px);
+  max-width: 14rem;
+}
+
+.tr-root[data-palette="trigger"] .tr-toc ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-toc a {
+  display: block;
+  margin-left: -1px;
+  padding: 4px 0 4px 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--tr-muted);
+  border-left: 2px solid transparent;
+}
+
+.tr-root[data-palette="trigger"] .tr-toc .tr-toc-sub a {
+  padding-left: 24px;
+}
+
+.tr-root[data-palette="trigger"] .tr-toc a[aria-current] {
+  color: var(--tr-ink);
+  border-left-color: var(--tr-trion);
+}
+
+.tr-root[data-palette="trigger"] .tr-toc-inline {
+  position: static;
+  max-width: none;
+  margin: 0 0 24px;
+  padding: 8px 16px;
+  border: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-toc-inline summary {
+  cursor: pointer;
+}
+
+/* post body: 17px, line height 1.8 */
 .tr-root[data-palette="trigger"] .vuemo-content {
+  font-size: 17px;
   counter-reset: tr-h2;
+}
+
+.tr-root[data-palette="trigger"] .vuemo-content :is(p, li) {
+  line-height: 1.8;
 }
 
 .tr-root[data-palette="trigger"] .vuemo-content h2 {
   counter-increment: tr-h2;
-  margin-top: 2.5rem;
-  padding: 0.125rem 0 0.125rem 0.75rem;
-  border-top: 0;
-  border-left: 3px solid var(--tr-accent);
 }
 
 .tr-root[data-palette="trigger"] .vuemo-content h2::before {
-  /* decoration: the second declaration (alt text "") keeps screen readers from reading the number; a browser without that syntax ignores it and uses the first */
+  /* a section number; the second declaration (alt text "") keeps screen readers from reading it, a browser without that syntax uses the first */
   content: counter(tr-h2, decimal-leading-zero);
   content: counter(tr-h2, decimal-leading-zero) / "";
-  margin-right: 0.6rem;
-  font-family: var(--vp-font-family-mono);
+  margin-right: 8px;
+  font-family: var(--tr-font-mono);
   font-size: 0.7em;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--tr-accent);
+  letter-spacing: 0.05em;
+  color: var(--tr-muted);
 }
 
-/* dividers: a dashed hairline with a small hexagon node */
+.tr-root[data-palette="trigger"] .vp-doc blockquote {
+  border-left: 2px solid var(--tr-trion);
+  background: none;
+  color: var(--tr-muted);
+}
+
 .tr-root[data-palette="trigger"] hr {
-  position: relative;
-  height: 12px;
+  height: 0;
   border: 0;
-  background: repeating-linear-gradient(to right, var(--tr-hairline) 0 6px, transparent 6px 10px) center / 100% 1px no-repeat;
-  overflow: visible;
+  border-top: 1px solid var(--tr-line);
+  background: none;
 }
 
-.tr-root[data-palette="trigger"] hr::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  background: var(--tr-accent);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpolygon%20points%3D%226%2C0.8%2010.5%2C3.4%2010.5%2C8.6%206%2C11.2%201.5%2C8.6%201.5%2C3.4%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.5%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpolygon%20points%3D%226%2C0.8%2010.5%2C3.4%2010.5%2C8.6%206%2C11.2%201.5%2C8.6%201.5%2C3.4%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.5%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
-}
-
-/* code blocks: an accent edge */
+/* code blocks: a hairline frame, the language at the top left (`TRIGGER: ts`, see src/flavor.ts) */
 .tr-root[data-palette="trigger"] .vp-doc div[class*="language-"] {
   border: 1px solid var(--tr-code-border);
-  border-left: 3px solid var(--tr-accent);
-  border-radius: var(--tr-radius);
 }
 
-/* motion: quiet when the system asks for it */
-@media (prefers-reduced-motion: reduce) {
-  .tr-root[data-palette="trigger"],
-  .tr-root[data-palette="trigger"] *,
-  .tr-root[data-palette="trigger"] *::before,
-  .tr-root[data-palette="trigger"] *::after {
-    animation: none !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.tr-root[data-palette="trigger"] .vp-doc div[class*="language-"] > span.lang {
+  top: 4px;
+  right: auto;
+  left: 16px;
+  font-family: var(--tr-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--tr-muted);
+  opacity: 1 !important;
 }
 
-/* room between the nav line and the first card */
-.tr-root[data-palette="trigger"] .theme-card:first-child {
-  margin-top: 1.5rem;
+.tr-root[data-palette="trigger"] .vp-doc div[class*="language-"] > span.lang::before {
+  content: var(--tr-code-prefix, "");
+}
+
+/* notes and warnings: a frame, no coloured fill (one accent only) */
+.tr-root[data-palette="trigger"] .vp-doc .custom-block {
+  border: 1px solid var(--tr-line);
+  background: transparent;
+  color: var(--tr-text);
+}
+
+.tr-root[data-palette="trigger"] .vp-doc .custom-block .custom-block-title {
+  font-family: var(--tr-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* tags and the previous / next posts under a post */
+.tr-root[data-palette="trigger"] .tr-post-foot {
+  margin-top: 40px;
+}
+
+.tr-root[data-palette="trigger"] .tr-prevnext {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .tr-prevnext a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tr-root[data-palette="trigger"] .tr-prevnext .tr-next {
+  grid-column: 2;
+  text-align: right;
+}
+
+/* reading progress: a 2px accent line at the top of the window */
+.tr-root[data-palette="trigger"] .tr-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 2px;
+  pointer-events: none;
+}
+
+.tr-root[data-palette="trigger"] .tr-progress > div {
+  height: 100%;
+  background: var(--tr-trion);
+}
+
+/* back to top: a text button that jumps */
+.tr-root[data-palette="trigger"] .tr-bailout {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  padding: 8px 16px;
+  color: var(--tr-ink);
+  background: var(--tr-paper);
+  border: 1px solid var(--tr-line);
+  cursor: pointer;
+}
+
+.tr-root[data-palette="trigger"] .tr-bailout:hover {
+  color: var(--tr-accent);
+  border-color: currentColor;
+}
+
+/* 404 */
+.tr-root[data-palette="trigger"] .tr-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+/* AI summary (@vuemo/plugin-ai-summary): a frame and a text button */
+.tr-root[data-palette="trigger"] .vuemo-ai-summary {
+  align-items: flex-start;
+  min-height: 0;
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid var(--tr-line);
+}
+
+.tr-root[data-palette="trigger"] .vuemo-ai-summary-button {
+  padding: 8px 16px;
+  font-family: var(--tr-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tr-ink);
+  background: transparent;
+  border: 1px solid var(--tr-ink);
+}
+
+.tr-root[data-palette="trigger"] .vuemo-ai-summary-button:hover {
+  color: var(--tr-accent);
+  border-color: currentColor;
 }

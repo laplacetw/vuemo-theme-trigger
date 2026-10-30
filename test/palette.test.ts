@@ -18,8 +18,9 @@ const required = [
   '--tr-surface-0', '--tr-surface-1', '--tr-surface-2',
   '--tr-text', '--tr-text-muted', '--tr-border', '--tr-focus',
   '--tr-selection-bg', '--tr-selection-fg', '--tr-code-bg', '--tr-code-border',
-  '--tr-scrollbar-thumb', '--tr-scrollbar-track',
-  '--tr-radius', '--tr-cut', '--tr-grid-opacity', '--tr-motion-duration'
+  '--tr-scrollbar-thumb', '--tr-scrollbar-track', '--tr-radius',
+  // the five colours of DESIGN.md and the two font stacks
+  '--tr-ink', '--tr-paper', '--tr-muted', '--tr-line', '--tr-trion', '--tr-font-sans', '--tr-font-mono'
 ]
 
 describe('palette trigger: completeness', () => {
@@ -40,7 +41,7 @@ describe('palette trigger: completeness', () => {
     it(`all colour tokens resolve to a parsable colour (${mode})`, () => {
       const vars = resolveTokens(layers, 'trigger', mode)
       for (const [name, v] of Object.entries(vars)) {
-        if (!/^--tr-(?!radius|cut|grid-opacity|motion)/.test(name) || /cyan|blue|gray|slate|yellow/.test(name)) continue
+        if (!/^--tr-(?!radius|font)/.test(name) || /cyan|blue|gray|slate|yellow/.test(name)) continue
         expect(() => parseColor(resolveVar(vars, name)), name).not.toThrow()
         void v
       }
@@ -66,6 +67,10 @@ const pairs: [string, string, number, string][] = [
   ['--tr-accent-ui', '--tr-hover-bg', text, 'pagination text on hover'],
   ['--tr-on-accent', '--tr-accent-solid', text, 'button text'],
   ['--tr-badge-fg', '--tr-badge-bg', text, 'badge'],
+  ['--tr-ink', '--tr-paper', text, 'ink on paper'],
+  ['--tr-muted', '--tr-paper', text, 'metadata'],
+  ['--tr-ink', '--tr-code-bg', text, 'code'],
+  ['--tr-trion', '--tr-paper', ui, 'progress line, quote line, current section'],
   ['--tr-title-from', '--tr-surface-0', text, 'page title gradient, start'],
   ['--tr-title-to', '--tr-surface-0', text, 'page title gradient, end'],
   ['--tr-card-text', '--tr-card-bg', text, 'about quote'],
@@ -77,8 +82,7 @@ const pairs: [string, string, number, string][] = [
   ['--tr-focus', '--tr-surface-0', ui, 'focus ring on the page'],
   ['--tr-focus', '--tr-surface-1', ui, 'focus ring on a card'],
   ['--tr-focus', '--tr-code-bg', ui, 'focus ring on code'],
-  ['--tr-border', '--tr-surface-0', ui, 'control and card border'],
-  ['--tr-code-border', '--tr-code-bg', ui, 'code block edge'],
+  // borders are hairlines (--tr-line, DESIGN.md); every framed control is identified by its text, so they are not checked
   ['--tr-accent-ring', '--tr-surface-0', ui, '"Read more" ring'],
   ['--tr-scrollbar-thumb', '--tr-scrollbar-track', ui, 'scrollbar thumb']
 ]
@@ -164,34 +168,18 @@ describe('tokens.css structure', () => {
 
 describe('focus is never clipped', () => {
   const css = readFileSync(fileURLToPath(new URL('../src/palette-trigger.css', import.meta.url)), 'utf8')
-  const clipped: string[] = []
-  const focusOverrides: string[] = []
-  postcss.parse(css).walkRules((rule) => {
-    const decls = rule.nodes.filter((n) => n.type === 'decl') as postcss.Declaration[]
-    for (const sel of rule.selectors) {
-      if (decls.some((d) => d.prop === 'clip-path' && d.value.trim() === 'none') && sel.endsWith(':focus-visible')) focusOverrides.push(sel.slice(0, -':focus-visible'.length))
-      // a pseudo-element cannot take focus, and a clip-path on it cannot clip the element's outline
-      if (decls.some((d) => d.prop === 'clip-path' && d.value.trim() !== 'none') && !/::(before|after)/.test(sel)) clipped.push(sel)
-    }
-  })
-  // what can take keyboard focus: links, buttons, form controls, the theme's link and button classes
-  const focusable = /(^|[\s>+~.])(a|button|input|select|textarea|summary)(?![\w-])|theme-readmore|theme-pagination|theme-prev|theme-next|\[tabindex|\[href/
 
-  it('has a clip-path on at least the "Read more" link (the check below is not vacuous)', () => {
-    expect(clipped.some((s) => s.includes('.theme-readmore'))).toBe(true)
+  it('clips nothing (a clip-path would cut the focus outline)', () => {
+    expect(css).not.toMatch(/clip-path/)
   })
 
-  it('removes the clip-path on :focus-visible from every focusable element that has one', () => {
-    const missing = clipped.filter((s) => focusable.test(s) && !focusOverrides.includes(s))
-    expect(missing).toEqual([])
+  it('draws an accent outline on focus', () => {
+    expect(css).toMatch(/:focus-visible\s*\{[^}]*outline: 2px solid var\(--tr-focus\)/)
   })
 
-  it('draws a visible ring on the "Read more" link while it has focus', () => {
-    expect(css).toMatch(/\.theme-readmore:focus-visible\s*\{[^}]*outline: 2px solid var\(--tr-focus\)/)
-  })
-
-  it('keeps the heading counter out of the accessibility tree', () => {
+  it('keeps the heading counter and the metadata separator out of the accessibility tree', () => {
     expect(css).toMatch(/content: counter\(tr-h2, decimal-leading-zero\) \/ ""/)
+    expect(css).toMatch(/content: "·" \/ ""/)
   })
 })
 

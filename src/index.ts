@@ -7,6 +7,7 @@ import Post from './layouts/Post.vue'
 import Archive from './layouts/Archive.vue'
 import Tag from './layouts/Tag.vue'
 import Category from './layouts/Category.vue'
+import AboutLayout from './layouts/About.vue'
 import '../dist/style.css'
 
 export type { TriggerThemeConfig, Palette } from './types'
@@ -21,6 +22,8 @@ const theme: Theme = {
     ctx.app.component('archive', Archive)
     ctx.app.component('tag', Tag)
     ctx.app.component('category', Category)
+    ctx.app.component('about', AboutLayout)
+    // `<About />` in a page body: the About card of Trigger 2.0.0-alpha.1 and earlier (now `layout: about`)
     ctx.app.component('About', About)
     // Contract: plugins (comments, AI summary, ...) register their client code through this
     return runEnhanceApps(ctx)

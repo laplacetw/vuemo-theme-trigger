@@ -1,7 +1,7 @@
 ---
 title: About
-layout: page
+layout: about
 description: About me
 ---
 
-<About />
+The About page: `layout: about` shows the avatar and quote from `themeConfig.about`, then this text.

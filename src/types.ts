@@ -1,6 +1,6 @@
 /** Options of the Trigger theme, set in `themeConfig` (`defineBlogConfig({ themeConfig: { about: { ... } } })`). */
 export interface TriggerThemeConfig {
-  /** The About page (`<About />`). */
+  /** The About page (`layout: about`). */
   about?: {
     /** Avatar image: a file in `public/` (for example `/avatar.png`) or a full URL. No avatar is shown when omitted. */
     avatar?: string
@@ -8,10 +8,15 @@ export interface TriggerThemeConfig {
     quote?: string
   }
   /**
-   * The colour palette. `'default'` (the default) is the look of Trigger 1.x;
-   * `'trigger'` is a dark-leaning sci-fi "operations console" look (navy surfaces, cyan signal accent).
+   * The look. `'default'` (the default) is the look of Trigger 1.x; `'trigger'` is a quiet, record-keeping look:
+   * neutral paper and ink, one teal accent, monospace labels and numbers, no motion.
    */
   palette?: Palette
+  /**
+   * Palette `'trigger'` only: label things with the theme's own vocabulary (`LOG-0042`, `SQ-A01`, `BAIL OUT`).
+   * `false` uses plain words instead. Default: `true`. The words are in `src/flavor.ts`.
+   */
+  flavor?: boolean
 }
 
 export type Palette = 'default' | 'trigger'
@@ -25,6 +30,15 @@ export function readPalette(theme: Record<string, unknown>, warn: (message: stri
   if (typeof raw === 'string' && (PALETTES as readonly string[]).includes(raw)) return raw as Palette
   warn(`[vuemo-theme-trigger] themeConfig.palette must be one of ${PALETTES.map((p) => `'${p}'`).join(', ')}; using 'default'`)
   return 'default'
+}
+
+/** The `flavor` option: anything but a boolean warns and falls back to `true`. */
+export function readFlavor(theme: Record<string, unknown>, warn: (message: string) => void = console.warn): boolean {
+  const raw = theme.flavor
+  if (raw === undefined) return true
+  if (typeof raw === 'boolean') return raw
+  warn('[vuemo-theme-trigger] themeConfig.flavor must be true or false; using true')
+  return true
 }
 
 /** The `about` option as the theme understands it, with a warning for every wrong value. */
