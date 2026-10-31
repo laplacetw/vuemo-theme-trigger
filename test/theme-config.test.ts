@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { readAbout, readFlavor, readPalette } from '../src/types'
 import { flavored, plain } from '../src/flavor'
-import { categoryCodes, dotDate, readingMinutes } from '../src/format'
+import { dotDate, readingMinutes } from '../src/format'
 
 describe('readAbout', () => {
   it('returns the valid options', () => {
@@ -62,12 +62,11 @@ describe('readFlavor', () => {
 describe('terms', () => {
   it('has the same keys with and without flavour', () => {
     expect(Object.keys(plain).sort()).toEqual(Object.keys(flavored).sort())
-    expect(Object.keys(plain.stats).sort()).toEqual(Object.keys(flavored.stats).sort())
   })
 
   it('uses none of the flavoured words when the flavour is off', () => {
-    const words = ['LOG', 'SQ-', 'BAIL', 'TRIGGER', 'GATE', 'MEMBERS', 'BRIEFING', 'DAY', 'NIGHT']
-    const text = JSON.stringify([...Object.values(plain), ...Object.values(plain.stats)]).toUpperCase()
+    const words = ['LOG', '緊急', '脫出', 'BRIEFING']
+    const text = JSON.stringify(Object.values(plain)).toUpperCase()
     expect(words.filter((w) => text.includes(w))).toEqual([])
   })
 })
@@ -81,8 +80,7 @@ describe('helpers', () => {
     expect(readingMinutes(post() as any)).toBeUndefined()
   })
 
-  it('formats dates and category codes', () => {
+  it('formats dates', () => {
     expect(dotDate('2026-10-30')).toBe('2026.10.30')
-    expect([...categoryCodes(['b', 'a'])]).toEqual([['a', 'A01'], ['b', 'A02']])
   })
 })

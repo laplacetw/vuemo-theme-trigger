@@ -117,21 +117,19 @@ export default defineBlogConfig({
 | Palette | Look |
 | --- | --- |
 | `'default'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
-| `'trigger'` | a quiet record-keeping look: paper and ink, one teal accent, monospace labels and numbers, square corners, no motion. Light and dark mode |
+| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, amber for the AI summary button, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut corners on tag badges and "Read more", a thin scrollbar and accent-edged code blocks |
 
-The `'trigger'` palette also changes the layouts, reading first:
+The `'trigger'` palette also adds:
 
-- home: the site name and description, then a plain list of posts (a metadata line, the title, one line of summary); from 1024px a side column with an author card (posts, words, years of writing) and the categories with codes
-- post: one column of at most 68 characters, 17px text with a line height of 1.8; a metadata line (`LOG-0042 · 2026.10.30 · 6 MIN · Category`), a table of contents beside the post from 1280px (the current section marked) and collapsed above it on narrower screens, a 2px reading-progress line at the top, tags as four fixed slots, a `BAIL OUT ↑` button that jumps to the top, the code language at the top left of code blocks (`TRIGGER: ts`)
-- archive: one table (date, number, title, category); tags and categories: lists, with category codes (`SQ-A01`)
-- about: the author card, then your text; 404: a plain black circle and one line
-- a `DAY / NIGHT` text button instead of VitePress's dark mode switch
+- a monospace metadata line above post titles (home and post): `LOG-0042 · 2026.10.30 · 6 MIN · Category`
+- on posts, a table of contents (beside the post from 1280px, with the current section marked; collapsed above the post before that), a 2px reading-progress line at the top, and a hexagon back-to-top button (`緊急` / `脫出`) that jumps to the top
+- an archive table (date, number, title, category)
 
-The accent (`--tr-trion`) is used only for links, the current position, the quote line, the reading progress and the focus ring. There are no transitions, animations, shadows, gradients or rounded corners (a guard rule turns off those of VitePress too, and `pnpm test` checks the stylesheet). Text is at 4.5:1 or more and the focus ring at 3:1 or more in both modes. Reading time and word counts need `@vuemo/core` 0.1.0-alpha.3 or later; with an older core they are left out.
+Reading time needs `@vuemo/core` 0.1.0-alpha.3 or later; with an older core it is left out. `themeConfig.flavor: false` replaces the theme's own words (`LOG-`, `緊急脫出`, `BRIEFING`) with plain ones (`No.`, `TOP`, `Contents`); they are all in [`src/flavor.ts`](./src/flavor.ts).
 
-`themeConfig.flavor: false` replaces the theme's own words (`LOG-`, `SQ-`, `BAIL OUT`, `TRIGGER:`, `DAY / NIGHT`, ...) with plain ones (`No.`, no category codes, `Back to top`, the bare language, `LIGHT / DARK`). All the words are in [`src/flavor.ts`](./src/flavor.ts).
+Both palettes follow VitePress's dark mode (`appearance`, the toggle in the nav). The `'trigger'` palette respects `prefers-reduced-motion` and keeps text at 4.5:1 and borders and the focus ring at 3:1 or more (checked by `pnpm test`, including VitePress's links, inline code and buttons in both palettes).
 
-The colours are semantic tokens (`--tr-accent`, `--tr-surface-0`, `--tr-text-muted`, `--tr-border`, `--tr-focus`, ...) in [`src/tokens.css`](./src/tokens.css), mapped to VitePress's variables (`--vp-c-brand-1/2/3/soft`, and under the `'trigger'` palette `--vp-c-bg`, `--vp-c-divider`, `--vp-code-block-bg`, the font stacks, ...) so VitePress's own parts follow the palette. The `'trigger'` palette's five colours are `--tr-ink`, `--tr-paper`, `--tr-muted`, `--tr-line` and `--tr-trion`.
+The colours are semantic tokens (`--tr-accent`, `--tr-surface-0`, `--tr-text-muted`, `--tr-border`, `--tr-focus`, ...) in [`src/tokens.css`](./src/tokens.css), mapped to VitePress's variables (`--vp-c-brand-1/2/3/soft`, and under the `'trigger'` palette `--vp-c-bg`, `--vp-c-divider`, `--vp-code-block-bg`, ...) so VitePress's own buttons, tip blocks, links and search follow the accent. A new palette is a new set of values for these tokens.
 
 In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'trigger'` palette.
 
@@ -142,7 +140,7 @@ In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'
 1. install it and enable it in `vuemo.config.ts` (`gallery: { baseUrl: '...' }`)
 2. add `gallery.md` with `layout: page` and `<VuemoGallery />` as the body
 
-Trigger centres the gallery in a container (max 72rem) and, under the `'trigger'` palette, maps the plugin's CSS variables to its tokens: `--vuemo-gallery-radius` to `0`, `--vuemo-gallery-bg` to `--tr-surface-2` and `--vuemo-gallery-focus` to `--tr-focus`. Without them the plugin uses VitePress's variables, which follow the accent in both palettes. Override any `--vuemo-gallery-*` variable in your own CSS to change it.
+Trigger centres the gallery in a container (max 72rem) and, under the `'trigger'` palette, maps the plugin's CSS variables to its tokens: `--vuemo-gallery-radius` to `--tr-radius`, `--vuemo-gallery-bg` to `--tr-surface-1` and `--vuemo-gallery-focus` to `--tr-focus`. Without them the plugin uses VitePress's variables, which follow the accent in both palettes. Override any `--vuemo-gallery-*` variable in your own CSS to change it.
 
 ## Migrating from 1.x
 
@@ -198,7 +196,7 @@ The GitHub Pages workflow (`.github/workflows/pages.yml`) builds the example blo
 
 The name is a nod to the manga *World Trigger* by Daisuke Ashihara. This is an unofficial fan-made project, not affiliated with or endorsed by the author, Shueisha or Toei Animation.
 
-The theme contains no official artwork, logos, character likenesses or other material from that work. The `'trigger'` palette borrows only the feeling of a calm, numbers-driven organisation, and a few general concepts as plain words (a log, a squad, a loadout slot, bailing out, a gate), all in `src/flavor.ts` and switched off with `flavor: false`. Every graphic is original work drawn in this repository under the MIT licence, listed in [ASSETS.md](./ASSETS.md); no font is bundled. Contributions must follow the same rule (see the pull request template): nothing copied or traced from official material, no character names, and no other names or titles from the work in code, class names or documentation.
+The theme contains no official artwork, logos, character likenesses or other material from that work. The palette is inspired only by general motifs (a sci-fi control-room feel, HUD lines, hexagon geometry, a cool colour scheme) and a few general concepts as plain words (a log, a briefing, bailing out), all in `src/flavor.ts` and switched off with `flavor: false`. Every graphic is original work drawn in this repository under the MIT licence, listed in [ASSETS.md](./ASSETS.md); fonts are system fonts or OFL only. Contributions must follow the same rule (see the pull request template): nothing copied or traced from official material, no character names, and no other names or titles from the work in code, class names or documentation.
 
 ## License
 

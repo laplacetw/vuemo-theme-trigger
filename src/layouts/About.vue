@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { usePalette } from '../composables'
-import Default from './default/About.vue'
-import Trigger from './trigger/About.vue'
-
-const palette = usePalette()
+import About from '../components/About.vue'
 </script>
 
 <template>
-  <component :is="palette === 'trigger' ? Trigger : Default" />
+  <div>
+    <About />
+    <div class="theme-container pb-8">
+      <Content class="vp-doc" />
+    </div>
+  </div>
 </template>

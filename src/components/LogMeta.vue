@@ -2,9 +2,10 @@
 import { computed } from 'vue'
 import { useTaxonomyLinks, type Post } from '@vuemo/core/client'
 import { dotDate, pad, readingMinutes, useLogNumbers, useTerms } from '../composables'
+import SignalTag from './SignalTag.vue'
 
-// One monospace line above a post title: `LOG-0042 · 2026.10.30 · 6 MIN · Category`
-const props = defineProps<{ post: Post; category?: boolean }>()
+// The trigger palette's line above a post title: `LOG-0042 · 2026.10.30 · 6 MIN · Category`
+const props = defineProps<{ post: Post }>()
 const terms = useTerms()
 const numbers = useLogNumbers()
 const { categoryLink } = useTaxonomyLinks()
@@ -14,9 +15,10 @@ const minutes = computed(() => readingMinutes(props.post))
 
 <template>
   <p class="tr-meta">
-    <span v-if="number">{{ terms.log }}{{ pad(number, 4) }}</span>
-    <span><time :datetime="post.date.string">{{ dotDate(post.date.string) }}</time></span>
-    <span v-if="minutes">{{ minutes }} MIN</span>
-    <span v-if="category && post.category"><a :href="categoryLink(post.category)">{{ post.category }}</a></span>
+    <SignalTag />
+    <span v-if="number" class="tr-meta-item">{{ terms.log }}{{ pad(number, 4) }}</span>
+    <span class="tr-meta-item"><time :datetime="post.date.string">{{ dotDate(post.date.string) }}</time></span>
+    <span v-if="minutes" class="tr-meta-item">{{ minutes }} MIN</span>
+    <span v-if="post.category" class="tr-meta-item"><a :href="categoryLink(post.category)">{{ post.category }}</a></span>
   </p>
 </template>

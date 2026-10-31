@@ -93,215 +93,242 @@
 }
 
 /*
- * Palette "trigger": a quiet record-keeping look (DESIGN.md of the theme): neutral paper and ink, one teal accent
- * used only for links, the current position, the quote line, the reading progress and focus. No gradients,
- * shadows or rounded corners. Set with `themeConfig.palette: 'trigger'`.
+ * Palette "trigger": an operations-console look. Cool graphite and navy surfaces, a signal-cyan accent,
+ * amber for warnings, thin hairlines. Set with `themeConfig.palette: 'trigger'`.
  * Two rules per set, kept apart (a selector list is dropped as a whole by a browser that does not know `:has()`):
  * the theme root (`.tr-root`), and `:root` through `:has()`, so that things VitePress renders outside the theme
  * root (the search modal) and the VitePress variables below follow the palette too. Without `:has()` the
  * theme root still keeps the palette. Both rules of a set must stay identical (test/palette.test.ts).
- * Values were chosen against WCAG 2.x: text >= 4.5:1, focus ring and other UI >= 3:1 (test/palette.test.ts).
+ * Values were chosen against WCAG 2.x: text >= 4.5:1, borders, focus ring and other UI >= 3:1 (test/palette.test.ts).
  */
 [data-palette="trigger"] {
-  /* the five colours of the palette: ink, paper, muted, line and the one accent */
-  --tr-ink: #16181d;
-  --tr-paper: #f6f6f3;
-  --tr-muted: #6b7079;
-  --tr-line: #d9dad6;
-  --tr-trion: #2f9e8f;
-  /* the accent as text: the same hue, darker, so links reach 4.5:1 on paper (#2f9e8f has 3.0:1) */
-  --tr-trion-text: #1b6f64;
-  --tr-font-sans: "Noto Sans TC", "PingFang TC", system-ui, sans-serif;
-  --tr-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --tr-surface-0: #f3f7fa;
+  --tr-surface-1: #e6eef4;
+  --tr-surface-2: #d6e2eb;
+  --tr-text: #0e1a28;
+  --tr-text-muted: #425468;
+  --tr-text-strong: #07111d;
+  --tr-border: #6f879d;
+  --tr-hairline: #b9c9d6;
+  --tr-rule: #b9c9d6;
+  --tr-divide: #b9c9d6;
+  --tr-hover-bg: #d6e2eb;
 
-  --tr-surface-0: var(--tr-paper);
-  --tr-surface-1: var(--tr-paper);
-  --tr-surface-2: #ecece8;
-  --tr-text: var(--tr-ink);
-  --tr-text-muted: var(--tr-muted);
-  --tr-text-strong: var(--tr-ink);
-  --tr-border: var(--tr-line);
-  --tr-hairline: var(--tr-line);
-  --tr-rule: var(--tr-line);
-  --tr-divide: var(--tr-line);
-  --tr-hover-bg: var(--tr-surface-2);
+  --tr-accent: #00647f;
+  --tr-accent-strong: #004a60;
+  --tr-accent-ui: #00647f;
+  --tr-accent-active: #003b4d;
+  --tr-accent-ring: #00829f;
+  --tr-accent-hover: #004a60;
+  --tr-accent-solid: #00687f;
+  --tr-brand-text: var(--tr-accent);
+  --tr-accent-soft: rgb(0 130 159 / 12%);
+  --tr-on-accent: #ffffff;
+  --tr-focus: #0b63b8;
+  --tr-selection-bg: #b4e4f3;
+  --tr-selection-fg: #07111d;
 
-  --tr-accent: var(--tr-trion-text);
-  --tr-accent-strong: var(--tr-ink);
-  --tr-accent-ui: var(--tr-ink);
-  --tr-accent-active: var(--tr-trion-text);
-  --tr-accent-ring: var(--tr-trion);
-  --tr-accent-hover: var(--tr-trion-text);
-  --tr-accent-solid: var(--tr-ink);
-  --tr-brand-text: var(--tr-trion-text);
-  --tr-accent-soft: rgb(47 158 143 / 10%);
-  --tr-on-accent: var(--tr-paper);
-  --tr-focus: var(--tr-trion-text);
-  --tr-selection-bg: #cde6e1;
-  --tr-selection-fg: var(--tr-ink);
+  --tr-badge-bg: #d2eef6;
+  --tr-badge-fg: #004a60;
+  --tr-title-from: #004a60;
+  --tr-title-to: #1e3a8a;
+  --tr-card-bg: var(--tr-surface-1);
+  --tr-card-text: var(--tr-text-muted);
+  --tr-dashed-border: #6f879d;
+  --tr-dashed-text: var(--tr-text);
+  --tr-warn: #f2a900;
+  --tr-warn-text: #7a4b00;
+  --tr-on-warn: #1a1200;
 
-  --tr-badge-bg: var(--tr-paper);
-  --tr-badge-fg: var(--tr-ink);
-  --tr-title-from: var(--tr-ink);
-  --tr-title-to: var(--tr-ink);
-  --tr-card-bg: var(--tr-paper);
-  --tr-card-text: var(--tr-muted);
-  --tr-dashed-border: var(--tr-line);
-  --tr-dashed-text: var(--tr-ink);
-  --tr-warn: var(--tr-ink);
-  --tr-warn-text: var(--tr-ink);
-  --tr-on-warn: var(--tr-paper);
+  --tr-code-bg: #e9f0f6;
+  --tr-code-border: #6f879d;
+  --tr-scrollbar-thumb: #6f879d;
+  --tr-scrollbar-track: #e6eef4;
 
-  --tr-code-bg: #efefeb;
-  --tr-code-border: var(--tr-line);
-  --tr-scrollbar-thumb: var(--tr-muted);
-  --tr-scrollbar-track: var(--tr-paper);
-
-  --tr-radius: 0;
+  --tr-radius: 2px;
+  --tr-cut: 10px;
+  --tr-grid-opacity: 0.07;
+  --tr-motion-duration: 160ms;
 
   /* VitePress */
   --vp-c-bg: var(--tr-surface-0);
-  --vp-c-bg-alt: var(--tr-surface-0);
-  --vp-c-bg-soft: var(--tr-surface-2);
+  --vp-c-bg-alt: var(--tr-surface-1);
+  --vp-c-bg-soft: var(--tr-surface-1);
   --vp-c-bg-elv: var(--tr-surface-0);
   --vp-c-text-1: var(--tr-text);
   --vp-c-text-2: var(--tr-text-muted);
-  --vp-c-divider: var(--tr-line);
-  --vp-c-gutter: var(--tr-line);
+  --vp-c-divider: var(--tr-hairline);
+  --vp-c-gutter: var(--tr-hairline);
   --vp-code-block-bg: var(--tr-code-bg);
-  --vp-code-block-divider-color: var(--tr-line);
-  /* inline code in ink: the accent is kept for links */
-  --vp-code-color: var(--tr-ink);
-  --vp-code-bg: var(--tr-surface-2);
+  --vp-code-block-divider-color: var(--tr-hairline);
   --vp-button-brand-text: var(--tr-on-accent);
   --vp-button-brand-hover-text: var(--tr-on-accent);
   --vp-button-brand-active-text: var(--tr-on-accent);
-  --vp-font-family-base: var(--tr-font-sans);
-  --vp-font-family-mono: var(--tr-font-mono);
-  --vp-shadow-1: none;
-  --vp-shadow-2: none;
-  --vp-shadow-3: none;
-  --vp-shadow-4: none;
-  --vp-shadow-5: none;
 
   /* @vuemo/plugin-gallery */
-  --vuemo-gallery-radius: 0;
-  --vuemo-gallery-bg: var(--tr-surface-2);
+  --vuemo-gallery-radius: var(--tr-radius);
+  --vuemo-gallery-bg: var(--tr-surface-1);
   --vuemo-gallery-focus: var(--tr-focus);
 }
 
 :root:has(> body > #app > .tr-root[data-palette="trigger"]) {
-  /* the five colours of the palette: ink, paper, muted, line and the one accent */
-  --tr-ink: #16181d;
-  --tr-paper: #f6f6f3;
-  --tr-muted: #6b7079;
-  --tr-line: #d9dad6;
-  --tr-trion: #2f9e8f;
-  /* the accent as text: the same hue, darker, so links reach 4.5:1 on paper (#2f9e8f has 3.0:1) */
-  --tr-trion-text: #1b6f64;
-  --tr-font-sans: "Noto Sans TC", "PingFang TC", system-ui, sans-serif;
-  --tr-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --tr-surface-0: #f3f7fa;
+  --tr-surface-1: #e6eef4;
+  --tr-surface-2: #d6e2eb;
+  --tr-text: #0e1a28;
+  --tr-text-muted: #425468;
+  --tr-text-strong: #07111d;
+  --tr-border: #6f879d;
+  --tr-hairline: #b9c9d6;
+  --tr-rule: #b9c9d6;
+  --tr-divide: #b9c9d6;
+  --tr-hover-bg: #d6e2eb;
 
-  --tr-surface-0: var(--tr-paper);
-  --tr-surface-1: var(--tr-paper);
-  --tr-surface-2: #ecece8;
-  --tr-text: var(--tr-ink);
-  --tr-text-muted: var(--tr-muted);
-  --tr-text-strong: var(--tr-ink);
-  --tr-border: var(--tr-line);
-  --tr-hairline: var(--tr-line);
-  --tr-rule: var(--tr-line);
-  --tr-divide: var(--tr-line);
-  --tr-hover-bg: var(--tr-surface-2);
+  --tr-accent: #00647f;
+  --tr-accent-strong: #004a60;
+  --tr-accent-ui: #00647f;
+  --tr-accent-active: #003b4d;
+  --tr-accent-ring: #00829f;
+  --tr-accent-hover: #004a60;
+  --tr-accent-solid: #00687f;
+  --tr-brand-text: var(--tr-accent);
+  --tr-accent-soft: rgb(0 130 159 / 12%);
+  --tr-on-accent: #ffffff;
+  --tr-focus: #0b63b8;
+  --tr-selection-bg: #b4e4f3;
+  --tr-selection-fg: #07111d;
 
-  --tr-accent: var(--tr-trion-text);
-  --tr-accent-strong: var(--tr-ink);
-  --tr-accent-ui: var(--tr-ink);
-  --tr-accent-active: var(--tr-trion-text);
-  --tr-accent-ring: var(--tr-trion);
-  --tr-accent-hover: var(--tr-trion-text);
-  --tr-accent-solid: var(--tr-ink);
-  --tr-brand-text: var(--tr-trion-text);
-  --tr-accent-soft: rgb(47 158 143 / 10%);
-  --tr-on-accent: var(--tr-paper);
-  --tr-focus: var(--tr-trion-text);
-  --tr-selection-bg: #cde6e1;
-  --tr-selection-fg: var(--tr-ink);
+  --tr-badge-bg: #d2eef6;
+  --tr-badge-fg: #004a60;
+  --tr-title-from: #004a60;
+  --tr-title-to: #1e3a8a;
+  --tr-card-bg: var(--tr-surface-1);
+  --tr-card-text: var(--tr-text-muted);
+  --tr-dashed-border: #6f879d;
+  --tr-dashed-text: var(--tr-text);
+  --tr-warn: #f2a900;
+  --tr-warn-text: #7a4b00;
+  --tr-on-warn: #1a1200;
 
-  --tr-badge-bg: var(--tr-paper);
-  --tr-badge-fg: var(--tr-ink);
-  --tr-title-from: var(--tr-ink);
-  --tr-title-to: var(--tr-ink);
-  --tr-card-bg: var(--tr-paper);
-  --tr-card-text: var(--tr-muted);
-  --tr-dashed-border: var(--tr-line);
-  --tr-dashed-text: var(--tr-ink);
-  --tr-warn: var(--tr-ink);
-  --tr-warn-text: var(--tr-ink);
-  --tr-on-warn: var(--tr-paper);
+  --tr-code-bg: #e9f0f6;
+  --tr-code-border: #6f879d;
+  --tr-scrollbar-thumb: #6f879d;
+  --tr-scrollbar-track: #e6eef4;
 
-  --tr-code-bg: #efefeb;
-  --tr-code-border: var(--tr-line);
-  --tr-scrollbar-thumb: var(--tr-muted);
-  --tr-scrollbar-track: var(--tr-paper);
-
-  --tr-radius: 0;
+  --tr-radius: 2px;
+  --tr-cut: 10px;
+  --tr-grid-opacity: 0.07;
+  --tr-motion-duration: 160ms;
 
   /* VitePress */
   --vp-c-bg: var(--tr-surface-0);
-  --vp-c-bg-alt: var(--tr-surface-0);
-  --vp-c-bg-soft: var(--tr-surface-2);
+  --vp-c-bg-alt: var(--tr-surface-1);
+  --vp-c-bg-soft: var(--tr-surface-1);
   --vp-c-bg-elv: var(--tr-surface-0);
   --vp-c-text-1: var(--tr-text);
   --vp-c-text-2: var(--tr-text-muted);
-  --vp-c-divider: var(--tr-line);
-  --vp-c-gutter: var(--tr-line);
+  --vp-c-divider: var(--tr-hairline);
+  --vp-c-gutter: var(--tr-hairline);
   --vp-code-block-bg: var(--tr-code-bg);
-  --vp-code-block-divider-color: var(--tr-line);
-  /* inline code in ink: the accent is kept for links */
-  --vp-code-color: var(--tr-ink);
-  --vp-code-bg: var(--tr-surface-2);
+  --vp-code-block-divider-color: var(--tr-hairline);
   --vp-button-brand-text: var(--tr-on-accent);
   --vp-button-brand-hover-text: var(--tr-on-accent);
   --vp-button-brand-active-text: var(--tr-on-accent);
-  --vp-font-family-base: var(--tr-font-sans);
-  --vp-font-family-mono: var(--tr-font-mono);
-  --vp-shadow-1: none;
-  --vp-shadow-2: none;
-  --vp-shadow-3: none;
-  --vp-shadow-4: none;
-  --vp-shadow-5: none;
 
   /* @vuemo/plugin-gallery */
-  --vuemo-gallery-radius: 0;
-  --vuemo-gallery-bg: var(--tr-surface-2);
+  --vuemo-gallery-radius: var(--tr-radius);
+  --vuemo-gallery-bg: var(--tr-surface-1);
   --vuemo-gallery-focus: var(--tr-focus);
 }
 
 .dark [data-palette="trigger"] {
-  --tr-ink: #e6e7e3;
-  --tr-paper: #121418;
-  --tr-muted: #8a8f98;
-  --tr-line: #2a2d33;
-  --tr-trion: #4fc2b1;
-  --tr-trion-text: var(--tr-trion);
+  --tr-surface-0: #0a111c;
+  --tr-surface-1: #101a2b;
+  --tr-surface-2: #182539;
+  --tr-text: #dce8f4;
+  --tr-text-muted: #9fb2c7;
+  --tr-text-strong: #f2f8fd;
+  --tr-border: #4f6785;
+  --tr-hairline: #233650;
+  --tr-rule: #233650;
+  --tr-divide: #233650;
+  --tr-hover-bg: #182539;
 
-  --tr-surface-2: #1a1d22;
-  --tr-selection-bg: #1d4740;
-  --tr-code-bg: #1a1d22;
-  --tr-accent-soft: rgb(79 194 177 / 12%);
+  --tr-accent: #3fd6f0;
+  --tr-accent-strong: #8fe9fb;
+  --tr-accent-ui: #3fd6f0;
+  --tr-accent-active: #c4f4fd;
+  --tr-accent-ring: #2bb8d4;
+  --tr-accent-hover: #2bb8d4;
+  --tr-accent-solid: #0b6f89;
+  --tr-brand-text: var(--tr-accent);
+  --tr-accent-soft: rgb(63 214 240 / 14%);
+  --tr-on-accent: #ffffff;
+  --tr-focus: #66dcf5;
+  --tr-selection-bg: #0f4a63;
+  --tr-selection-fg: #eaf8ff;
+
+  --tr-badge-bg: #0d3d52;
+  --tr-badge-fg: #a9eefc;
+  --tr-title-from: #8fe9fb;
+  --tr-title-to: #6ea8ff;
+  --tr-card-bg: var(--tr-surface-1);
+  --tr-card-text: var(--tr-text-muted);
+  --tr-dashed-border: #4f6785;
+  --tr-dashed-text: var(--tr-text);
+  --tr-warn: #ffb020;
+  --tr-warn-text: #ffc857;
+  --tr-on-warn: #1a1200;
+
+  --tr-code-bg: #0d1626;
+  --tr-code-border: #4f6785;
+  --tr-scrollbar-thumb: #4f6785;
+  --tr-scrollbar-track: #0f1827;
+  --tr-grid-opacity: 0.06;
 }
 
 :root.dark:has(> body > #app > .tr-root[data-palette="trigger"]) {
-  --tr-ink: #e6e7e3;
-  --tr-paper: #121418;
-  --tr-muted: #8a8f98;
-  --tr-line: #2a2d33;
-  --tr-trion: #4fc2b1;
-  --tr-trion-text: var(--tr-trion);
+  --tr-surface-0: #0a111c;
+  --tr-surface-1: #101a2b;
+  --tr-surface-2: #182539;
+  --tr-text: #dce8f4;
+  --tr-text-muted: #9fb2c7;
+  --tr-text-strong: #f2f8fd;
+  --tr-border: #4f6785;
+  --tr-hairline: #233650;
+  --tr-rule: #233650;
+  --tr-divide: #233650;
+  --tr-hover-bg: #182539;
 
-  --tr-surface-2: #1a1d22;
-  --tr-selection-bg: #1d4740;
-  --tr-code-bg: #1a1d22;
-  --tr-accent-soft: rgb(79 194 177 / 12%);
+  --tr-accent: #3fd6f0;
+  --tr-accent-strong: #8fe9fb;
+  --tr-accent-ui: #3fd6f0;
+  --tr-accent-active: #c4f4fd;
+  --tr-accent-ring: #2bb8d4;
+  --tr-accent-hover: #2bb8d4;
+  --tr-accent-solid: #0b6f89;
+  --tr-brand-text: var(--tr-accent);
+  --tr-accent-soft: rgb(63 214 240 / 14%);
+  --tr-on-accent: #ffffff;
+  --tr-focus: #66dcf5;
+  --tr-selection-bg: #0f4a63;
+  --tr-selection-fg: #eaf8ff;
+
+  --tr-badge-bg: #0d3d52;
+  --tr-badge-fg: #a9eefc;
+  --tr-title-from: #8fe9fb;
+  --tr-title-to: #6ea8ff;
+  --tr-card-bg: var(--tr-surface-1);
+  --tr-card-text: var(--tr-text-muted);
+  --tr-dashed-border: #4f6785;
+  --tr-dashed-text: var(--tr-text);
+  --tr-warn: #ffb020;
+  --tr-warn-text: #ffc857;
+  --tr-on-warn: #1a1200;
+
+  --tr-code-bg: #0d1626;
+  --tr-code-border: #4f6785;
+  --tr-scrollbar-thumb: #4f6785;
+  --tr-scrollbar-track: #0f1827;
+  --tr-grid-opacity: 0.06;
 }
