@@ -2,11 +2,11 @@
 import { useTerms } from '../composables'
 
 // Back to top: a hexagon button (an outline drawn here, see ASSETS.md) that jumps straight to the top;
-// focus goes back to the top of the page for keyboard users
+// keyboard focus moves to the site title in the nav (not to VitePress's skip link, which shows itself when focused)
 const terms = useTerms()
 function top() {
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-  document.querySelector<HTMLElement>('.VPSkipLink, #app a[href]')?.focus({ preventScroll: true })
+  document.querySelector<HTMLElement>('.VPNavBarTitle a')?.focus({ preventScroll: true })
 }
 </script>
 

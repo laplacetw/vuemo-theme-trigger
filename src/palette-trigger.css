@@ -68,47 +68,30 @@
   opacity: 0.55;
 }
 
-/* signal tag: a small solid cube (front, top and side faces, CSS only); decoration only (aria-hidden), hidden by the default palette */
+/* signal tag: a small solid cube turned 45 degrees (src/components/SignalTag.vue): a lighter top, the accent and a darker
+   side; decoration only (aria-hidden), hidden by the default palette */
 .tr-tag {
   display: none;
 }
 
 .tr-root[data-palette="trigger"] .tr-tag {
-  position: relative;
   display: inline-block;
-  width: 0.7rem;
-  height: 0.7rem;
-  margin: 0.3rem 0.8rem 0 0;
+  width: 0.9rem;
+  height: 1rem;
+  margin-right: 0.5rem;
   vertical-align: middle;
-  background: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .tr-tag::before,
-.tr-root[data-palette="trigger"] .tr-tag::after {
-  content: "";
-  position: absolute;
+.tr-root[data-palette="trigger"] .tr-tag-top {
+  fill: color-mix(in srgb, var(--tr-accent) 60%, white);
 }
 
-/* top face: lighter, slanted to the right */
-.tr-root[data-palette="trigger"] .tr-tag::before {
-  left: 0;
-  bottom: 100%;
-  width: 100%;
-  height: 0.3rem;
-  background: color-mix(in srgb, var(--tr-accent) 65%, white);
-  transform: skewX(-45deg);
-  transform-origin: bottom left;
+.tr-root[data-palette="trigger"] .tr-tag-left {
+  fill: var(--tr-accent);
 }
 
-/* side face: darker, slanted upwards */
-.tr-root[data-palette="trigger"] .tr-tag::after {
-  left: 100%;
-  top: 0;
-  width: 0.3rem;
-  height: 100%;
-  background: color-mix(in srgb, var(--tr-accent) 65%, black);
-  transform: skewY(-45deg);
-  transform-origin: top left;
+.tr-root[data-palette="trigger"] .tr-tag-right {
+  fill: color-mix(in srgb, var(--tr-accent) 60%, black);
 }
 
 /* tag and category badges: a cut corner instead of rounded corners, no frame (a badge is a span inside a link, so the cut never clips a focus outline) */
@@ -252,7 +235,7 @@
 }
 
 .tr-root[data-palette="trigger"] .tr-meta .tr-tag {
-  margin-right: 0.4rem;
+  margin-right: 0.25rem;
 }
 
 .tr-root[data-palette="trigger"] .tr-meta-item + .tr-meta-item::before {

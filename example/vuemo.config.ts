@@ -1,5 +1,6 @@
 /// <reference types="@vuemo/plugin-comments" />
 /// <reference types="@vuemo/plugin-ai-summary" />
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import { defineBlogConfig } from '@vuemo/core'
 import footnote from 'markdown-it-footnote'
@@ -10,6 +11,20 @@ const themeConfig: TriggerThemeConfig = {
   palette: process.env.PALETTE === 'trigger' ? 'trigger' : 'default',
   about: { avatar: '/avatar.png', quote: 'Trigger your blog !' }
 }
+
+// The photo gallery (@vuemo/plugin-gallery, a small demo album stored in public/gallery) is on when the plugin is
+// installed; without it the gallery page is left out
+const hasGallery = (() => {
+  try {
+    createRequire(import.meta.url).resolve('@vuemo/plugin-gallery')
+    return true
+  } catch {
+    return false
+  }
+})()
+const gallery: Record<string, unknown> = hasGallery
+  ? { gallery: { storage: 'local', widths: [320, 640], perPage: 6 } }
+  : { srcExclude: ['gallery.md'] }
 
 export default defineBlogConfig({
   // site
@@ -36,6 +51,7 @@ export default defineBlogConfig({
     { text: '📚 Archives', link: '/archives' },
     { text: '📁 Categories', link: '/categories' },
     { text: '🔖 Tags', link: '/tags' },
+    ...(hasGallery ? [{ text: '📷 Gallery', link: '/gallery' }] : []),
     { text: '🙆 About', link: '/about' }
   ],
   socialLinks: [{ icon: 'github', link: 'https://github.com/laplacetw' }],
@@ -60,6 +76,7 @@ export default defineBlogConfig({
   },
 
   // features
+  ...gallery,
   comments: {
     provider: 'giscus',
     repo: 'laplacetw/vuemo-comments',

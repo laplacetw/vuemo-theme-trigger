@@ -117,7 +117,7 @@ export default defineBlogConfig({
 | Palette | Look |
 | --- | --- |
 | `'default'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
-| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, a small solid cube before post metadata, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner tag badges without a frame, the AI summary as a bracketed panel with a console-style button, a thin scrollbar and accent-edged code blocks |
+| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, a small solid cube (turned 45 degrees) before post metadata, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner tag badges without a frame, the AI summary as a bracketed panel with a console-style button, a thin scrollbar and accent-edged code blocks |
 
 The `'trigger'` palette also adds:
 
@@ -139,6 +139,8 @@ In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'
 
 1. install it and enable it in `vuemo.config.ts` (`gallery: { baseUrl: '...' }`)
 2. add `gallery.md` with `layout: page` and `<VuemoGallery />` as the body
+
+The example has a small demo gallery (`example/gallery.md`, `example/gallery/`, images in `example/public/gallery/`); it is built when `@vuemo/plugin-gallery` is installed.
 
 Trigger centres the gallery in a container (max 72rem) and, under the `'trigger'` palette, maps the plugin's CSS variables to its tokens: `--vuemo-gallery-radius` to `--tr-radius`, `--vuemo-gallery-bg` to `--tr-surface-1` and `--vuemo-gallery-focus` to `--tr-focus`. Without them the plugin uses VitePress's variables, which follow the accent in both palettes. Override any `--vuemo-gallery-*` variable in your own CSS to change it.
 
