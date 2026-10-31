@@ -21,4 +21,5 @@ Rules for anything added:
 
 - original work only: drawn in this repository, or taken from a source whose licence allows this use, with the licence named in the table
 - no official artwork, logos, emblems or character likenesses of any third-party work, and nothing traced from them; hexagons appear only as plain geometry (a faint grid, a cut corner), never composed into an emblem-like badge
-- no names, titles or terms from a third-party work in code, class names, comments or documentation (the single disclaimer sentence in the README is the exception)
+- no character names anywhere; the labels of the trigger palette borrow only general concepts (a log, a briefing, bailing out) as plain words, all in `src/flavor.ts`, and `themeConfig.flavor: false` replaces them with neutral words
+- apart from those labels and the single disclaimer sentence in the README, no names or titles from a third-party work in code, class names, comments or documentation
