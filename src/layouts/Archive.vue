@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
-import { useArchives, usePosts, useTaxonomyLinks } from '@vuemo/core/client'
+import { useArchives, usePosts } from '@vuemo/core/client'
 import Title from '../components/Title.vue'
-import { dotDate, pad, useLogNumbers, usePalette, useTerms } from '../composables'
+import PostTable from '../components/PostTable.vue'
+import { usePalette } from '../composables'
 
 const { frontmatter } = useData()
 const archives = useArchives()
 // the trigger palette shows one table: date, number, title, category
 const palette = usePalette()
 const posts = usePosts()
-const numbers = useLogNumbers()
-const terms = useTerms()
-const { categoryLink } = useTaxonomyLinks()
 const total = computed(() => archives.reduce((n, group) => n + group.posts.length, 0))
 </script>
 
@@ -21,26 +19,7 @@ const total = computed(() => archives.reduce((n, group) => n + group.posts.lengt
     <Title :text="frontmatter.title || 'Archives'" />
     <p class="pb-2 text-xl font-extrabold">Total : {{ total }} {{ total === 1 ? 'post' : 'posts' }}</p>
     <hr class="h-px my-4 bg-(--tr-rule) border-0" />
-    <table v-if="palette === 'trigger'" class="tr-table">
-      <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col" class="tr-col-wide">No.</th>
-          <th scope="col">Title</th>
-          <th scope="col" class="tr-col-wide">Category</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="post in posts" :key="post.url">
-          <td class="tr-mono"><time :datetime="post.date.string">{{ dotDate(post.date.string) }}</time></td>
-          <td class="tr-mono tr-col-wide">{{ terms.log }}{{ pad(numbers.get(post.url) ?? 0, 4) }}</td>
-          <td><a :href="withBase(post.url)">{{ post.title }}</a></td>
-          <td class="tr-col-wide">
-            <a v-if="post.category" :href="categoryLink(post.category)">{{ post.category }}</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <PostTable v-if="palette === 'trigger'" :posts="posts" />
     <template v-else>
       <section v-for="(group, i) in archives" :key="group.year">
         <h2 class="pb-2 text-xl font-extrabold">{{ group.year }}</h2>

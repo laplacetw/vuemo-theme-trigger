@@ -5,13 +5,14 @@
 ### Features
 - `layout: about`, the About layout of the Vuemo theme contract (since `@vuemo/core` 0.1.0-alpha.3): the About card (avatar and quote from `themeConfig.about`) above the page's own text. The example uses it. `<About />` in a page body still works
 - `themeConfig.palette: 'default' | 'trigger'`. The theme root carries `data-palette`; an unknown value warns once and falls back to `'default'`. The example switches with `PALETTE=trigger`
-- palette `'trigger'`: navy and graphite surfaces, signal-cyan accent, light and dark, contrast-tested. Nav with an accent line and a clipped corner, `SignalTag` (decorative, `aria-hidden`), tag/category badges and "Read more" with a cut corner, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, reduced-motion support. It also adds a metadata line above post titles (`LOG-0042 · date · reading time · category`), a table of contents and a reading-progress line on posts, a hexagon back-to-top button (`緊急` / `脫出`, it jumps) and an archive table. The default palette does not change
+- palette `'trigger'`: navy and graphite surfaces, signal-cyan accent, light and dark, contrast-tested. Nav with an accent line and a clipped corner, `SignalTag` (a static solid cube, decorative, `aria-hidden`), tag/category badges with a cut corner and no frame, "Read more" with the 1.x ring and pulse, the AI summary as a bracketed panel with a console-style button, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, reduced-motion support. It also adds a metadata line above post titles (`LOG-0042 · date · reading time · category`), a table of contents and a reading-progress line on posts, a hexagon back-to-top button (`緊急` / `脫出`, it jumps) and one post table for the archive, tags and categories pages. The default palette does not change
 - `themeConfig.flavor` (default `true`): `false` replaces the palette's own words with plain ones; all words are in `src/flavor.ts`
 - reading time from `Post.words` (`@vuemo/core` 0.1.0-alpha.3); left out with an older core
 - `ASSETS.md` lists every graphic (original work, MIT); the README has a name and credits section with the unofficial-fan-project disclaimer; `.github/PULL_REQUEST_TEMPLATE.md` has a checkbox that no official material was copied or traced
 
 ### Changes
 - page titles (archive, tags, category, about) have room under the nav in both palettes
+- the category page's default title is `Categories`
 - `layout: page` content from `@vuemo/plugin-gallery` gets a centred container (max 72rem, 1rem padding) in both palettes
 - the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
 

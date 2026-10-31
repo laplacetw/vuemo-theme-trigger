@@ -177,17 +177,17 @@ describe('focus is never clipped', () => {
   // what can take keyboard focus: links, buttons, form controls, the theme's link and button classes
   const focusable = /(^|[\s>+~.])(a|button|input|select|textarea|summary)(?![\w-])|theme-readmore|theme-pagination|theme-prev|theme-next|\[tabindex|\[href/
 
-  it('has a clip-path on at least the "Read more" link (the check below is not vacuous)', () => {
-    expect(clipped.some((s) => s.includes('.theme-readmore'))).toBe(true)
+  it('has a clip-path only on badges and pseudo-elements, which cannot take focus (the check below is not vacuous)', () => {
+    expect(clipped.some((s) => s.includes('.theme-badge'))).toBe(true)
   })
 
-  it('removes the clip-path on :focus-visible from every focusable element that has one', () => {
+  it('puts no clip-path on a focusable element without removing it on :focus-visible', () => {
     const missing = clipped.filter((s) => focusable.test(s) && !focusOverrides.includes(s))
     expect(missing).toEqual([])
   })
 
-  it('draws a visible ring on the "Read more" link while it has focus', () => {
-    expect(css).toMatch(/\.theme-readmore:focus-visible\s*\{[^}]*outline: 2px solid var\(--tr-focus\)/)
+  it('gives "Read more" a full frame: no cut corner', () => {
+    expect(clipped.filter((s) => s.includes('.theme-readmore'))).toEqual([])
   })
 
   it('keeps the heading counter out of the accessibility tree', () => {

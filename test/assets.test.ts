@@ -29,8 +29,8 @@ describe('palette styles', () => {
   it('respects reduced motion and marks focus with an outline, not by colour alone', () => {
     expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\)[\s\S]*animation: none !important/)
     expect(css).toMatch(/:focus-visible\s*\{[^}]*outline: 2px solid var\(--tr-focus\)[^}]*outline-offset: 2px/)
-    // the infinite LED animation only runs when motion is allowed
-    expect(css).toMatch(/@media \(prefers-reduced-motion: no-preference\)[\s\S]*tr-led/)
+    // the signal tag is a static cube
+    expect(css).not.toMatch(/tr-led/)
   })
 })
 

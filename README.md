@@ -31,7 +31,7 @@ export default defineBlogConfig({
   nav: [
     { text: '🏠 Home', link: '/' },
     { text: '📚 Archives', link: '/archives' },
-    { text: '📁 Category', link: '/category' },
+    { text: '📁 Categories', link: '/category' },
     { text: '🔖 Tags', link: '/tags' },
     { text: '🙆 About', link: '/about' }
   ],
@@ -117,13 +117,13 @@ export default defineBlogConfig({
 | Palette | Look |
 | --- | --- |
 | `'default'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
-| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, amber for the AI summary button, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut corners on tag badges and "Read more", a thin scrollbar and accent-edged code blocks |
+| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, a small solid cube before post metadata, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner tag badges without a frame, the AI summary as a bracketed panel with a console-style button, a thin scrollbar and accent-edged code blocks |
 
 The `'trigger'` palette also adds:
 
 - a monospace metadata line above post titles (home and post): `LOG-0042 · 2026.10.30 · 6 MIN · Category`
 - on posts, a table of contents (beside the post from 1280px, with the current section marked; collapsed above the post before that), a 2px reading-progress line at the top, and a hexagon back-to-top button (`緊急` / `脫出`) that jumps to the top
-- an archive table (date, number, title, category)
+- an archive table (date, number, title, category); the tags and categories pages list the posts of the selected tag or category in the same table
 
 Reading time needs `@vuemo/core` 0.1.0-alpha.3 or later; with an older core it is left out. `themeConfig.flavor: false` replaces the theme's own words (`LOG-`, `緊急脫出`, `BRIEFING`) with plain ones (`No.`, `TOP`, `Contents`); they are all in [`src/flavor.ts`](./src/flavor.ts).
 

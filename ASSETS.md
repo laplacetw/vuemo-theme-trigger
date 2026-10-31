@@ -7,7 +7,7 @@ Every graphic or font that ships with the theme, with its author and licence.
 | `src/assets/hex-grid.svg` | a plain hexagon tiling (28 x 48 px tile), used as a very faint card texture through a CSS mask | laplacetw | MIT | original work, drawn for this repository from the geometry of a regular hexagon grid |
 | `src/assets/divider-node.svg` | a small hexagon outline with a dot, the node on a divider line | laplacetw | MIT | original work, drawn for this repository |
 | `src/components/BailOut.vue` | the back-to-top button: a flat-topped hexagon outline (inline SVG) | laplacetw | MIT | original work, drawn for this repository from the geometry of a regular hexagon |
-| `src/components/SignalTag.vue` | a rectangle with one cut corner and an LED dot (CSS shapes, no image) | laplacetw | MIT | original work |
+| `src/components/SignalTag.vue` | a small solid cube: front, top and side faces (CSS shapes, no image) | laplacetw | MIT | original work |
 | nav corner (`.VPNavBar::before/::after` in `src/palette-trigger.css`) | a 1px line ending in a clipped triangle | laplacetw | MIT | original work, CSS only (no image) |
 | card brackets (`.theme-card::before` in `src/palette-trigger.css`) | four L-shaped corner marks drawn with gradients | laplacetw | MIT | original work, CSS only (no image) |
 
