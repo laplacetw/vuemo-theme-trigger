@@ -31,7 +31,7 @@ export default defineBlogConfig({
   nav: [
     { text: '🏠 Home', link: '/' },
     { text: '📚 Archives', link: '/archives' },
-    { text: '📁 Categories', link: '/category' },
+    { text: '📁 Categories', link: '/categories' },
     { text: '🔖 Tags', link: '/tags' },
     { text: '🙆 About', link: '/about' }
   ],
@@ -64,7 +64,7 @@ Create the pages the nav points to, each with a layout in its frontmatter:
 | `index.md` | `layout: home` | |
 | `archives.md` | `layout: archive` | |
 | `tags.md` | `layout: tag` | |
-| `category.md` | `layout: category` | |
+| `categories.md` | `layout: category` | |
 | `about.md` | `layout: about` | your text |
 
 `npm create vuemo@alpha my-blog -- --theme trigger` already creates these files (`about.md` gets `layout: about`, a layout every Vuemo theme has). Trigger shows the About card (avatar and quote from `themeConfig.about`) above your text, so the page needs no component:
@@ -160,7 +160,7 @@ Trigger 1.x was a repository you cloned and edited. 2.0 is a package; your posts
 | `cloudflareApi` | `aiSummary: { api: '<worker url>' }` ([`@vuemo/plugin-ai-summary`](https://github.com/laplacetw/vuemo)) |
 | local search in `config.ts` | `search: true` |
 | hard-coded About avatar and quote | `themeConfig.about { avatar, quote }` |
-| `archives.md`: `<Archives />`, `tags.md`: `<Tags />`, `category.md`: `<Category />` | `layout: archive`, `layout: tag`, `layout: category` in the frontmatter, no body |
+| `archives.md`: `<Archives />`, `tags.md`: `<Tags />`, `category.md`: `<Category />` | `layout: archive`, `layout: tag`, `layout: category` in the frontmatter, no body; with `@vuemo/core` 0.1.0-alpha.3 or later the category page is `categories.md` (`/categories`), or set `paths: { category: '/category' }` to keep `category.md` |
 | `index.md`: `layout: home` | unchanged |
 | posts in `posts/` | unchanged; `date`, `title`, `category`, `tags`, `description` (frontmatter schema of Vuemo) |
 | `npm run new <name>` | `npx vuemo new <name>` |

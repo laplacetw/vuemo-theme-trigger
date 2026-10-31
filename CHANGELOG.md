@@ -12,7 +12,7 @@
 
 ### Changes
 - page titles (archive, tags, category, about) have room under the nav in both palettes
-- the category page's default title is `Categories`
+- the category page's default title is `Categories`; the example's page is `categories.md` (`/categories`, the default path of `@vuemo/core` 0.1.0-alpha.3)
 - `layout: page` content from `@vuemo/plugin-gallery` gets a centred container (max 72rem, 1rem padding) in both palettes
 - the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
 

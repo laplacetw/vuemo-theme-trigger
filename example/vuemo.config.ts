@@ -27,12 +27,14 @@ export default defineBlogConfig({
 
   // theme: the absolute path of the theme entry works like a package name
   theme: fileURLToPath(new URL('../src/index.ts', import.meta.url)),
+  // the default since @vuemo/core 0.1.0-alpha.3; written out for older cores
+  paths: { category: '/categories' },
   logo: '/avatar.png',
   postsPerPage: 2,
   nav: [
     { text: '🏠 Home', link: '/' },
     { text: '📚 Archives', link: '/archives' },
-    { text: '📁 Categories', link: '/category' },
+    { text: '📁 Categories', link: '/categories' },
     { text: '🔖 Tags', link: '/tags' },
     { text: '🙆 About', link: '/about' }
   ],
