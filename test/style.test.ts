@@ -22,23 +22,23 @@ const required = [
   '--tr-radius', '--tr-cut', '--tr-grid-opacity', '--tr-motion-duration'
 ]
 
-describe('palette trigger: completeness', () => {
+describe('style anime: completeness', () => {
   for (const mode of modes) {
     it(`defines every semantic token (${mode})`, () => {
-      const vars = resolveTokens(layers, 'trigger', mode)
+      const vars = resolveTokens(layers, 'anime', mode)
       for (const name of required) expect(vars[name], `${name} (${mode})`).toBeDefined()
     })
 
     it(`sets every default-palette role itself, so nothing falls back to the default look (${mode})`, () => {
       const own = new Set(
-        layers.filter((l) => l.palette === 'trigger' && (l.mode === 'light' || mode === 'dark')).flatMap((l) => Object.keys(l.vars))
+        layers.filter((l) => l.style === 'anime' && (l.mode === 'light' || mode === 'dark')).flatMap((l) => Object.keys(l.vars))
       )
       const missing = roles.map((r) => r.token).filter((t) => !own.has(t))
       expect(missing).toEqual([])
     })
 
     it(`all colour tokens resolve to a parsable colour (${mode})`, () => {
-      const vars = resolveTokens(layers, 'trigger', mode)
+      const vars = resolveTokens(layers, 'anime', mode)
       for (const [name, v] of Object.entries(vars)) {
         if (!/^--tr-(?!radius|cut|grid-opacity|motion)/.test(name) || /cyan|blue|gray|slate|yellow/.test(name)) continue
         expect(() => parseColor(resolveVar(vars, name)), name).not.toThrow()
@@ -83,9 +83,9 @@ const pairs: [string, string, number, string][] = [
   ['--tr-scrollbar-thumb', '--tr-scrollbar-track', ui, 'scrollbar thumb']
 ]
 
-describe('palette trigger: contrast', () => {
+describe('style anime: contrast', () => {
   for (const mode of modes) {
-    const vars = resolveTokens(layers, 'trigger', mode)
+    const vars = resolveTokens(layers, 'anime', mode)
     for (const [fg, bg, min, what] of pairs) {
       it(`${what}: ${fg} on ${bg} >= ${min}:1 (${mode})`, () => {
         const ratio = contrast(resolveVar(vars, fg), resolveVar(vars, bg))
@@ -97,7 +97,7 @@ describe('palette trigger: contrast', () => {
 
 /**
  * The accent variables VitePress reads (`--vp-c-brand-1/3`): its links, inline code, buttons, tip blocks and
- * search. VitePress's own page backgrounds apply to the default palette (it sets none); the trigger palette
+ * search. VitePress's own page backgrounds apply to the `'normal'` style (it sets none); the anime style
  * sets its own. Both palettes and both modes are checked.
  */
 describe('VitePress brand variables: contrast', () => {
@@ -105,10 +105,10 @@ describe('VitePress brand variables: contrast', () => {
     light: { bg: '#ffffff', bgSoft: '#f6f6f7', codeBlock: '#f6f6f7', inlineCode: 'rgba(142, 150, 170, 0.14)', white: '#ffffff' },
     dark: { bg: '#1b1b1f', bgSoft: '#202127', codeBlock: '#161618', inlineCode: 'rgba(101, 117, 133, 0.16)', white: '#ffffff' }
   }
-  for (const palette of ['default', 'trigger'] as const) {
+  for (const style of ['normal', 'anime'] as const) {
     for (const mode of modes) {
-      const vars = resolveTokens(layers, palette, mode)
-      const own = (name: string, fallback: string) => (palette === 'trigger' ? resolveVar(vars, name) : fallback)
+      const vars = resolveTokens(layers, style, mode)
+      const own = (name: string, fallback: string) => (style === 'anime' ? resolveVar(vars, name) : fallback)
       const d = vpDefault[mode]
       const bg = own('--vp-c-bg', d.bg)
       const bgSoft = own('--vp-c-bg-soft', d.bgSoft)
@@ -116,7 +116,7 @@ describe('VitePress brand variables: contrast', () => {
       // inline code sits on a translucent tint over the page: flatten it
       const inlineCode = composite(parseColor(d.inlineCode), parseColor(bg))
       const brand = (n: string) => resolveVar(vars, `--vp-c-brand-${n}`)
-      const buttonText = palette === 'trigger' ? resolveVar(vars, '--vp-button-brand-text') : d.white
+      const buttonText = style === 'anime' ? resolveVar(vars, '--vp-button-brand-text') : d.white
       const cases: [string, string, string | ReturnType<typeof composite>, number][] = [
         ['links (--vp-c-brand-1) on the page', brand('1'), bg, text],
         ['links on a soft surface', brand('1'), bgSoft, text],
@@ -125,7 +125,7 @@ describe('VitePress brand variables: contrast', () => {
         ['button text on --vp-c-brand-3', buttonText, brand('3'), text]
       ]
       for (const [what, fg, back, min] of cases) {
-        it(`${palette} ${mode}: ${what} >= ${min}:1`, () => {
+        it(`${style} ${mode}: ${what} >= ${min}:1`, () => {
           const ratio = contrast(fg, back)
           expect(ratio, `${ratio.toFixed(2)}:1`).toBeGreaterThanOrEqual(min)
         })
@@ -143,14 +143,14 @@ describe('tokens.css structure', () => {
 
   it('never groups the theme root with :root:has() in one selector list', () => {
     // a browser without :has() drops the whole list, and the palette with it
-    const grouped = rules.filter((r) => r.selector.includes(',') && (r.selector.includes(':has(') || r.selector.includes('data-palette')))
+    const grouped = rules.filter((r) => r.selector.includes(',') && (r.selector.includes(':has(') || r.selector.includes('data-style')))
     expect(grouped.map((r) => r.selector)).toEqual([])
   })
 
   it('keeps the two rules of a palette set identical', () => {
     for (const dark of [false, true]) {
-      const root = rules.find((r) => r.selector.startsWith(dark ? '.dark [data-palette="trigger"]' : '[data-palette="trigger"]'))
-      const html = rules.find((r) => r.selector.startsWith(dark ? ':root.dark:has(' : ':root:has(') && r.selector.includes('data-palette="trigger"'))
+      const root = rules.find((r) => r.selector.startsWith(dark ? '.dark [data-style="anime"]' : '[data-style="anime"]'))
+      const html = rules.find((r) => r.selector.startsWith(dark ? ':root.dark:has(' : ':root:has(') && r.selector.includes('data-style="anime"'))
       expect(root, `theme root rule (${dark ? 'dark' : 'light'})`).toBeDefined()
       expect(html, `:root rule (${dark ? 'dark' : 'light'})`).toBeDefined()
       expect(html!.decls).toBe(root!.decls)
@@ -163,7 +163,7 @@ describe('tokens.css structure', () => {
 })
 
 describe('focus is never clipped', () => {
-  const css = readFileSync(fileURLToPath(new URL('../src/palette-trigger.css', import.meta.url)), 'utf8')
+  const css = readFileSync(fileURLToPath(new URL('../src/style-anime.css', import.meta.url)), 'utf8')
   const clipped: string[] = []
   const focusOverrides: string[] = []
   postcss.parse(css).walkRules((rule) => {
@@ -195,14 +195,14 @@ describe('focus is never clipped', () => {
   })
 })
 
-describe('built HTML carries the palette (SSR)', () => {
+describe('built HTML carries the style (SSR)', () => {
   const root = fileURLToPath(new URL('..', import.meta.url))
-  const build = (palette?: string) => {
+  const build = (style?: string) => {
     const out = mkdtempSync(join(tmpdir(), 'trigger-build-'))
     try {
       execFileSync('pnpm', ['exec', 'vitepress', 'build', 'example'], {
         cwd: root,
-        env: { ...process.env, PALETTE: palette ?? '', OUT_DIR: out },
+        env: { ...process.env, STYLE: style ?? '', OUT_DIR: out },
         stdio: 'pipe'
       })
       return readFileSync(join(out, 'index.html'), 'utf8')
@@ -211,11 +211,11 @@ describe('built HTML carries the palette (SSR)', () => {
     }
   }
 
-  it('PALETTE=trigger: the server-rendered wrapper has data-palette="trigger"', () => {
-    expect(build('trigger')).toMatch(/<div class="tr-root" data-palette="trigger"/)
+  it('STYLE=anime: the server-rendered wrapper has data-style="anime"', () => {
+    expect(build('anime')).toMatch(/<div class="tr-root" data-style="anime"/)
   }, 240_000)
 
-  it('default: the wrapper has data-palette="default"', () => {
-    expect(build()).toMatch(/<div class="tr-root" data-palette="default"/)
+  it('default: the wrapper has data-style="normal"', () => {
+    expect(build()).toMatch(/<div class="tr-root" data-style="normal"/)
   }, 240_000)
 })

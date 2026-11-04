@@ -1,6 +1,6 @@
 /**
- * Every label of the trigger palette in one place. `flavored` is the theme's own vocabulary,
- * `plain` is what `themeConfig.flavor: false` shows instead. The default palette uses none of them.
+ * Every label of the anime style in one place. `flavored` is the theme's own vocabulary,
+ * `plain` is what `themeConfig.flavor: false` shows instead. The `'normal'` style uses none of them.
  */
 export interface Terms {
   /** Before a post number: `LOG-0042`. */

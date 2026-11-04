@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Decoration of the "trigger" palette: a small solid cube turned 45 degrees (corner to the front), drawn here.
-// It carries no information (aria-hidden) and the default palette hides it with CSS.
+// Decoration of the "anime" style: a small solid cube turned 45 degrees (corner to the front), drawn here.
+// It carries no information (aria-hidden) and the `'normal'` style hides it with CSS.
 </script>
 
 <template>

@@ -3,13 +3,13 @@ import { useData, withBase } from 'vitepress'
 import { useTags, useQueryParam } from '@vuemo/core/client'
 import Title from '../components/Title.vue'
 import PostTable from '../components/PostTable.vue'
-import { usePalette } from '../composables'
+import { useStyle } from '../composables'
 
 const { frontmatter } = useData()
 const tags = useTags()
 // the selected tag lives in the URL (?tag=...), so tag links on posts preselect it
-// the trigger palette lists the posts in the archive's table
-const palette = usePalette()
+// the anime style lists the posts in the archive's table
+const themeStyle = useStyle()
 const selected = useQueryParam('tag')
 </script>
 
@@ -30,7 +30,7 @@ const selected = useQueryParam('tag')
     </div>
     <hr class="h-px my-4 bg-(--tr-rule) border-0" />
     <template v-if="selected && Object.hasOwn(tags, selected)">
-      <template v-if="palette === 'trigger'">
+      <template v-if="themeStyle === 'anime'">
         <p id="tagName" class="pb-2 text-xl font-extrabold">{{ selected }} : {{ tags[selected].length }} {{ tags[selected].length === 1 ? 'post' : 'posts' }}</p>
         <PostTable :posts="tags[selected]" />
       </template>

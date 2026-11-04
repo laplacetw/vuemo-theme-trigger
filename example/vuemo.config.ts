@@ -6,9 +6,9 @@ import { defineBlogConfig } from '@vuemo/core'
 import footnote from 'markdown-it-footnote'
 import type { TriggerThemeConfig } from '../src'
 
-// `PALETTE=trigger pnpm dev` shows the other palette
+// `STYLE=anime pnpm dev` shows the other style
 const themeConfig: TriggerThemeConfig = {
-  palette: process.env.PALETTE === 'trigger' ? 'trigger' : 'default',
+  style: process.env.STYLE === 'anime' ? 'anime' : 'normal',
   about: { avatar: '/avatar.png', quote: 'Trigger your blog !' }
 }
 

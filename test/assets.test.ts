@@ -3,11 +3,11 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
 const read = (rel: string) => readFileSync(fileURLToPath(new URL(rel, import.meta.url)), 'utf8')
-const css = read('../src/palette-trigger.css')
+const css = read('../src/style-anime.css')
 
-describe('palette assets', () => {
+describe('style assets', () => {
   for (const name of ['hex-grid', 'divider-node']) {
-    it(`${name}.svg matches the data URI in palette-trigger.css`, () => {
+    it(`${name}.svg matches the data URI in style-anime.css`, () => {
       const svg = read(`../src/assets/${name}.svg`).trim()
       const uris = [...css.matchAll(/url\("data:image\/svg\+xml,([^"]+)"\)/g)].map((m) => decodeURIComponent(m[1]))
       expect(uris).toContain(svg)
@@ -19,10 +19,10 @@ describe('palette assets', () => {
   }
 })
 
-describe('palette styles', () => {
-  it('scopes every rule to the trigger palette (or the tag hook)', () => {
+describe('style sheet', () => {
+  it('scopes every rule to the anime style (or the tag hook)', () => {
     const selectors = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/(^|\})\s*([^{}@]+)\{/g)].map((m) => m[2].trim())
-    const stray = selectors.filter((s) => !/data-palette="trigger"/.test(s) && !/^(\.tr-tag|\.tr-tag-led|0%, 100%|50%)$/.test(s))
+    const stray = selectors.filter((s) => !/data-style="anime"/.test(s) && !/^(\.tr-tag|\.tr-tag-led|0%, 100%|50%)$/.test(s))
     expect(stray).toEqual([])
   })
 

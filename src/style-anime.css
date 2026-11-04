@@ -1,65 +1,65 @@
 /*
- * Palette "trigger": component styles. Everything is scoped to `.tr-root[data-palette="trigger"]` (or to
- * `:root:has(...)` for what lives outside the theme root), so the default palette is untouched.
+ * Style "anime" (`themeConfig.style`): component styles. Everything is scoped to `.tr-root[data-style="anime"]` (or to
+ * `:root:has(...)` for what lives outside the theme root), so the `'normal'` style is untouched.
  * The ornaments are original geometry drawn for this theme (src/assets/*.svg, see ASSETS.md): a hexagon tiling
  * used as a very faint texture, one cut corner on tags and a small hexagon node on dividers.
- * The SVGs are inlined as masks (data URIs, the same content as the files), so they take the palette's colours.
+ * The SVGs are inlined as masks (data URIs, the same content as the files), so they take the style's colours.
  */
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) {
+:root:has(> body > #app > .tr-root[data-style="anime"]) {
   scrollbar-width: thin;
   scrollbar-color: var(--tr-scrollbar-thumb) var(--tr-scrollbar-track);
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar,
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar {
+:root:has(> body > #app > .tr-root[data-style="anime"])::-webkit-scrollbar,
+:root:has(> body > #app > .tr-root[data-style="anime"]) ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar-track,
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar-track {
+:root:has(> body > #app > .tr-root[data-style="anime"])::-webkit-scrollbar-track,
+:root:has(> body > #app > .tr-root[data-style="anime"]) ::-webkit-scrollbar-track {
   background: var(--tr-scrollbar-track);
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"])::-webkit-scrollbar-thumb,
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::-webkit-scrollbar-thumb {
+:root:has(> body > #app > .tr-root[data-style="anime"])::-webkit-scrollbar-thumb,
+:root:has(> body > #app > .tr-root[data-style="anime"]) ::-webkit-scrollbar-thumb {
   background: var(--tr-scrollbar-thumb);
   border-radius: var(--tr-radius);
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) ::selection {
+:root:has(> body > #app > .tr-root[data-style="anime"]) ::selection {
   background: var(--tr-selection-bg);
   color: var(--tr-selection-fg);
 }
 
 /* the focus ring is an outline (it is not clipped by the cut corners and shows in forced-colors mode) */
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) :focus-visible {
+:root:has(> body > #app > .tr-root[data-style="anime"]) :focus-visible {
   outline: 2px solid var(--tr-focus);
   outline-offset: 2px;
 }
 
 /* nav: a 1px accent line with a clipped corner at the end */
-.tr-root[data-palette="trigger"] .VPNavBar {
+.tr-root[data-style="anime"] .VPNavBar {
   position: relative;
 }
 
-.tr-root[data-palette="trigger"] .VPNavBar::before,
-.tr-root[data-palette="trigger"] .VPNavBar::after {
+.tr-root[data-style="anime"] .VPNavBar::before,
+.tr-root[data-style="anime"] .VPNavBar::after {
   content: "";
   position: absolute;
   bottom: 0;
   pointer-events: none;
 }
 
-.tr-root[data-palette="trigger"] .VPNavBar::before {
+.tr-root[data-style="anime"] .VPNavBar::before {
   left: 0;
   right: var(--tr-cut);
   height: 1px;
   background: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .VPNavBar::after {
+.tr-root[data-style="anime"] .VPNavBar::after {
   right: 0;
   width: var(--tr-cut);
   height: var(--tr-cut);
@@ -69,12 +69,12 @@
 }
 
 /* signal tag: a small solid cube turned 45 degrees (src/components/SignalTag.vue): a lighter top, the accent and a darker
-   side; decoration only (aria-hidden), hidden by the default palette */
+   side; decoration only (aria-hidden), hidden by the `'normal'` style */
 .tr-tag {
   display: none;
 }
 
-.tr-root[data-palette="trigger"] .tr-tag {
+.tr-root[data-style="anime"] .tr-tag {
   display: inline-block;
   width: 0.9rem;
   height: 1rem;
@@ -82,37 +82,37 @@
   vertical-align: middle;
 }
 
-.tr-root[data-palette="trigger"] .tr-tag-top {
+.tr-root[data-style="anime"] .tr-tag-top {
   fill: color-mix(in srgb, var(--tr-accent) 60%, white);
 }
 
-.tr-root[data-palette="trigger"] .tr-tag-left {
+.tr-root[data-style="anime"] .tr-tag-left {
   fill: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .tr-tag-right {
+.tr-root[data-style="anime"] .tr-tag-right {
   fill: color-mix(in srgb, var(--tr-accent) 60%, black);
 }
 
 /* tag and category badges: a cut corner instead of rounded corners, no frame (a badge is a span inside a link, so the cut never clips a focus outline) */
-.tr-root[data-palette="trigger"] .theme-badge {
+.tr-root[data-style="anime"] .theme-badge {
   border-radius: 0;
   clip-path: polygon(0 0, calc(100% - 0.4rem) 0, 100% 0.4rem, 100% 100%, 0 100%);
 }
 
 /* "Read more": the 1.x button (ring, shadow, pulse) with square corners */
-.tr-root[data-palette="trigger"] .theme-readmore {
+.tr-root[data-style="anime"] .theme-readmore {
   border-radius: var(--tr-radius);
   text-decoration: none;
 }
 
-.tr-root[data-palette="trigger"] .theme-pagination {
+.tr-root[data-style="anime"] .theme-pagination {
   border-radius: var(--tr-radius);
   transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
 }
 
 /* post cards: hairline frame, corner brackets (::before), a very faint hexagon texture (::after) */
-.tr-root[data-palette="trigger"] .theme-card {
+.tr-root[data-style="anime"] .theme-card {
   position: relative;
   isolation: isolate;
   background: var(--tr-surface-1);
@@ -120,7 +120,7 @@
   border-radius: var(--tr-radius);
 }
 
-.tr-root[data-palette="trigger"] .theme-card::before {
+.tr-root[data-style="anime"] .theme-card::before {
   --bracket: var(--tr-accent);
   content: "";
   position: absolute;
@@ -137,7 +137,7 @@
     linear-gradient(var(--bracket), var(--bracket)) bottom right / 2px 14px no-repeat;
 }
 
-.tr-root[data-palette="trigger"] .theme-card::after {
+.tr-root[data-style="anime"] .theme-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -150,11 +150,11 @@
 }
 
 /* post body: h2 with an accent bar and a counter */
-.tr-root[data-palette="trigger"] .vuemo-content {
+.tr-root[data-style="anime"] .vuemo-content {
   counter-reset: tr-h2;
 }
 
-.tr-root[data-palette="trigger"] .vuemo-content h2 {
+.tr-root[data-style="anime"] .vuemo-content h2 {
   counter-increment: tr-h2;
   margin-top: 2.5rem;
   padding: 0.125rem 0 0.125rem 0.75rem;
@@ -162,7 +162,7 @@
   border-left: 3px solid var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .vuemo-content h2::before {
+.tr-root[data-style="anime"] .vuemo-content h2::before {
   /* decoration: the second declaration (alt text "") keeps screen readers from reading the number; a browser without that syntax ignores it and uses the first */
   content: counter(tr-h2, decimal-leading-zero);
   content: counter(tr-h2, decimal-leading-zero) / "";
@@ -175,7 +175,7 @@
 }
 
 /* dividers: a dashed hairline with a small hexagon node */
-.tr-root[data-palette="trigger"] hr {
+.tr-root[data-style="anime"] hr {
   position: relative;
   height: 12px;
   border: 0;
@@ -183,7 +183,7 @@
   overflow: visible;
 }
 
-.tr-root[data-palette="trigger"] hr::after {
+.tr-root[data-style="anime"] hr::after {
   content: "";
   position: absolute;
   top: 0;
@@ -197,7 +197,7 @@
 }
 
 /* code blocks: an accent edge */
-.tr-root[data-palette="trigger"] .vp-doc div[class*="language-"] {
+.tr-root[data-style="anime"] .vp-doc div[class*="language-"] {
   border: 1px solid var(--tr-code-border);
   border-left: 3px solid var(--tr-accent);
   border-radius: var(--tr-radius);
@@ -205,10 +205,10 @@
 
 /* motion: quiet when the system asks for it */
 @media (prefers-reduced-motion: reduce) {
-  .tr-root[data-palette="trigger"],
-  .tr-root[data-palette="trigger"] *,
-  .tr-root[data-palette="trigger"] *::before,
-  .tr-root[data-palette="trigger"] *::after {
+  .tr-root[data-style="anime"],
+  .tr-root[data-style="anime"] *,
+  .tr-root[data-style="anime"] *::before,
+  .tr-root[data-style="anime"] *::after {
     animation: none !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
@@ -216,12 +216,12 @@
 }
 
 /* room between the nav line and the first card */
-.tr-root[data-palette="trigger"] .theme-card:first-child {
+.tr-root[data-style="anime"] .theme-card:first-child {
   margin-top: 1.5rem;
 }
 
 /* post metadata line: `LOG-0042 · 2026.10.30 · 6 MIN · Category` in monospace, after the signal tag */
-.tr-root[data-palette="trigger"] .tr-meta {
+.tr-root[data-style="anime"] .tr-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -234,23 +234,23 @@
   color: var(--tr-text-muted);
 }
 
-.tr-root[data-palette="trigger"] .tr-meta .tr-tag {
+.tr-root[data-style="anime"] .tr-meta .tr-tag {
   margin-right: 0.25rem;
 }
 
-.tr-root[data-palette="trigger"] .tr-meta-item + .tr-meta-item::before {
+.tr-root[data-style="anime"] .tr-meta-item + .tr-meta-item::before {
   /* a separator, not read out */
   content: "·";
   content: "·" / "";
   margin-right: 0.5rem;
 }
 
-.tr-root[data-palette="trigger"] .tr-meta a:hover {
+.tr-root[data-style="anime"] .tr-meta a:hover {
   text-decoration: underline;
 }
 
 /* reading progress: a 2px accent line at the top of the window */
-.tr-root[data-palette="trigger"] .tr-progress {
+.tr-root[data-style="anime"] .tr-progress {
   position: fixed;
   top: 0;
   left: 0;
@@ -260,25 +260,25 @@
   pointer-events: none;
 }
 
-.tr-root[data-palette="trigger"] .tr-progress > div {
+.tr-root[data-style="anime"] .tr-progress > div {
   height: 100%;
   background: var(--tr-accent);
 }
 
 /* table of contents: beside the post from 1280px (the current section marked), collapsed above it before */
-.tr-root[data-palette="trigger"] .tr-post-aside,
-.tr-root[data-palette="trigger"] .tr-toc-inline {
+.tr-root[data-style="anime"] .tr-post-aside,
+.tr-root[data-style="anime"] .tr-toc-inline {
   display: none;
 }
 
 @media (max-width: 1279px) {
-  .tr-root[data-palette="trigger"] .tr-toc-inline {
+  .tr-root[data-style="anime"] .tr-toc-inline {
     display: block;
   }
 }
 
 @media (min-width: 1280px) {
-  .tr-root[data-palette="trigger"] .tr-post-aside {
+  .tr-root[data-style="anime"] .tr-post-aside {
     display: block;
     position: fixed;
     top: calc(var(--vp-nav-height) + 2rem);
@@ -287,7 +287,7 @@
   }
 }
 
-.tr-root[data-palette="trigger"] .tr-toc .tr-label {
+.tr-root[data-style="anime"] .tr-toc .tr-label {
   margin: 0;
   font-family: var(--vp-font-family-mono);
   font-size: 0.75rem;
@@ -295,14 +295,14 @@
   color: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .tr-toc ul {
+.tr-root[data-style="anime"] .tr-toc ul {
   margin: 0.5rem 0 0;
   padding: 0;
   list-style: none;
   border-left: 1px solid var(--tr-hairline);
 }
 
-.tr-root[data-palette="trigger"] .tr-toc a {
+.tr-root[data-style="anime"] .tr-toc a {
   display: block;
   margin-left: -1px;
   padding: 0.2rem 0 0.2rem 0.75rem;
@@ -312,20 +312,20 @@
   border-left: 2px solid transparent;
 }
 
-.tr-root[data-palette="trigger"] .tr-toc .tr-toc-sub a {
+.tr-root[data-style="anime"] .tr-toc .tr-toc-sub a {
   padding-left: 1.5rem;
 }
 
-.tr-root[data-palette="trigger"] .tr-toc a:hover {
+.tr-root[data-style="anime"] .tr-toc a:hover {
   color: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .tr-toc a[aria-current] {
+.tr-root[data-style="anime"] .tr-toc a[aria-current] {
   color: var(--tr-accent);
   border-left-color: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .tr-toc-inline {
+.tr-root[data-style="anime"] .tr-toc-inline {
   margin: 1rem 0;
   padding: 0.5rem 1rem;
   background: var(--tr-surface-1);
@@ -333,12 +333,12 @@
   border-radius: var(--tr-radius);
 }
 
-.tr-root[data-palette="trigger"] .tr-toc-inline summary {
+.tr-root[data-style="anime"] .tr-toc-inline summary {
   cursor: pointer;
 }
 
 /* back to top ("bail out"): a hexagon outline with two lines of text; it jumps, so it has no scrolling of its own */
-.tr-root[data-palette="trigger"] .tr-bailout {
+.tr-root[data-style="anime"] .tr-bailout {
   position: fixed;
   right: 1rem;
   bottom: 1rem;
@@ -354,7 +354,7 @@
   cursor: pointer;
 }
 
-.tr-root[data-palette="trigger"] .tr-bailout-hex {
+.tr-root[data-style="anime"] .tr-bailout-hex {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -362,18 +362,18 @@
   overflow: visible;
 }
 
-.tr-root[data-palette="trigger"] .tr-bailout-hex polygon {
+.tr-root[data-style="anime"] .tr-bailout-hex polygon {
   fill: var(--tr-surface-1);
   stroke: var(--tr-accent);
   stroke-width: 1.5;
   transition: fill var(--tr-motion-duration) ease;
 }
 
-.tr-root[data-palette="trigger"] .tr-bailout:hover .tr-bailout-hex polygon {
+.tr-root[data-style="anime"] .tr-bailout:hover .tr-bailout-hex polygon {
   fill: var(--tr-accent-soft);
 }
 
-.tr-root[data-palette="trigger"] .tr-bailout-text {
+.tr-root[data-style="anime"] .tr-bailout-text {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -385,22 +385,22 @@
 }
 
 /* archive: one table (date, number, title, category); number and category from 640px */
-.tr-root[data-palette="trigger"] .tr-table {
+.tr-root[data-style="anime"] .tr-table {
   width: 100%;
   border-collapse: collapse;
   background: var(--tr-surface-1);
   border: 1px solid var(--tr-hairline);
 }
 
-.tr-root[data-palette="trigger"] .tr-table th,
-.tr-root[data-palette="trigger"] .tr-table td {
+.tr-root[data-style="anime"] .tr-table th,
+.tr-root[data-style="anime"] .tr-table td {
   padding: 0.5rem 1rem;
   text-align: left;
   vertical-align: baseline;
   border-bottom: 1px solid var(--tr-hairline);
 }
 
-.tr-root[data-palette="trigger"] .tr-table th {
+.tr-root[data-style="anime"] .tr-table th {
   font-family: var(--vp-font-family-mono);
   font-size: 0.75rem;
   font-weight: 500;
@@ -410,29 +410,29 @@
   border-bottom-color: var(--tr-accent-ring);
 }
 
-.tr-root[data-palette="trigger"] .tr-table .tr-mono {
+.tr-root[data-style="anime"] .tr-table .tr-mono {
   font-family: var(--vp-font-family-mono);
   font-size: 0.8125rem;
   white-space: nowrap;
   color: var(--tr-text-muted);
 }
 
-.tr-root[data-palette="trigger"] .tr-table a:hover {
+.tr-root[data-style="anime"] .tr-table a:hover {
   text-decoration: underline;
 }
 
-.tr-root[data-palette="trigger"] .tr-col-wide {
+.tr-root[data-style="anime"] .tr-col-wide {
   display: none;
 }
 
 @media (min-width: 640px) {
-  .tr-root[data-palette="trigger"] .tr-col-wide {
+  .tr-root[data-style="anime"] .tr-col-wide {
     display: table-cell;
   }
 }
 
 /* AI summary (@vuemo/plugin-ai-summary): a panel like the post cards (hairline frame, corner brackets) with a console-style button */
-.tr-root[data-palette="trigger"] .vuemo-ai-summary {
+.tr-root[data-style="anime"] .vuemo-ai-summary {
   position: relative;
   min-height: 0;
   margin: 1rem 0;
@@ -443,7 +443,7 @@
   border-radius: var(--tr-radius);
 }
 
-.tr-root[data-palette="trigger"] .vuemo-ai-summary::before {
+.tr-root[data-style="anime"] .vuemo-ai-summary::before {
   --bracket: var(--tr-accent);
   content: "";
   position: absolute;
@@ -460,7 +460,7 @@
     linear-gradient(var(--bracket), var(--bracket)) bottom right / 2px 10px no-repeat;
 }
 
-.tr-root[data-palette="trigger"] .vuemo-ai-summary-button {
+.tr-root[data-style="anime"] .vuemo-ai-summary-button {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -477,21 +477,21 @@
   transition: background-color var(--tr-motion-duration) ease, color var(--tr-motion-duration) ease;
 }
 
-.tr-root[data-palette="trigger"] .vuemo-ai-summary-button:hover:not(:disabled) {
+.tr-root[data-style="anime"] .vuemo-ai-summary-button:hover:not(:disabled) {
   color: var(--tr-on-accent);
   background: var(--tr-accent-solid);
 }
 
-.tr-root[data-palette="trigger"] .vuemo-ai-summary-dot {
+.tr-root[data-style="anime"] .vuemo-ai-summary-dot {
   background: var(--tr-accent);
 }
 
-.tr-root[data-palette="trigger"] .vuemo-ai-summary-result {
+.tr-root[data-style="anime"] .vuemo-ai-summary-result {
   margin: 0;
   line-height: 1.75;
 }
 
-.tr-root[data-palette="trigger"] .vuemo-ai-summary-error {
+.tr-root[data-style="anime"] .vuemo-ai-summary-error {
   margin: 0.5rem 0 0;
   font-family: var(--vp-font-family-mono);
   font-size: 0.8125rem;

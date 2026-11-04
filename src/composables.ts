@@ -1,18 +1,18 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
 import { usePosts } from '@vuemo/core/client'
-import { readFlavor, readPalette } from './types'
+import { readFlavor, readStyle } from './types'
 import { flavored, plain } from './flavor'
 
 export * from './format'
 
-/** The palette, as plain config data: the same during SSR and on the client. */
-export function usePalette() {
+/** The style (`themeConfig.style`), as plain config data: the same during SSR and on the client. */
+export function useStyle() {
   const { theme } = useData()
-  return computed(() => readPalette(theme.value, () => {}))
+  return computed(() => readStyle(theme.value, () => {}))
 }
 
-/** The labels of the trigger palette (`themeConfig.flavor`). */
+/** The labels of the anime style (`themeConfig.flavor`). */
 export function useTerms() {
   const { theme } = useData()
   return computed(() => (readFlavor(theme.value, () => {}) ? flavored : plain))

@@ -98,28 +98,28 @@ See [`example/`](./example) for a complete blog. Posts go in `posts/`; an excerp
 | --- | --- | --- |
 | `about.avatar` | `string` | avatar of the About page: a file in `public/` or a URL (none by default) |
 | `about.quote` | `string` | the line under it (default `Trigger your blog !`) |
-| `palette` | `'default'` \| `'trigger'` | the look (default `'default'`, the look of 1.x) |
-| `flavor` | `boolean` | `'trigger'` palette only: the theme's own words (default `true`), or plain ones with `false` |
+| `style` | `'normal'` \| `'anime'` | the look (default `'normal'`, the look of 1.x) |
+| `flavor` | `boolean` | `'anime'` style only: the theme's own words (default `true`), or plain ones with `false` |
 
 The type `TriggerThemeConfig` is exported; a wrong value prints a `console.warn('[vuemo-theme-trigger] ...')` once and the theme falls back to the default.
 
-### Palettes
+### Styles
 
-`themeConfig.palette` picks the colours:
+`themeConfig.style` picks the look:
 
 ```ts
 export default defineBlogConfig({
   theme: 'trigger',
-  themeConfig: { palette: 'trigger' }
+  themeConfig: { style: 'anime' }
 })
 ```
 
-| Palette | Look |
+| Style | Look |
 | --- | --- |
-| `'default'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
-| `'trigger'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, a small solid cube (turned 45 degrees) before post metadata, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner tag badges without a frame, the AI summary as a bracketed panel with a console-style button, a thin scrollbar and accent-edged code blocks |
+| `'normal'` | the look of Trigger 1.x: white and dark surfaces, cyan links, Tailwind's cyan to blue title |
+| `'anime'` | an operations-console look: graphite and navy surfaces, a signal-cyan accent, thin hairlines. Light and dark mode. Nav with an accent line and a clipped corner, a small solid cube (turned 45 degrees) before post metadata, post cards with corner brackets and a faint hexagon texture, numbered `h2` in posts, dashed dividers with a small hexagon node, cut-corner tag badges without a frame, the AI summary as a bracketed panel with a console-style button, a thin scrollbar and accent-edged code blocks |
 
-The `'trigger'` palette also adds:
+The `'anime'` style also adds:
 
 - a monospace metadata line above post titles (home and post): `LOG-0042 · 2026.10.30 · 6 MIN · Category`
 - on posts, a table of contents (beside the post from 1280px, with the current section marked; collapsed above the post before that), a 2px reading-progress line at the top, and a hexagon back-to-top button (`緊急` / `脫出`) that jumps to the top
@@ -127,11 +127,11 @@ The `'trigger'` palette also adds:
 
 Reading time needs `@vuemo/core` 0.1.0-alpha.3 or later; with an older core it is left out. `themeConfig.flavor: false` replaces the theme's own words (`LOG-`, `緊急脫出`, `BRIEFING`) with plain ones (`No.`, `TOP`, `Contents`); they are all in [`src/flavor.ts`](./src/flavor.ts).
 
-Both palettes follow VitePress's dark mode (`appearance`, the toggle in the nav). The `'trigger'` palette respects `prefers-reduced-motion` and keeps text at 4.5:1 and borders and the focus ring at 3:1 or more (checked by `pnpm test`, including VitePress's links, inline code and buttons in both palettes).
+Both styles follow VitePress's dark mode (`appearance`, the toggle in the nav). The `'anime'` style respects `prefers-reduced-motion` and keeps text at 4.5:1 and borders and the focus ring at 3:1 or more (checked by `pnpm test`, including VitePress's links, inline code and buttons in both styles).
 
-The colours are semantic tokens (`--tr-accent`, `--tr-surface-0`, `--tr-text-muted`, `--tr-border`, `--tr-focus`, ...) in [`src/tokens.css`](./src/tokens.css), mapped to VitePress's variables (`--vp-c-brand-1/2/3/soft`, and under the `'trigger'` palette `--vp-c-bg`, `--vp-c-divider`, `--vp-code-block-bg`, ...) so VitePress's own buttons, tip blocks, links and search follow the accent. A new palette is a new set of values for these tokens.
+The colours are semantic tokens (`--tr-accent`, `--tr-surface-0`, `--tr-text-muted`, `--tr-border`, `--tr-focus`, ...) in [`src/tokens.css`](./src/tokens.css), mapped to VitePress's variables (`--vp-c-brand-1/2/3/soft`, and under the `'anime'` style `--vp-c-bg`, `--vp-c-divider`, `--vp-code-block-bg`, ...) so VitePress's own buttons, tip blocks, links and search follow the accent. A new style is a new set of values for these tokens.
 
-In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'trigger'` palette.
+In `example/`, `STYLE=anime pnpm dev` (or `pnpm build:example`) shows the `'anime'` style.
 
 ### Photo gallery
 
@@ -142,7 +142,7 @@ In `example/`, `PALETTE=trigger pnpm dev` (or `pnpm build:example`) shows the `'
 
 The example has a small demo gallery (`example/gallery.md`, `example/gallery/`, images in `example/public/gallery/`); it is built when `@vuemo/plugin-gallery` is installed.
 
-Trigger centres the gallery in a container (max 72rem) and, under the `'trigger'` palette, maps the plugin's CSS variables to its tokens: `--vuemo-gallery-radius` to `--tr-radius`, `--vuemo-gallery-bg` to `--tr-surface-1` and `--vuemo-gallery-focus` to `--tr-focus`. Without them the plugin uses VitePress's variables, which follow the accent in both palettes. Override any `--vuemo-gallery-*` variable in your own CSS to change it.
+Trigger centres the gallery in a container (max 72rem) and, under the `'anime'` style, maps the plugin's CSS variables to its tokens: `--vuemo-gallery-radius` to `--tr-radius`, `--vuemo-gallery-bg` to `--tr-surface-1` and `--vuemo-gallery-focus` to `--tr-focus`. Without them the plugin uses VitePress's variables, which follow the accent in both palettes. Override any `--vuemo-gallery-*` variable in your own CSS to change it.
 
 ## Migrating from 1.x
 
@@ -179,8 +179,8 @@ pnpm install
 pnpm build          # compile src/style.css to dist/style.css (Tailwind CSS v4)
 pnpm dev            # the example blog
 pnpm check          # vuemo check-theme: the theme contract
-pnpm test           # includes the colour tokens: snapshot of the default palette, WCAG contrast of both
-pnpm build:example  # PALETTE=trigger pnpm build:example for the other palette
+pnpm test           # includes the colour tokens: snapshot of the `'normal'` style, WCAG contrast of both
+pnpm build:example  # STYLE=anime pnpm build:example for the other style
 pnpm package        # dist-zip/vuemo-theme-trigger-<version>.zip, the download for the `themes/` folder
 ```
 
@@ -198,7 +198,7 @@ The GitHub Pages workflow (`.github/workflows/pages.yml`) builds the example blo
 
 The name is a nod to the manga *World Trigger* by Daisuke Ashihara. This is an unofficial fan-made project, not affiliated with or endorsed by the author, Shueisha or Toei Animation.
 
-The theme contains no official artwork, logos, character likenesses or other material from that work. The palette is inspired only by general motifs (a sci-fi control-room feel, HUD lines, hexagon geometry, a cool colour scheme) and a few general concepts as plain words (a log, a briefing, bailing out), all in `src/flavor.ts` and switched off with `flavor: false`. Every graphic is original work drawn in this repository under the MIT licence, listed in [ASSETS.md](./ASSETS.md); fonts are system fonts or OFL only. Contributions must follow the same rule (see the pull request template): nothing copied or traced from official material, no character names, and no other names or titles from the work in code, class names or documentation.
+The theme contains no official artwork, logos, character likenesses or other material from that work. The `'anime'` style is inspired only by general motifs (a sci-fi control-room feel, HUD lines, hexagon geometry, a cool colour scheme) and a few general concepts as plain words (a log, a briefing, bailing out), all in `src/flavor.ts` and switched off with `flavor: false`. Every graphic is original work drawn in this repository under the MIT licence, listed in [ASSETS.md](./ASSETS.md); fonts are system fonts or OFL only. Contributions must follow the same rule (see the pull request template): nothing copied or traced from official material, no character names, and no other names or titles from the work in code, class names or documentation.
 
 ## License
 

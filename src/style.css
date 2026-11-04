@@ -5,7 +5,7 @@
 @import 'tailwindcss/utilities.css' source(none);
 @source '.';
 @import './tokens.css';
-@import './palette-trigger.css';
+@import './style-anime.css';
 
 /* dark mode follows VitePress's `dark` class on <html> (isDark) */
 @custom-variant dark (&:where(.dark, .dark *));

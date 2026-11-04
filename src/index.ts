@@ -10,7 +10,7 @@ import Category from './layouts/Category.vue'
 import AboutLayout from './layouts/About.vue'
 import '../dist/style.css'
 
-export type { TriggerThemeConfig, Palette } from './types'
+export type { TriggerThemeConfig, ThemeStyle } from './types'
 
 // Trigger builds on VitePress's default theme (nav, search, footer, dark mode toggle). VitePress renders
 // `<component :is="frontmatter.layout">` for a layout it does not know, so global components act as layouts.

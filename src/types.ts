@@ -8,28 +8,28 @@ export interface TriggerThemeConfig {
     quote?: string
   }
   /**
-   * The look. `'default'` (the default) is the look of Trigger 1.x; `'trigger'` is a quiet, record-keeping look:
-   * neutral paper and ink, one teal accent, monospace labels and numbers, no motion.
+   * The look. `'normal'` (the default) is the look of Trigger 1.x; `'anime'` is a sci-fi operations-console look
+   * (navy surfaces, signal-cyan accent, hexagon texture, post numbers, a table of contents and a back-to-top button).
    */
-  palette?: Palette
+  style?: ThemeStyle
   /**
-   * Palette `'trigger'` only: label things with the theme's own vocabulary (`LOG-0042`, `SQ-A01`, `BAIL OUT`).
+   * Style `'anime'` only: label things with the theme's own vocabulary (`LOG-0042`, `緊急脫出`, `BRIEFING`).
    * `false` uses plain words instead. Default: `true`. The words are in `src/flavor.ts`.
    */
   flavor?: boolean
 }
 
-export type Palette = 'default' | 'trigger'
+export type ThemeStyle = 'normal' | 'anime'
 
-export const PALETTES: readonly Palette[] = ['default', 'trigger']
+export const STYLES: readonly ThemeStyle[] = ['normal', 'anime']
 
-/** The `palette` option: an unknown value warns and falls back to `'default'`. */
-export function readPalette(theme: Record<string, unknown>, warn: (message: string) => void = console.warn): Palette {
-  const raw = theme.palette
-  if (raw === undefined) return 'default'
-  if (typeof raw === 'string' && (PALETTES as readonly string[]).includes(raw)) return raw as Palette
-  warn(`[vuemo-theme-trigger] themeConfig.palette must be one of ${PALETTES.map((p) => `'${p}'`).join(', ')}; using 'default'`)
-  return 'default'
+/** The `style` option: an unknown value warns and falls back to `'normal'`. */
+export function readStyle(theme: Record<string, unknown>, warn: (message: string) => void = console.warn): ThemeStyle {
+  const raw = theme.style
+  if (raw === undefined) return 'normal'
+  if (typeof raw === 'string' && (STYLES as readonly string[]).includes(raw)) return raw as ThemeStyle
+  warn(`[vuemo-theme-trigger] themeConfig.style must be one of ${STYLES.map((p) => `'${p}'`).join(', ')}; using 'normal'`)
+  return 'normal'
 }
 
 /** The `flavor` option: anything but a boolean warns and falls back to `true`. */

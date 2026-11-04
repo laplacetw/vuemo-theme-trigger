@@ -4,23 +4,23 @@
 
 ### Features
 - `layout: about`, the About layout of the Vuemo theme contract (since `@vuemo/core` 0.1.0-alpha.3): the About card (avatar and quote from `themeConfig.about`) above the page's own text. The example uses it. `<About />` in a page body still works
-- `themeConfig.palette: 'default' | 'trigger'`. The theme root carries `data-palette`; an unknown value warns once and falls back to `'default'`. The example switches with `PALETTE=trigger`
-- palette `'trigger'`: navy and graphite surfaces, signal-cyan accent, light and dark, contrast-tested. Nav with an accent line and a clipped corner, `SignalTag` (a static solid cube turned 45 degrees, inline SVG, decorative, `aria-hidden`), tag/category badges with a cut corner and no frame, "Read more" with the 1.x ring and pulse, the AI summary as a bracketed panel with a console-style button, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, reduced-motion support. It also adds a metadata line above post titles (`LOG-0042 · date · reading time · category`), a table of contents and a reading-progress line on posts, a hexagon back-to-top button (`緊急` / `脫出`, it jumps) and one post table for the archive, tags and categories pages. The default palette does not change
-- `themeConfig.flavor` (default `true`): `false` replaces the palette's own words with plain ones; all words are in `src/flavor.ts`
+- `themeConfig.style: 'normal' | 'anime'`. The theme root carries `data-style`; an unknown value warns once and falls back to `'normal'`. The example switches with `STYLE=anime`
+- style `'anime'`: navy and graphite surfaces, signal-cyan accent, light and dark, contrast-tested. Nav with an accent line and a clipped corner, `SignalTag` (a static solid cube turned 45 degrees, inline SVG, decorative, `aria-hidden`), tag/category badges with a cut corner and no frame, "Read more" with the 1.x ring and pulse, the AI summary as a bracketed panel with a console-style button, post cards with corner brackets and a faint hexagon texture, numbered h2 with an accent bar, dashed dividers with a hexagon node, thin scrollbar, code blocks with an accent edge, `::selection`, a 2px `:focus-visible` outline, reduced-motion support. It also adds a metadata line above post titles (`LOG-0042 · date · reading time · category`), a table of contents and a reading-progress line on posts, a hexagon back-to-top button (`緊急` / `脫出`, it jumps) and one post table for the archive, tags and categories pages. The `'normal'` style does not change
+- `themeConfig.flavor` (default `true`): `false` replaces the style's own words with plain ones; all words are in `src/flavor.ts`
 - reading time from `Post.words` (`@vuemo/core` 0.1.0-alpha.3); left out with an older core
 - `ASSETS.md` lists every graphic (original work, MIT); the README has a name and credits section with the unofficial-fan-project disclaimer; `.github/PULL_REQUEST_TEMPLATE.md` has a checkbox that no official material was copied or traced
 
 ### Changes
-- page titles (archive, tags, category, about) have room under the nav in both palettes
+- page titles (archive, tags, category, about) have room under the nav in both styles
 - the example has a demo photo gallery page (built when `@vuemo/plugin-gallery` is installed)
 - the back-to-top button moves keyboard focus to the site title, not to VitePress's skip link (which showed itself over the title)
 - the category page's default title is `Categories`; the example's page is `categories.md` (`/categories`, the default path of `@vuemo/core` 0.1.0-alpha.3)
-- `layout: page` content from `@vuemo/plugin-gallery` gets a centred container (max 72rem, 1rem padding) in both palettes
+- `layout: page` content from `@vuemo/plugin-gallery` gets a centred container (max 72rem, 1rem padding) in both styles
 - the colours live in `src/tokens.css` as semantic tokens (`--tr-accent`, `--tr-text-muted`, `--tr-border`, ...); the styles and components use the tokens instead of Tailwind colour names. The default look of Trigger's own parts is unchanged (a test pins every value)
 
 ### Fixes
-- `--vp-c-brand-1` and `--vp-c-brand-3` in the default palette gave about 3.6:1 for VitePress links, inline code and the white text on buttons. They use cyan-700 now (about 5.3:1 on white), and dark mode defines its own button colour. **VitePress-owned colours changed**: links, inline code, buttons and tip blocks in the default palette are a darker cyan in light mode. Trigger's own parts keep their 1.x colours. Contrast tests cover both palettes and both modes
-- the accent of VitePress's own parts now follows Trigger's cyan. Trigger overrode the deprecated `--vp-c-brand`, `--vp-c-brand-light` ... variables, which VitePress 1.6 no longer reads, so VitePress buttons, tip blocks, links in the post body, inline code, the nav link highlight and the footer links stayed indigo. They are now driven by `--vp-c-brand-1/2/3/soft`. The border of a tip block is transparent in the default palette (VitePress 1.6's own value)
+- `--vp-c-brand-1` and `--vp-c-brand-3` in the `'normal'` style gave about 3.6:1 for VitePress links, inline code and the white text on buttons. They use cyan-700 now (about 5.3:1 on white), and dark mode defines its own button colour. **VitePress-owned colours changed**: links, inline code, buttons and tip blocks in the `'normal'` style are a darker cyan in light mode. Trigger's own parts keep their 1.x colours. Contrast tests cover both styles and both modes
+- the accent of VitePress's own parts now follows Trigger's cyan. Trigger overrode the deprecated `--vp-c-brand`, `--vp-c-brand-light` ... variables, which VitePress 1.6 no longer reads, so VitePress buttons, tip blocks, links in the post body, inline code, the nav link highlight and the footer links stayed indigo. They are now driven by `--vp-c-brand-1/2/3/soft`. The border of a tip block is transparent in the `'normal'` style (VitePress 1.6's own value)
 
 ## 2.0.0-alpha.1
 

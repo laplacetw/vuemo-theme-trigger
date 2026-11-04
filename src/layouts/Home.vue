@@ -5,12 +5,12 @@ import { usePagination } from '@vuemo/core/client'
 import type { Post } from '@vuemo/core/client'
 import PostInfo from '../components/PostInfo.vue'
 import LogMeta from '../components/LogMeta.vue'
-import { usePalette } from '../composables'
+import { useStyle } from '../composables'
 import Pagination from '../components/Pagination.vue'
 
 const { theme } = useData<VuemoThemeConfig>()
 const { page, goPage } = usePagination(theme.value.postsPerPage ?? 5)
-const palette = usePalette()
+const themeStyle = useStyle()
 
 /** `summary: 'excerpt'` shows the excerpt, else the description; `'description'` shows the description only. */
 function summary(post: Post): { html?: string; text?: string } {
@@ -25,7 +25,7 @@ function summary(post: Post): { html?: string; text?: string } {
     <ul class="divide-y divide-(color:--tr-divide)">
       <li v-for="post in page.items" :key="post.url" class="theme-card mb-6 p-6">
         <article class="space-y-2 xl:space-y-0 xl:items-baseline">
-          <LogMeta v-if="palette === 'trigger'" :post="post" />
+          <LogMeta v-if="themeStyle === 'anime'" :post="post" />
           <PostInfo v-else :date="post.date.string" :category="post.category" />
           <h2 class="pb-2 text-2xl leading-8 font-bold tracking-tight">
             <a class="text-(color:--tr-text-strong)" :href="withBase(post.url)">{{ post.title }}</a>

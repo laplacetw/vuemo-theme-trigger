@@ -11,12 +11,12 @@ const require = createRequire(import.meta.url)
 const themeCss = readFileSync(require.resolve('tailwindcss/theme.css'), 'utf8')
 const tailwind = (name: string) => (name.startsWith('#') ? name : new RegExp(`--color-${name}:\\s*([^;]+);`).exec(themeCss)![1].trim())
 
-describe('tokens.css, default palette', () => {
+describe('tokens.css, normal style', () => {
   const layers = readTokens()
 
   for (const mode of ['light', 'dark'] as const) {
     it(`keeps every colour of the pre-token look (${mode})`, () => {
-      const vars = resolveTokens(layers, 'default', mode)
+      const vars = resolveTokens(layers, 'normal', mode)
       for (const role of roles) {
         const actual = toHex(parseColor(resolveVar(vars, role.token)))
         const expected = toHex(parseColor(tailwind(role[mode])))
@@ -26,7 +26,7 @@ describe('tokens.css, default palette', () => {
   }
 
   it('maps the VitePress accent variables to the tokens', () => {
-    const vars = resolveTokens(layers, 'default', 'light')
+    const vars = resolveTokens(layers, 'normal', 'light')
     for (const name of ['--vp-c-brand-1', '--vp-c-brand-2', '--vp-c-brand-3', '--vp-c-brand-soft']) {
       expect(vars[name], name).toMatch(/^var\(--tr-/)
       expect(() => parseColor(resolveVar(vars, name)), name).not.toThrow()

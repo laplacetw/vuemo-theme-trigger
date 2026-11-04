@@ -45,20 +45,20 @@ describe('token parser', () => {
   const css = `
     :root { --a: #fff; --b: var(--a); }
     :root.dark { --a: #000; }
-    [data-palette="trigger"], :root:has(.tr-root[data-palette="trigger"]) { --a: #123456; }
-    .dark [data-palette="trigger"], :root.dark:has(.tr-root[data-palette="trigger"]) { --a: #abcdef; }
+    [data-style="anime"], :root:has(.tr-root[data-style="anime"]) { --a: #123456; }
+    .dark [data-style="anime"], :root.dark:has(.tr-root[data-style="anime"]) { --a: #abcdef; }
     .other { color: red; }
   `
   const layers = parseTokens(css)
 
   it('sorts rules into palette and mode', () => {
-    expect(layers.map((l) => `${l.palette}/${l.mode}`)).toEqual(['default/light', 'default/dark', 'trigger/light', 'trigger/dark'])
+    expect(layers.map((l) => `${l.style}/${l.mode}`)).toEqual(['normal/light', 'normal/dark', 'anime/light', 'anime/dark'])
   })
 
   it('applies the cascade and resolves var()', () => {
-    expect(resolveVar(resolveTokens(layers, 'default', 'dark'), '--b')).toBe('#000')
-    expect(resolveVar(resolveTokens(layers, 'trigger', 'light'), '--b')).toBe('#123456')
-    expect(resolveVar(resolveTokens(layers, 'trigger', 'dark'), '--b')).toBe('#abcdef')
+    expect(resolveVar(resolveTokens(layers, 'normal', 'dark'), '--b')).toBe('#000')
+    expect(resolveVar(resolveTokens(layers, 'anime', 'light'), '--b')).toBe('#123456')
+    expect(resolveVar(resolveTokens(layers, 'anime', 'dark'), '--b')).toBe('#abcdef')
   })
 
   it('rejects an undefined token and a cycle', () => {
@@ -67,7 +67,7 @@ describe('token parser', () => {
   })
 })
 
-/** Baseline of the default palette, taken before tokens.css existed: it must not change in a refactoring. */
+/** Baseline of the `'normal'` style, taken before tokens.css existed: it must not change in a refactoring. */
 describe('baseline of the default look', () => {
   const resolved = (mode: 'light' | 'dark') => Object.fromEntries(roles.map((r) => [r.token, tailwind(r[mode])]))
 

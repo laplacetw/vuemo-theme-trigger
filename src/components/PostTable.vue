@@ -3,7 +3,7 @@ import { withBase } from 'vitepress'
 import { useTaxonomyLinks, type Post } from '@vuemo/core/client'
 import { dotDate, pad, useLogNumbers, useTerms } from '../composables'
 
-// The trigger palette's post table (archive, tags, categories): date, number, title, category
+// The anime style's post table (archive, tags, categories): date, number, title, category
 defineProps<{ posts: Post[] }>()
 const numbers = useLogNumbers()
 const terms = useTerms()

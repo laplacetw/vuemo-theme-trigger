@@ -4,12 +4,12 @@ import { useData, withBase } from 'vitepress'
 import { useArchives, usePosts } from '@vuemo/core/client'
 import Title from '../components/Title.vue'
 import PostTable from '../components/PostTable.vue'
-import { usePalette } from '../composables'
+import { useStyle } from '../composables'
 
 const { frontmatter } = useData()
 const archives = useArchives()
-// the trigger palette shows one table: date, number, title, category
-const palette = usePalette()
+// the anime style shows one table: date, number, title, category
+const themeStyle = useStyle()
 const posts = usePosts()
 const total = computed(() => archives.reduce((n, group) => n + group.posts.length, 0))
 </script>
@@ -19,7 +19,7 @@ const total = computed(() => archives.reduce((n, group) => n + group.posts.lengt
     <Title :text="frontmatter.title || 'Archives'" />
     <p class="pb-2 text-xl font-extrabold">Total : {{ total }} {{ total === 1 ? 'post' : 'posts' }}</p>
     <hr class="h-px my-4 bg-(--tr-rule) border-0" />
-    <PostTable v-if="palette === 'trigger'" :posts="posts" />
+    <PostTable v-if="themeStyle === 'anime'" :posts="posts" />
     <template v-else>
       <section v-for="(group, i) in archives" :key="group.year">
         <h2 class="pb-2 text-xl font-extrabold">{{ group.year }}</h2>

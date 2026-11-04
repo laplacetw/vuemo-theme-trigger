@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { readAbout, readFlavor, readPalette } from '../src/types'
+import { readAbout, readFlavor, readStyle } from '../src/types'
 import { flavored, plain } from '../src/flavor'
 import { dotDate, readingMinutes } from '../src/format'
 
@@ -23,24 +23,24 @@ describe('readAbout', () => {
   })
 })
 
-describe('readPalette', () => {
+describe('readStyle', () => {
   it('defaults to "default" without a warning', () => {
     const warnings: string[] = []
-    expect(readPalette({}, (m) => warnings.push(m))).toBe('default')
+    expect(readStyle({}, (m) => warnings.push(m))).toBe('normal')
     expect(warnings).toEqual([])
   })
 
-  it('accepts the known palettes', () => {
-    expect(readPalette({ palette: 'trigger' })).toBe('trigger')
-    expect(readPalette({ palette: 'default' })).toBe('default')
+  it('accepts the known styles', () => {
+    expect(readStyle({ style: 'anime' })).toBe('anime')
+    expect(readStyle({ style: 'normal' })).toBe('normal')
   })
 
   it('warns about an unknown value and falls back', () => {
     const warnings: string[] = []
-    expect(readPalette({ palette: 'neon' }, (m) => warnings.push(m))).toBe('default')
-    expect(readPalette({ palette: 3 }, (m) => warnings.push(m))).toBe('default')
+    expect(readStyle({ style: 'neon' }, (m) => warnings.push(m))).toBe('normal')
+    expect(readStyle({ style: 3 }, (m) => warnings.push(m))).toBe('normal')
     expect(warnings).toHaveLength(2)
-    expect(warnings[0]).toMatch(/^\[vuemo-theme-trigger\] themeConfig\.palette/)
+    expect(warnings[0]).toMatch(/^\[vuemo-theme-trigger\] themeConfig\.style/)
   })
 })
 

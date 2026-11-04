@@ -1,4 +1,4 @@
-// Pure helpers of the trigger palette (no Vue, no VitePress), so tests can import them.
+// Pure helpers of the anime style (no Vue, no VitePress), so tests can import them.
 import type { Post } from '@vuemo/core/client'
 
 /** `words` is in the post model since @vuemo/core 0.1.0-alpha.3; older cores have no reading time. */

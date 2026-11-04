@@ -7,27 +7,27 @@ import LogMeta from '../components/LogMeta.vue'
 import Toc from '../components/Toc.vue'
 import ReadingProgress from '../components/ReadingProgress.vue'
 import BailOut from '../components/BailOut.vue'
-import { usePalette } from '../composables'
+import { useStyle } from '../composables'
 
 const { frontmatter } = useData()
 const post = usePost()
 const adjacent = usePrevNext()
 const { tagLink } = useTaxonomyLinks()
-// the trigger palette adds a metadata line, a table of contents, the reading progress and a back-to-top button
-const palette = usePalette()
+// the anime style adds a metadata line, a table of contents, the reading progress and a back-to-top button
+const themeStyle = useStyle()
 </script>
 
 <template>
   <article class="theme-container pt-8 pb-16">
-    <ReadingProgress v-if="palette === 'trigger'" />
+    <ReadingProgress v-if="themeStyle === 'anime'" />
     <header class="grid">
       <h1 class="mb-2 justify-self-center font-bold text-xl sm:text-2xl text-(color:--tr-accent-strong)">
         {{ frontmatter.title }}
       </h1>
-      <LogMeta v-if="post && palette === 'trigger'" class="justify-self-center" :post="post" />
+      <LogMeta v-if="post && themeStyle === 'anime'" class="justify-self-center" :post="post" />
       <PostInfo v-else-if="post" class="justify-self-center" :date="post.date.string" :category="post.category" />
     </header>
-    <template v-if="palette === 'trigger'">
+    <template v-if="themeStyle === 'anime'">
       <Toc variant="inline" />
       <aside class="tr-post-aside"><Toc variant="aside" /></aside>
     </template>
@@ -53,6 +53,6 @@ const palette = usePalette()
     </footer>
     <slot name="post-comments" />
     <PluginSlot name="post-comments" />
-    <BailOut v-if="palette === 'trigger'" />
+    <BailOut v-if="themeStyle === 'anime'" />
   </article>
 </template>

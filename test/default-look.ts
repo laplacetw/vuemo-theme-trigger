@@ -1,5 +1,5 @@
 /**
- * The colours of the default palette as they were before tokens.css existed (Trigger 2.0.0-alpha.1):
+ * The colours of the `'normal'` style as they were before tokens.css existed (Trigger 2.0.0-alpha.1):
  * Tailwind colour names, as used in src/style.css and the components. T1 moves them into tokens.css
  * without changing a value; the tokens test checks that, and `contrast.test.ts` snapshots the resolved values.
  * The page backgrounds are VitePress's own (not set by Trigger).

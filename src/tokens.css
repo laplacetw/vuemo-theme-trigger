@@ -2,11 +2,11 @@
  * Design tokens of the Trigger theme.
  *
  * Primitives are Tailwind's colours (copied, so that nothing depends on which theme variables Tailwind emits);
- * semantic tokens (`--tr-*`) say what a colour is for. Components use the semantic tokens only, a palette
- * is a set of values for them. The default palette is the look of Trigger 1.x. Dark mode is VitePress's `.dark` class.
+ * semantic tokens (`--tr-*`) say what a colour is for. Components use the semantic tokens only, a style
+ * is a set of values for them. The `'normal'` style is the look of Trigger 1.x. Dark mode is VitePress's `.dark` class.
  */
 
-/* default palette, light */
+/* style "normal", light */
 :root {
   --tr-cyan-100: oklch(95.6% 0.045 203.388);
   --tr-cyan-200: oklch(91.7% 0.08 205.041);
@@ -54,7 +54,7 @@
   --tr-on-warn: #000000;
 }
 
-/* default palette, dark */
+/* style "normal", dark */
 :root.dark {
   --tr-accent: var(--tr-cyan-300);
   --tr-accent-strong: var(--tr-cyan-100);
@@ -82,7 +82,7 @@
  * VitePress's variables follow the tokens. VitePress 1.6 colours its links, buttons, tip blocks, inline code
  * and search with `--vp-c-brand-1/2/3/soft` (the old `--vp-c-brand`, `-light`, `-dark` ... are deprecated
  * and no longer read), so these four are what makes VitePress's own parts follow the accent.
- * Declared on `:root`, so every palette that changes `--tr-accent` there is picked up, including the
+ * Declared on `:root`, so every style that changes `--tr-accent` there is picked up, including the
  * search modal, which VitePress renders outside the theme's root element.
  */
 :root {
@@ -93,15 +93,15 @@
 }
 
 /*
- * Palette "trigger": an operations-console look. Cool graphite and navy surfaces, a signal-cyan accent,
- * amber for warnings, thin hairlines. Set with `themeConfig.palette: 'trigger'`.
+ * Style "anime": an operations-console look. Cool graphite and navy surfaces, a signal-cyan accent,
+ * amber for warnings, thin hairlines. Set with `themeConfig.style: 'anime'`.
  * Two rules per set, kept apart (a selector list is dropped as a whole by a browser that does not know `:has()`):
  * the theme root (`.tr-root`), and `:root` through `:has()`, so that things VitePress renders outside the theme
- * root (the search modal) and the VitePress variables below follow the palette too. Without `:has()` the
- * theme root still keeps the palette. Both rules of a set must stay identical (test/palette.test.ts).
- * Values were chosen against WCAG 2.x: text >= 4.5:1, borders, focus ring and other UI >= 3:1 (test/palette.test.ts).
+ * root (the search modal) and the VitePress variables below follow the style too. Without `:has()` the
+ * theme root still keeps the style. Both rules of a set must stay identical (test/style.test.ts).
+ * Values were chosen against WCAG 2.x: text >= 4.5:1, borders, focus ring and other UI >= 3:1 (test/style.test.ts).
  */
-[data-palette="trigger"] {
+[data-style="anime"] {
   --tr-surface-0: #f3f7fa;
   --tr-surface-1: #e6eef4;
   --tr-surface-2: #d6e2eb;
@@ -171,7 +171,7 @@
   --vuemo-gallery-focus: var(--tr-focus);
 }
 
-:root:has(> body > #app > .tr-root[data-palette="trigger"]) {
+:root:has(> body > #app > .tr-root[data-style="anime"]) {
   --tr-surface-0: #f3f7fa;
   --tr-surface-1: #e6eef4;
   --tr-surface-2: #d6e2eb;
@@ -241,7 +241,7 @@
   --vuemo-gallery-focus: var(--tr-focus);
 }
 
-.dark [data-palette="trigger"] {
+.dark [data-style="anime"] {
   --tr-surface-0: #0a111c;
   --tr-surface-1: #101a2b;
   --tr-surface-2: #182539;
@@ -287,7 +287,7 @@
   --tr-grid-opacity: 0.06;
 }
 
-:root.dark:has(> body > #app > .tr-root[data-palette="trigger"]) {
+:root.dark:has(> body > #app > .tr-root[data-style="anime"]) {
   --tr-surface-0: #0a111c;
   --tr-surface-1: #101a2b;
   --tr-surface-2: #182539;

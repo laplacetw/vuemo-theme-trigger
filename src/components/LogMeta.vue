@@ -4,7 +4,7 @@ import { useTaxonomyLinks, type Post } from '@vuemo/core/client'
 import { dotDate, pad, readingMinutes, useLogNumbers, useTerms } from '../composables'
 import SignalTag from './SignalTag.vue'
 
-// The trigger palette's line above a post title: `LOG-0042 · 2026.10.30 · 6 MIN · Category`
+// The anime style's line above a post title: `LOG-0042 · 2026.10.30 · 6 MIN · Category`
 const props = defineProps<{ post: Post }>()
 const terms = useTerms()
 const numbers = useLogNumbers()
