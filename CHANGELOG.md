@@ -14,7 +14,7 @@ Works with `@vuemo/core` 0.1.0-alpha.2; the About layout, reading time and the `
 
 ### Changes
 - the README is shorter, starts with a quick start, and has Traditional and Simplified Chinese versions (`README.zh-TW.md`, `README.zh-CN.md`)
-- the `@vuemo/*` devDependencies stay on `^0.1.0-alpha.2` until alpha.3 is on npm
+- the `@vuemo/*` devDependencies are on `^0.1.0-alpha.3`, so the example shows reading time and uses `/categories`; the peer dependency stays `^0.1.0-alpha.2`
 - page titles (archive, tags, category, about) have room under the nav in both styles
 - the example has a demo photo gallery page (built when `@vuemo/plugin-gallery` is installed)
 - the back-to-top button moves keyboard focus to the site title, not to VitePress's skip link (which showed itself over the title)
