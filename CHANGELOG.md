@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 2.0.0-alpha.2
+
+Works with `@vuemo/core` 0.1.0-alpha.2; the About layout, reading time and the `/categories` default need 0.1.0-alpha.3.
 
 ### Features
 - `layout: about`, the About layout of the Vuemo theme contract (since `@vuemo/core` 0.1.0-alpha.3): the About card (avatar and quote from `themeConfig.about`) above the page's own text. The example uses it. `<About />` in a page body still works
@@ -11,6 +13,8 @@
 - `ASSETS.md` lists every graphic (original work, MIT); the README has a name and credits section with the unofficial-fan-project disclaimer; `.github/PULL_REQUEST_TEMPLATE.md` has a checkbox that no official material was copied or traced
 
 ### Changes
+- the README is shorter, starts with a quick start, and has Traditional and Simplified Chinese versions (`README.zh-TW.md`, `README.zh-CN.md`)
+- the `@vuemo/*` devDependencies stay on `^0.1.0-alpha.2` until alpha.3 is on npm
 - page titles (archive, tags, category, about) have room under the nav in both styles
 - the example has a demo photo gallery page (built when `@vuemo/plugin-gallery` is installed)
 - the back-to-top button moves keyboard focus to the site title, not to VitePress's skip link (which showed itself over the title)
