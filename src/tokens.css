@@ -93,7 +93,7 @@
 }
 
 /*
- * Style "anime": an operations-console look. Cool graphite and navy surfaces, a signal-cyan accent,
+ * Style "anime": an anime-inspired look. Cool graphite and navy surfaces, a signal-cyan accent,
  * amber for warnings, thin hairlines. Set with `themeConfig.style: 'anime'`.
  * Two rules per set, kept apart (a selector list is dropped as a whole by a browser that does not know `:has()`):
  * the theme root (`.tr-root`), and `:root` through `:has()`, so that things VitePress renders outside the theme

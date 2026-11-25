@@ -5,7 +5,7 @@
 ![](https://img.shields.io/github/license/laplacetw/vuemo-theme-trigger)
 ![Node.js >= 18.3](https://img.shields.io/badge/Node.js-%3E%3D18.3-green)
 
-Trigger 是 [Vuemo](https://github.com/laplacetw/vuemo) 的博客主题，Vuemo 是基于 [VitePress](https://vitepress.dev) 的博客框架。主题有两种风格：`normal` 是 Trigger 1.x 的简洁风格，`anime` 是作战指挥台风格。Tailwind CSS 已预先编译，无需另外安装。
+Trigger 是 [Vuemo](https://github.com/laplacetw/vuemo) 的博客主题，Vuemo 是基于 [VitePress](https://vitepress.dev) 的博客框架。主题有两种风格：`normal` 是 Trigger 1.x 的简洁风格，`anime` 是动漫风格。Tailwind CSS 已预先编译，无需另外安装。
 
 > **2.0 alpha。** 需要 `@vuemo/core` 0.1.0-alpha.2 或更高版本。
 

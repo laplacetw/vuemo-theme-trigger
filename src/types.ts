@@ -8,7 +8,7 @@ export interface TriggerThemeConfig {
     quote?: string
   }
   /**
-   * The look. `'normal'` (the default) is the look of Trigger 1.x; `'anime'` is a sci-fi operations-console look
+   * The look. `'normal'` (the default) is the look of Trigger 1.x; `'anime'` is an anime-inspired look
    * (navy surfaces, signal-cyan accent, hexagon texture, post numbers, a table of contents and a back-to-top button).
    */
   style?: ThemeStyle
