@@ -2,11 +2,16 @@
 
 [English](./README.md) · **繁體中文** · [简体中文](./README.zh-CN.md)
 
+![](https://img.shields.io/github/license/laplacetw/vuemo-theme-trigger)
+![Node.js >= 18.3](https://img.shields.io/badge/Node.js-%3E%3D18.3-green)
+
 Trigger 是 [Vuemo](https://github.com/laplacetw/vuemo) 的部落格主題，Vuemo 是以 [VitePress](https://vitepress.dev) 為基礎的部落格框架。主題有兩種風格：`normal` 是 Trigger 1.x 的簡潔風格，`anime` 是作戰指揮台風格。Tailwind CSS 已預先編譯，不需要另外安裝。
 
 > **2.0 alpha。** 需要 `@vuemo/core` 0.1.0-alpha.2 以上。
 
-![](./example/public/preview.png)
+![Trigger 的 normal 風格在桌機、筆電、平板與手機上的畫面](./example/public/preview.png)
+
+![Trigger 的 anime 風格在桌機、筆電、平板與手機上的畫面](./example/public/preview_anime.png)
 
 ## 快速開始
 

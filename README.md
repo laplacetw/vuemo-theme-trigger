@@ -3,13 +3,15 @@
 **English** · [繁體中文](./README.zh-TW.md) · [简体中文](./README.zh-CN.md)
 
 ![](https://img.shields.io/github/license/laplacetw/vuemo-theme-trigger)
-![Node.js >= 18.0.0](https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green)
+![Node.js >= 18.3](https://img.shields.io/badge/Node.js-%3E%3D18.3-green)
 
 Trigger is a blog theme for [Vuemo](https://github.com/laplacetw/vuemo), the blog framework built on [VitePress](https://vitepress.dev). It has two looks: `normal`, the clean look of Trigger 1.x, and `anime`, an operations-console look. Tailwind CSS is compiled in, so there is nothing extra to install.
 
 > **2.0 alpha.** Needs `@vuemo/core` 0.1.0-alpha.2 or later.
 
-![](./example/public/preview.png)
+![Trigger's normal style on a desktop, laptop, tablet and phone](./example/public/preview.png)
+
+![Trigger's anime style on a desktop, laptop, tablet and phone](./example/public/preview_anime.png)
 
 ## Quick start
 

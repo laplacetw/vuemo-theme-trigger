@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changes
+- the READMEs show a preview of the `anime` style under the `normal` one, both with alt text; the Traditional and Simplified Chinese READMEs have the licence and Node.js badges too
+- the Node.js badge says 18.3, the version `@vuemo/core` needs
+
 ## 2.0.0-alpha.2
 
 Works with `@vuemo/core` 0.1.0-alpha.2; the About layout, reading time and the `/categories` default need 0.1.0-alpha.3.
